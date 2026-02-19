@@ -1,101 +1,143 @@
 'use client'
 
 import { motion } from "framer-motion"
-import { Check, Zap, Shield, Clock, Eye, Gift } from "lucide-react"
+import { Check, Gift } from "lucide-react"
 
-const included = [
-  "5 видео-уроков (от психологии до техник)",
-  "Пошаговые инструкции: дыхание, руки, ритм",
-  "Техника убирания рвотного рефлекса",
-  "Гайд «Как говорить о сексе без стыда»",
-  "Чек-лист эрогенных зон мужчины",
-  "Доступ к записям навсегда",
+const monthlyFeatures = [
+  "Еженедельные стримы с записью",
+  "Ежедневный стек нейронок — только проверенные, без воды",
+  "Готовые решения на нейронках — скачиваешь и пользуешься",
+  "Закрытая группа практиков",
+  "Приватный канал с контентом",
 ]
 
-const bonuses = [
-  "Бонус: Мини-гайд «Прелюдия, от которой он теряет голову»",
-  "Бонус: Аудио-медитация на снятие телесных блоков",
+const monthlyBonuses = [
+  "Joker Speaker — закрытый эфир с топовым экспертом AI-рынка",
+  "Готовые воркфлоу контент-завода для инстаблогеров",
+]
+
+const quarterlyExtra = [
+  "Всё из месячного тарифа",
+  "Q&A сессия раз в месяц — приходишь со своим кейсом, разбираем вместе",
+  "Приоритетный доступ к новым материалам",
 ]
 
 export function OfferSection() {
   return (
-    <section id="offer" className="bg-neutral-950 py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="offer" className="bg-neutral-950 py-8 px-8 md:px-16">
+      <div className="max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-left mb-10"
         >
+          <p className="text-rose-400 text-sm font-medium uppercase tracking-wider mb-3">
+            Тарифы
+          </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Получи доступ прямо сейчас
+            Хватит дрочить на бесплатные гайды
           </h2>
-          <p className="text-neutral-400 text-lg">
-            Одна инвестиция — навык на всю жизнь
+          <p className="text-neutral-400 text-lg max-w-2xl">
+            Одна подписка вместо десятков каналов, курсов и пересказов чужих пересказов.
+            Тут не читают — тут делают.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-b from-neutral-900 to-neutral-900/50 border border-rose-500/20 rounded-3xl overflow-hidden"
-        >
-          {/* Header */}
-          <div className="bg-gradient-to-r from-rose-500 to-pink-600 p-6 text-center">
-            <p className="text-rose-100 text-sm font-medium mb-1">Интенсив «Взрослые игры»</p>
-            <div className="flex items-end justify-center gap-2">
-              <span className="text-white/50 line-through text-2xl">$79</span>
-              <span className="text-white text-5xl font-bold">$29</span>
-            </div>
-            <p className="text-rose-200 text-sm mt-2">Цена как один поход в кафе</p>
-          </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Card 1 — Monthly */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-b from-neutral-900 to-neutral-900/50 border border-neutral-800 rounded-3xl overflow-hidden hover:border-rose-500/30 transition-colors"
+          >
+            <div className="p-8">
+              <p className="text-neutral-500 text-sm font-medium mb-2">Подписка</p>
+              <h3 className="text-2xl font-bold text-white mb-1">1 месяц</h3>
+              <div className="flex items-end gap-2 mb-6">
+                <span className="text-white text-4xl font-bold">$79</span>
+                <span className="text-neutral-500 text-lg">/мес</span>
+              </div>
 
-          {/* Content */}
-          <div className="p-8">
-            <h3 className="text-white font-semibold text-lg mb-4">Что входит:</h3>
-            <div className="space-y-3 mb-8">
-              {included.map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                  <span className="text-neutral-300">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t border-neutral-800 pt-6 mb-8">
-              <div className="space-y-3">
-                {bonuses.map((item, i) => (
+              <div className="space-y-3 mb-6">
+                {monthlyFeatures.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <span className="text-amber-200">{item}</span>
+                    <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="text-neutral-300">{item}</span>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* CTA */}
-            <a
-              href="#"
-              className="block w-full text-center px-8 py-5 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl text-xl hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transform"
-            >
-              Получить доступ за $29
-            </a>
+              <div className="border-t border-neutral-800 pt-6 mb-6">
+                <div className="space-y-3">
+                  {monthlyBonuses.map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                      <span className="text-amber-200">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap justify-center gap-6 mt-6 text-neutral-500 text-sm">
-              <div className="flex items-center gap-1.5">
-                <Shield className="w-4 h-4" /> Гарантия возврата 14 дней
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Eye className="w-4 h-4" /> В выписке нейтральное название
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" /> Смотри в своём темпе
-              </div>
+              <a
+                href="#"
+                className="block w-full text-center px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transform"
+              >
+                Вступить в клуб
+              </a>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Card 2 — Quarterly */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="bg-gradient-to-b from-neutral-900 to-neutral-900/50 border border-rose-500/30 rounded-3xl overflow-hidden relative"
+          >
+            <div className="absolute top-4 right-4 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              Выгодно
+            </div>
+            <div className="p-8">
+              <p className="text-neutral-500 text-sm font-medium mb-2">Подписка</p>
+              <h3 className="text-2xl font-bold text-white mb-1">3 месяца</h3>
+              <div className="flex items-end gap-2 mb-1">
+                <span className="text-white/50 line-through text-2xl">$237</span>
+                <span className="text-white text-4xl font-bold">$150</span>
+              </div>
+              <p className="text-rose-400 text-sm mb-6">$50/мес — экономия 37%</p>
+
+              <div className="space-y-3 mb-6">
+                {quarterlyExtra.map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="text-neutral-300">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-neutral-800 pt-6 mb-6">
+                <div className="space-y-3">
+                  {monthlyBonuses.map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                      <span className="text-amber-200">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <a
+                href="#"
+                className="block w-full text-center px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transform"
+              >
+                Вступить в клуб
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
