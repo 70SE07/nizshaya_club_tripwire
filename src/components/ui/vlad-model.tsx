@@ -50,8 +50,8 @@ function Model() {
     if (!groupRef.current) return
     const targetX = windowMouse.current.x * 0.5
     const targetY = windowMouse.current.y * 0.3
-    mouse.current.x += (targetX - mouse.current.x) * 0.85
-    mouse.current.y += (targetY - mouse.current.y) * 0.85
+    mouse.current.x = targetX
+    mouse.current.y = targetY
     groupRef.current.rotation.y = mouse.current.x
     groupRef.current.rotation.x = -mouse.current.y
   })
