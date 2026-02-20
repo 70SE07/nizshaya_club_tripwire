@@ -8,6 +8,11 @@ import { motion } from "framer-motion"
 export function HeroSection() {
   return (
     <section id="hero" className="relative">
+      {/* Vlad 3D — fixed background, visible across all sections */}
+      <div className="fixed top-0 right-0 w-1/2 h-screen hidden md:block pointer-events-auto z-0">
+        <VladScene className="w-full h-full" />
+      </div>
+
       <Card className="w-full min-h-[500px] md:h-auto bg-transparent relative rounded-none border-0">
         <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#e11d48" />
 
@@ -54,9 +59,7 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          <div className="flex-1 relative hidden md:block">
-            <VladScene className="w-full h-full" />
-          </div>
+          <div className="flex-1 hidden md:block" />
         </div>
       </Card>
     </section>

@@ -9,10 +9,8 @@ function Model() {
   const { scene } = useGLTF('/vlad.glb')
   const groupRef = useRef<THREE.Group>(null)
   const mouse = useRef({ x: 0, y: 0 })
-  const smoothMouse = useRef({ x: 0, y: 0 })
   const { camera } = useThree()
   const [fitted, setFitted] = useState(false)
-  const headRef = useRef<THREE.Object3D | null>(null)
 
   useEffect(() => {
     if (!scene || fitted) return
@@ -30,7 +28,7 @@ function Model() {
     camera.lookAt(0, 0, 0)
     camera.updateProjectionMatrix()
 
-    // Apply glossy dark material & find head bone
+    // Apply glossy dark material
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh
@@ -42,9 +40,6 @@ function Model() {
           clearcoatRoughness: 0.05,
           envMapIntensity: 1.5,
         })
-      }
-      if (!headRef.current && child.name.toLowerCase().includes('head')) {
-        headRef.current = child
       }
     })
 
@@ -61,18 +56,9 @@ function Model() {
   }, [])
 
   useFrame(() => {
-    const target = headRef.current ?? groupRef.current
-    if (!target) return
-
-    const maxAngle = headRef.current ? 0.3 : 0.15
-    const targetX = mouse.current.x * maxAngle
-    const targetY = -mouse.current.y * maxAngle
-
-    smoothMouse.current.x = THREE.MathUtils.lerp(smoothMouse.current.x, targetX, 0.05)
-    smoothMouse.current.y = THREE.MathUtils.lerp(smoothMouse.current.y, targetY, 0.05)
-
-    target.rotation.y = smoothMouse.current.x
-    target.rotation.x = smoothMouse.current.y
+    if (!groupRef.current) return
+    groupRef.current.rotation.y = mouse.current.x * 10
+    groupRef.current.rotation.x = -mouse.current.y * 6
   })
 
   return (
