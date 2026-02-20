@@ -25,7 +25,7 @@ export function FinalCtaSection() {
           </p>
 
           <a
-            href="#"
+            href="https://t.me/ligayasko_bot?start=tariffs"
             className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl text-xl hover:from-rose-600 hover:to-pink-700 transition-all shadow-2xl shadow-rose-500/30 hover:shadow-rose-500/50 hover:scale-105 transform mb-6"
           >
             Вступить в клуб <ArrowRight className="w-5 h-5" />

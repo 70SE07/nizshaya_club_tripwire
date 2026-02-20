@@ -50,7 +50,7 @@ export function HeroSection() {
 
               <div className="mt-8">
                 <a
-                  href="#offer"
+                  href="https://t.me/ligayasko_bot?start=tariffs"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-semibold rounded-xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-105 transform"
                 >
                   Тут делают бабки

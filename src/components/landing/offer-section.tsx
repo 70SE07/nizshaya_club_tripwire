@@ -87,7 +87,7 @@ export function OfferSection() {
 
               {/* CTA */}
               <a
-                href="#"
+                href="https://t.me/ligayasko_bot?start=tariffs"
                 className="block w-full text-center px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transform mt-auto"
               >
                 Вступить в клуб
@@ -142,7 +142,7 @@ export function OfferSection() {
 
               {/* CTA */}
               <a
-                href="#"
+                href="https://t.me/ligayasko_bot?start=tariffs"
                 className="block w-full text-center px-8 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transform mt-auto"
               >
                 Вступить в клуб
