@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight, Clock } from "lucide-react"
+import Link from "next/link"
 
 export function FinalCtaSection() {
   return (
@@ -40,8 +41,8 @@ export function FinalCtaSection() {
         <div className="mt-20 pt-8 border-t border-neutral-900 text-neutral-700 text-sm space-y-2">
           <p>© Низшая Лига | Все права защищены</p>
           <div className="flex gap-4">
-            <a href="/oferta" className="hover:text-neutral-400 transition-colors">Публичная оферта</a>
-            <a href="/policy" className="hover:text-neutral-400 transition-colors">Политика конфиденциальности</a>
+            <Link href="/oferta" className="hover:text-neutral-400 transition-colors">Публичная оферта</Link>
+            <Link href="/policy" className="hover:text-neutral-400 transition-colors">Политика конфиденциальности</Link>
           </div>
         </div>
       </div>
