@@ -1,7 +1,22 @@
 'use client'
 
 import { motion } from "framer-motion"
-import { Bot, Layers, Code, Video, Lock } from "lucide-react"
+import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
+
+const monthNames = [
+  "январь", "февраль", "март", "апрель", "май", "июнь",
+  "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь",
+]
+
+const schedule: Record<string, string[]> = {
+  "2026-02": [
+    "OpenClaw — собираем AI-агента",
+    "Контент-завод на нейросетях",
+    "Вайб-кодинг: продукт без кода",
+    "AI-видео и креатив без продакшна",
+    "Закрытый эфир с экспертом",
+  ],
+}
 
 const highlights = [
   {
@@ -80,6 +95,37 @@ export function TopicsSection() {
             </motion.div>
           ))}
         </div>
+
+        {(() => {
+          const now = new Date()
+          const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
+          const topics = schedule[key]
+          if (!topics) return null
+          const month = monthNames[now.getMonth()]
+          return (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-8 bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Calendar className="w-5 h-5 text-rose-400" />
+                <h3 className="text-white font-semibold text-lg">
+                  Стримы в {month}е
+                </h3>
+              </div>
+              <div className="space-y-2">
+                {topics.map((topic, i) => (
+                  <div key={i} className="flex items-center gap-3 py-2">
+                    <span className="text-rose-400 font-bold text-sm w-6 shrink-0">{i + 1}.</span>
+                    <span className="text-neutral-300 text-sm">{topic}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )
+        })()}
 
       </div>
     </section>

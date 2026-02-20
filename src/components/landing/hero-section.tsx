@@ -1,15 +1,19 @@
 'use client'
 
-import { SplineScene } from "@/components/ui/splite"
+import { VladScene } from "@/components/ui/vlad-model"
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"
 import { motion } from "framer-motion"
-import { Flame } from "lucide-react"
 
 export function HeroSection() {
   return (
     <section id="hero" className="relative">
-      <Card className="w-full min-h-[500px] md:h-auto bg-black/[0.96] relative overflow-hidden rounded-none border-0">
+      {/* Vlad 3D — fixed background, visible across all sections */}
+      <div className="fixed top-0 right-0 w-1/2 h-screen hidden md:block pointer-events-auto z-0">
+        <VladScene className="w-full h-full" />
+      </div>
+
+      <Card className="w-full min-h-[500px] md:h-auto bg-transparent relative rounded-none border-0">
         <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#e11d48" />
 
         <div className="flex flex-col md:flex-row h-full">
@@ -20,7 +24,10 @@ export function HeroSection() {
               transition={{ duration: 0.8 }}
             >
               <div className="inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 rounded-full px-4 py-1.5 mb-6">
-                <Flame className="w-4 h-4 text-rose-400" />
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+                </span>
                 <span className="text-rose-300 text-sm font-medium">
                   Стримы каждую неделю
                 </span>
@@ -52,12 +59,7 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          <div className="flex-1 relative hidden md:block">
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
-          </div>
+          <div className="flex-1 hidden md:block" />
         </div>
       </Card>
     </section>
