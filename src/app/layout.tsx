@@ -23,20 +23,11 @@ export const metadata: Metadata = {
     siteName: "Низшая Лига",
     locale: "ru_RU",
     type: "website",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Низшая Лига — AI-клуб",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Низшая Лига — AI-клуб, где зарабатывают на нейросетях",
     description: "Закрытый клуб практиков. Рабочие воркфлоу, агенты, боты — всё, что уже приносит результат.",
-    images: ["/og.png"],
   },
 };
 
