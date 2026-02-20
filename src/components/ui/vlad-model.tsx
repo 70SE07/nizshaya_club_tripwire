@@ -34,12 +34,22 @@ function Model() {
     setFitted(true)
   }, [scene, camera, fitted])
 
-  useFrame((state) => {
+  const windowMouse = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Normalize to -1..1 range
+      windowMouse.current.x = (e.clientX / window.innerWidth) * 2 - 1
+      windowMouse.current.y = (e.clientY / window.innerHeight) * 2 - 1
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
+  useFrame(() => {
     if (!groupRef.current) return
-    const x = (state.pointer.x * viewport.width) / 2
-    const y = (state.pointer.y * viewport.height) / 2
-    mouse.current.x = THREE.MathUtils.lerp(mouse.current.x, x * 0.15, 0.4)
-    mouse.current.y = THREE.MathUtils.lerp(mouse.current.y, y * 0.1, 0.4)
+    mouse.current.x = THREE.MathUtils.lerp(mouse.current.x, windowMouse.current.x * 0.3, 0.4)
+    mouse.current.y = THREE.MathUtils.lerp(mouse.current.y, windowMouse.current.y * 0.15, 0.4)
     groupRef.current.rotation.y = mouse.current.x
     groupRef.current.rotation.x = -mouse.current.y
   })
