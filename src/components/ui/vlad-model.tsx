@@ -48,8 +48,10 @@ function Model() {
 
   useFrame(() => {
     if (!groupRef.current) return
-    mouse.current.x = THREE.MathUtils.lerp(mouse.current.x, windowMouse.current.x * 0.5, 0.6)
-    mouse.current.y = THREE.MathUtils.lerp(mouse.current.y, windowMouse.current.y * 0.25, 0.6)
+    const targetX = windowMouse.current.x * 0.5
+    const targetY = windowMouse.current.y * 0.3
+    mouse.current.x += (targetX - mouse.current.x) * 0.85
+    mouse.current.y += (targetY - mouse.current.y) * 0.85
     groupRef.current.rotation.y = mouse.current.x
     groupRef.current.rotation.x = -mouse.current.y
   })
