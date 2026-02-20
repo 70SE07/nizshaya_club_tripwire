@@ -29,7 +29,7 @@ export function HeroSection() {
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
                 </span>
                 <span className="text-rose-300 text-sm font-medium">
-                  Стримы каждую неделю
+                  Стримы 2 раза в месяц
                 </span>
               </div>
 

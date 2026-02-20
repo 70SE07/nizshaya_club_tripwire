@@ -53,7 +53,7 @@ export default async function Image() {
             }}
           />
           <span style={{ color: '#fb7185', fontSize: '24px' }}>
-            Стримы каждую неделю
+            Стримы 2 раза в месяц
           </span>
         </div>
 
