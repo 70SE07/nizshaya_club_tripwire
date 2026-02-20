@@ -48,8 +48,8 @@ function Model() {
 
   useFrame(() => {
     if (!groupRef.current) return
-    const targetX = windowMouse.current.x * 0.5
-    const targetY = windowMouse.current.y * 0.3
+    const targetX = windowMouse.current.x * 10
+    const targetY = windowMouse.current.y * 6
     mouse.current.x = targetX
     mouse.current.y = targetY
     groupRef.current.rotation.y = mouse.current.x
