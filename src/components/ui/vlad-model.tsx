@@ -95,7 +95,7 @@ function Model() {
 
     // Head is not animated — set rotation directly from mouse, clamped
     head.rotation.y = smoothMouse.current.x
-    head.rotation.x = Math.max(smoothMouse.current.y, -0.25)
+    head.rotation.x = Math.max(smoothMouse.current.y, -0.1)
   })
 
   return (
