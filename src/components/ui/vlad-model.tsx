@@ -6,13 +6,25 @@ import { useGLTF, Environment, SpotLight } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Model() {
-  const { scene } = useGLTF('/vlad.glb')
+  const { scene, animations } = useGLTF('/vlad.glb')
   const groupRef = useRef<THREE.Group>(null)
   const mouse = useRef({ x: 0, y: 0 })
   const smoothMouse = useRef({ x: 0, y: 0 })
   const { camera } = useThree()
   const [fitted, setFitted] = useState(false)
   const headRef = useRef<THREE.Object3D | null>(null)
+  const mixerRef = useRef<THREE.AnimationMixer | null>(null)
+
+  // Play built-in animations
+  useEffect(() => {
+    if (!scene || !animations.length) return
+    const mixer = new THREE.AnimationMixer(scene)
+    mixerRef.current = mixer
+    animations.forEach((clip) => {
+      mixer.clipAction(clip).play()
+    })
+    return () => { mixer.stopAllAction() }
+  }, [scene, animations])
 
   useEffect(() => {
     if (!scene || fitted) return
@@ -60,7 +72,11 @@ function Model() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  useFrame(() => {
+  useFrame((_, delta) => {
+    // Update animations
+    if (mixerRef.current) mixerRef.current.update(delta)
+
+    // Mouse tracking on head
     const target = headRef.current ?? groupRef.current
     if (!target) return
 
