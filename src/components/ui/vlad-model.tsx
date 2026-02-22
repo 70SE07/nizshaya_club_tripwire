@@ -90,8 +90,8 @@ function Model() {
     const targetX = mouse.current.x * 1.6
     const targetY = mouse.current.y * 1.0
 
-    smoothMouse.current.x += (targetX - smoothMouse.current.x) * Math.min(delta * 6, 1)
-    smoothMouse.current.y += (targetY - smoothMouse.current.y) * Math.min(delta * 6, 1)
+    smoothMouse.current.x = targetX
+    smoothMouse.current.y = targetY
 
     // Head is not animated — set rotation directly from mouse, clamped
     head.rotation.y = smoothMouse.current.x
