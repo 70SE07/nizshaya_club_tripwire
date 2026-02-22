@@ -6,7 +6,7 @@ import { useGLTF, Environment, SpotLight } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Model() {
-  const { scene, animations } = useGLTF('/vlad.glb')
+  const { scene, animations } = useGLTF('/vlad-walking.glb')
   const groupRef = useRef<THREE.Group>(null)
   const mouse = useRef({ x: 0, y: 0 })
   const smoothMouse = useRef({ x: 0, y: 0 })
@@ -15,13 +15,20 @@ function Model() {
   const headRef = useRef<THREE.Object3D | null>(null)
   const mixerRef = useRef<THREE.AnimationMixer | null>(null)
 
-  // Play built-in animations
+  // Play walk animation with root motion stripped
   useEffect(() => {
     if (!scene || !animations.length) return
     const mixer = new THREE.AnimationMixer(scene)
     mixerRef.current = mixer
     animations.forEach((clip) => {
-      mixer.clipAction(clip).play()
+      // Strip root motion so model stays in place
+      const cleaned = clip.clone()
+      cleaned.tracks = cleaned.tracks.filter((track) => {
+        return !track.name.match(/^(Armature|Hips|mixamorig.*Hips)\.position/)
+      })
+      const action = mixer.clipAction(cleaned)
+      action.setLoop(THREE.LoopRepeat, Infinity)
+      action.play()
     })
     return () => { mixer.stopAllAction() }
   }, [scene, animations])
@@ -33,12 +40,10 @@ function Model() {
     const center = box.getCenter(new THREE.Vector3())
 
     scene.position.sub(center)
-    scene.position.y -= size.y * 0.05
 
-    const maxDim = Math.max(size.x, size.y, size.z)
     const fov = (camera as THREE.PerspectiveCamera).fov * (Math.PI / 180)
-    const dist = maxDim / (2 * Math.tan(fov / 2))
-    camera.position.set(0, 0, dist * 1.2)
+    const dist = (size.y / 2) / Math.tan(fov / 2)
+    camera.position.set(0, 0, dist * 1.15)
     camera.lookAt(0, 0, 0)
     camera.updateProjectionMatrix()
 
@@ -55,7 +60,7 @@ function Model() {
           envMapIntensity: 1.5,
         })
       }
-      if (!headRef.current && child.name.toLowerCase().includes('head')) {
+      if ((child as THREE.Bone).isBone && child.name === 'Head') {
         headRef.current = child
       }
     })
@@ -76,19 +81,18 @@ function Model() {
     // Update animations
     if (mixerRef.current) mixerRef.current.update(delta)
 
-    // Mouse tracking on head
-    const target = headRef.current ?? groupRef.current
-    if (!target) return
+    // Rotate head bone additively (on top of animation)
+    const head = headRef.current
+    if (!head) return
 
-    const maxAngle = headRef.current ? 0.3 : 0.15
-    const targetX = mouse.current.x * maxAngle
-    const targetY = -mouse.current.y * maxAngle
+    const targetX = mouse.current.x * 0.8
+    const targetY = mouse.current.y * 0.4
 
-    smoothMouse.current.x = THREE.MathUtils.lerp(smoothMouse.current.x, targetX, 0.05)
-    smoothMouse.current.y = THREE.MathUtils.lerp(smoothMouse.current.y, targetY, 0.05)
+    smoothMouse.current.x += (targetX - smoothMouse.current.x) * Math.min(delta * 3, 1)
+    smoothMouse.current.y += (targetY - smoothMouse.current.y) * Math.min(delta * 3, 1)
 
-    target.rotation.y = smoothMouse.current.x
-    target.rotation.x = smoothMouse.current.y
+    head.rotation.y += smoothMouse.current.x
+    head.rotation.x += smoothMouse.current.y
   })
 
   return (
