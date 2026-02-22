@@ -21,10 +21,12 @@ function Model() {
     const mixer = new THREE.AnimationMixer(scene)
     mixerRef.current = mixer
     animations.forEach((clip) => {
-      // Strip root motion so model stays in place
+      // Strip root motion and head rotation so head is mouse-only
       const cleaned = clip.clone()
       cleaned.tracks = cleaned.tracks.filter((track) => {
-        return !track.name.match(/^(Armature|Hips|mixamorig.*Hips)\.position/)
+        if (track.name.match(/^(Armature|Hips|mixamorig.*Hips)\.position/)) return false
+        if (track.name.match(/Head\.(quaternion|rotation)/)) return false
+        return true
       })
       const action = mixer.clipAction(cleaned)
       action.setLoop(THREE.LoopRepeat, Infinity)
@@ -91,13 +93,9 @@ function Model() {
     smoothMouse.current.x += (targetX - smoothMouse.current.x) * Math.min(delta * 3, 1)
     smoothMouse.current.y += (targetY - smoothMouse.current.y) * Math.min(delta * 3, 1)
 
-    // Read current animation rotation, add mouse offset
-    // This avoids jump on loop restart because we always add relative to current frame
-    head.quaternion.multiply(
-      new THREE.Quaternion().setFromEuler(
-        new THREE.Euler(smoothMouse.current.y, smoothMouse.current.x, 0, 'YXZ')
-      )
-    )
+    // Head is not animated — set rotation directly from mouse
+    head.rotation.y = smoothMouse.current.x
+    head.rotation.x = smoothMouse.current.y
   })
 
   return (
