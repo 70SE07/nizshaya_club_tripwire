@@ -94,8 +94,8 @@ function Model() {
     smoothMouse.current.y += (targetY - smoothMouse.current.y) * Math.min(delta * 6, 1)
 
     // Head is not animated — set rotation directly from mouse, clamped
-    head.rotation.y = THREE.MathUtils.clamp(smoothMouse.current.x, -0.6, 0.6)
-    head.rotation.x = THREE.MathUtils.clamp(smoothMouse.current.y, -0.3, 0.25)
+    head.rotation.y = smoothMouse.current.x
+    head.rotation.x = Math.min(smoothMouse.current.y, 0.25)
   })
 
   return (
