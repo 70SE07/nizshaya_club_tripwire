@@ -78,10 +78,10 @@ function Model() {
   }, [])
 
   useFrame((_, delta) => {
-    // Update animations
+    // Update animations first — this sets bone rotations
     if (mixerRef.current) mixerRef.current.update(delta)
 
-    // Rotate head bone additively (on top of animation)
+    // Then layer mouse rotation on top of animation's head pose
     const head = headRef.current
     if (!head) return
 
@@ -91,8 +91,13 @@ function Model() {
     smoothMouse.current.x += (targetX - smoothMouse.current.x) * Math.min(delta * 3, 1)
     smoothMouse.current.y += (targetY - smoothMouse.current.y) * Math.min(delta * 3, 1)
 
-    head.rotation.y += smoothMouse.current.x
-    head.rotation.x += smoothMouse.current.y
+    // Read current animation rotation, add mouse offset
+    // This avoids jump on loop restart because we always add relative to current frame
+    head.quaternion.multiply(
+      new THREE.Quaternion().setFromEuler(
+        new THREE.Euler(smoothMouse.current.y, smoothMouse.current.x, 0, 'YXZ')
+      )
+    )
   })
 
   return (
