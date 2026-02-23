@@ -1,7 +1,8 @@
 'use client'
 
+import Image from "next/image"
 import { motion } from "framer-motion"
-import { Zap, TrendingUp, Users } from "lucide-react"
+import { Flame, Eye, Hammer } from "lucide-react"
 
 export function ExpertSection() {
   return (
@@ -13,14 +14,15 @@ export function ExpertSection() {
           viewport={{ once: true }}
           className="flex flex-col md:flex-row gap-12 items-center"
         >
-          {/* Avatar */}
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 border border-rose-500/20 flex items-center justify-center shrink-0">
-            <div className="text-center">
-              <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center mb-3">
-                <span className="text-4xl font-bold text-white">В</span>
-              </div>
-              <p className="text-neutral-400 text-sm">Основатель клуба</p>
-            </div>
+          {/* Photo */}
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-rose-500/20 shrink-0">
+            <Image
+              src="/vlad-photo.jpg"
+              alt="Влад Ясько"
+              width={320}
+              height={320}
+              className="w-full h-full object-cover object-top"
+            />
           </div>
 
           {/* Text */}
@@ -29,29 +31,29 @@ export function ExpertSection() {
               Влад Ясько — основатель клуба
             </h2>
             <p className="text-neutral-300 text-lg leading-relaxed mb-6">
-              Предприниматель. Сам запускает AI-агентов в своём бизнесе и показывает что реально работает. Не из учебника — из того, что уже сделал сам.
+              Предприниматель. Запускает AI-агентов в своём бизнесе и показывает что работает. Всё из личного опыта.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-center">
-                <Zap className="w-6 h-6 text-rose-400 mx-auto mb-2" />
-                <p className="text-white font-semibold">Агенты</p>
-                <p className="text-neutral-500 text-sm">Работают 24/7</p>
+                <Hammer className="w-6 h-6 text-rose-400 mx-auto mb-2" />
+                <p className="text-white font-semibold">Помешан на AI</p>
+                <p className="text-neutral-500 text-sm">Создаёт и учит</p>
               </div>
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-center">
-                <TrendingUp className="w-6 h-6 text-rose-400 mx-auto mb-2" />
-                <p className="text-white font-semibold">Воркфлоу</p>
-                <p className="text-neutral-500 text-sm">Под реальный бизнес</p>
+                <Eye className="w-6 h-6 text-rose-400 mx-auto mb-2" />
+                <p className="text-white font-semibold">Осеменил AI</p>
+                <p className="text-neutral-500 text-sm">И построил из них целый отдел</p>
               </div>
               <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-center">
-                <Users className="w-6 h-6 text-rose-400 mx-auto mb-2" />
-                <p className="text-white font-semibold">Участники</p>
-                <p className="text-neutral-500 text-sm">В закрытом клубе</p>
+                <Flame className="w-6 h-6 text-rose-400 mx-auto mb-2" />
+                <p className="text-white font-semibold">Без фильтров</p>
+                <p className="text-neutral-500 text-sm">Говорит о провалах открыто</p>
               </div>
             </div>
 
             <p className="text-neutral-500 text-sm mt-6 italic">
-              Не объясняет зачем важны нейросети. Показывает как их запустить так, чтобы они уже работали на тебя.
+              Говорит о том, как запустить агентов, а не о том, зачем они важны.
             </p>
           </div>
         </motion.div>

@@ -39,7 +39,7 @@ export function HeroSection() {
               </h1>
 
               <p className="mt-6 text-neutral-300 max-w-lg text-lg leading-relaxed">
-                Здесь не учатся работать с AI. Берут готовый воркфлоу, запускают — и смотрят что приходит на счёт.
+                Здесь не учатся работать с AI. Берут готовый воркфлоу, запускают и смотрят что приходит на счёт.
               </p>
 
               <div className="mt-8">
