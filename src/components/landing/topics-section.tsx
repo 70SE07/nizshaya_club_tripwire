@@ -55,19 +55,19 @@ export function TopicsSection() {
   const month = monthNames[now.getMonth()]
 
   return (
-    <section ref={ref} className="bg-neutral-950 ds-section">
-      <div className="ds-container">
+    <section ref={ref} className="bg-black py-sp-lg">
+      <div className="max-w-300 mx-auto px-container-px">
 
         {/* Header */}
-        <div className="topics-header ds-grid" style={{ marginBottom: "var(--sp-md)" }}>
-          <div className="ds-col-3">
-            <p className="t-label text-rose-400" style={{ marginBottom: "var(--sp-xs)" }}>
+        <div className="topics-header grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
+            <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
               Темы стримов
             </p>
-            <h2 className="t-h2 text-white" style={{ marginBottom: "var(--sp-sm)" }}>
+            <h2 className="text-heading font-bold tracking-snug text-white mb-sp-sm">
               Разбираем то, что уже приносит деньги
             </h2>
-            <p className="t-body text-neutral-400 max-w-2xl">
+            <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
               2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка.
               Показываем с экрана, повторяешь — забираешь.
             </p>
@@ -75,40 +75,34 @@ export function TopicsSection() {
         </div>
 
         {/* Cards 2×2 + full */}
-        <div className="topics-grid ds-grid">
+        <div className="topics-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {highlights.map((item, i) => (
             <div
               key={i}
-              className={`topic-card bg-gradient-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-5 ${item.full ? "ds-col-4" : "ds-col-2"}`}
+              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-5 ${item.full ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"}`}
             >
-              <span
-                className="inline-block t-small font-medium text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1"
-                style={{ marginBottom: "var(--sp-sm)" }}
-              >
+              <span className="inline-block text-sm font-medium text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1 mb-sp-sm">
                 {item.tag}
               </span>
-              <item.icon className="w-7 h-7 text-rose-400" style={{ marginBottom: "var(--sp-sm)" }} />
-              <h3 className="t-h3 text-white" style={{ marginBottom: "var(--sp-xs)" }}>{item.title}</h3>
-              <p className="t-small text-neutral-400">{item.desc}</p>
+              <item.icon className="w-7 h-7 text-rose-400 mb-sp-sm" />
+              <h3 className="text-subheading font-semibold text-white mb-sp-xs">{item.title}</h3>
+              <p className="text-sm text-neutral-400">{item.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Schedule */}
         {topics && (
-          <div
-            className="topics-schedule bg-neutral-900/50 border border-neutral-800 rounded-2xl"
-            style={{ marginTop: "var(--sp-md)", padding: "var(--sp-md)" }}
-          >
-            <div className="flex items-center gap-2" style={{ marginBottom: "var(--sp-sm)" }}>
+          <div className="topics-schedule bg-neutral-900/50 border border-neutral-800 rounded-2xl mt-sp-md p-sp-md">
+            <div className="flex items-center gap-2 mb-sp-sm">
               <Calendar className="w-5 h-5 text-rose-400" />
-              <h3 className="t-h3 text-white">Стримы в {month}е</h3>
+              <h3 className="text-subheading font-semibold text-white">Стримы в {month}е</h3>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--sp-xs)" }}>
+            <div className="flex flex-col gap-sp-xs">
               {topics.map((topic, i) => (
                 <div key={i} className="flex items-center gap-3 py-2">
-                  <span className="text-rose-400 font-bold t-small w-6 shrink-0">{i + 1}.</span>
-                  <span className="text-neutral-300 t-small">{topic}</span>
+                  <span className="text-rose-400 font-bold text-sm w-6 shrink-0">{i + 1}.</span>
+                  <span className="text-neutral-300 text-sm">{topic}</span>
                 </div>
               ))}
             </div>

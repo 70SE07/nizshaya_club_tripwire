@@ -73,19 +73,19 @@ export function MembersSectionCircles() {
   }, { scope: ref })
 
   return (
-    <section ref={ref} className="bg-neutral-950 ds-section">
-      <div className="ds-container">
+    <section ref={ref} className="bg-neutral-950 py-sp-lg">
+      <div className="max-w-300 mx-auto px-container-px">
 
         {/* Header */}
-        <div className="members-header ds-grid" style={{ marginBottom: "var(--sp-md)" }}>
-          <div className="ds-col-3">
-            <p className="t-label text-rose-400" style={{ marginBottom: "var(--sp-xs)" }}>
+        <div className="members-header grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
+            <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
               Участники
             </p>
-            <h2 className="t-h2 text-white" style={{ marginBottom: "var(--sp-sm)" }}>
+            <h2 className="text-heading font-bold tracking-snug text-white mb-sp-sm">
               Кто уже внутри
             </h2>
-            <p className="t-body text-neutral-400 max-w-2xl">
+            <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
               Предприниматели, продакты и креаторы, которые уже зарабатывают с AI.
               Не теоретики — практики с результатами.
             </p>
@@ -93,15 +93,7 @@ export function MembersSectionCircles() {
         </div>
 
         {/* Members grid */}
-        <div
-          className="members-grid"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "var(--sp-md)",
-          }}
-        >
+        <div className="members-grid flex flex-wrap justify-start gap-sp-md">
           {members.map((m, i) => {
             const isActive = active === i
             const hasActive = active !== null
@@ -109,28 +101,20 @@ export function MembersSectionCircles() {
             return (
               <div
                 key={m.name}
-                className="member-item flex flex-col items-center cursor-pointer select-none"
-                style={{ width: 140 }}
+                className="member-item flex flex-col items-center cursor-pointer select-none w-[140px]"
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
                 onTouchStart={() => setActive(isActive ? null : i)}
               >
                 {/* Avatar */}
                 <div
-                  className={`rounded-full overflow-hidden transition-all duration-200 ${
+                  className={`rounded-full overflow-hidden transition-all duration-200 size-28 mb-sp-sm ${
                     isActive
-                      ? "ring-2 ring-rose-500 shadow-lg shadow-rose-500/20"
-                      : "ring-2 ring-rose-500/20"
+                      ? "ring-2 ring-rose-500 shadow-lg shadow-rose-500/20 scale-110"
+                      : "ring-2 ring-rose-500/20 scale-100"
+                  } ${
+                    hasActive && !isActive ? "blur-[1px] opacity-60" : "blur-0 opacity-100"
                   }`}
-                  style={{
-                    width: 112,
-                    height: 112,
-                    marginBottom: "var(--sp-sm)",
-                    transform: isActive ? "scale(1.1)" : "scale(1)",
-                    filter: hasActive && !isActive ? "blur(1px)" : "none",
-                    opacity: hasActive && !isActive ? 0.6 : 1,
-                    transition: "transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease",
-                  }}
                 >
                   <Image
                     src={m.photo}
@@ -142,37 +126,31 @@ export function MembersSectionCircles() {
                 </div>
 
                 {/* Name + role */}
-                <p className="text-white font-bold text-center t-small leading-tight">
+                <p className="text-white font-bold text-center text-sm leading-tight">
                   {m.name}
                 </p>
-                <p className="text-neutral-400 text-center" style={{ fontSize: "0.75rem", marginBottom: "var(--sp-xs)" }}>
+                <p className="text-neutral-400 text-center text-xs mb-sp-xs">
                   {m.role}
                 </p>
 
                 {/* Metric badge */}
-                <span
-                  className="inline-block font-medium text-rose-400 bg-rose-500/15 border border-rose-500/30 rounded-full whitespace-nowrap"
-                  style={{ fontSize: "0.75rem", padding: "2px 10px" }}
-                >
+                <span className="inline-block font-medium text-rose-400 bg-rose-500/15 border border-rose-500/30 rounded-full whitespace-nowrap text-xs py-0.5 px-2.5">
                   {m.metric}
                 </span>
 
                 {/* Desc — mobile always visible */}
-                <p className="text-neutral-300 text-center t-small md:hidden" style={{ marginTop: "var(--sp-xs)" }}>
+                <p className="text-neutral-300 text-center text-sm md:hidden mt-sp-xs">
                   {m.desc}
                 </p>
 
                 {/* Desc — desktop on hover */}
                 <div
-                  className="hidden md:block overflow-hidden text-center"
-                  style={{
-                    maxHeight: isActive ? 120 : 0,
-                    opacity: isActive ? 1 : 0,
-                    marginTop: isActive ? "var(--sp-xs)" : 0,
-                    transition: "max-height 0.2s ease, opacity 0.2s ease, margin-top 0.2s ease",
-                  }}
+                  className={`hidden md:block overflow-hidden text-center transition-all duration-200 ${
+                    isActive ? "mt-sp-xs opacity-100" : "mt-0 opacity-0"
+                  }`}
+                  style={{ maxHeight: isActive ? 120 : 0 }}
                 >
-                  <p className="text-neutral-300" style={{ fontSize: "0.75rem", lineHeight: 1.5 }}>
+                  <p className="text-neutral-300 text-xs leading-normal">
                     {m.desc}
                   </p>
                 </div>
@@ -182,15 +160,12 @@ export function MembersSectionCircles() {
         </div>
 
         {/* Counter */}
-        <div
-          className="members-counter flex items-center justify-center gap-2"
-          style={{ marginTop: "var(--sp-md)" }}
-        >
+        <div className="members-counter flex items-center justify-center gap-2 mt-sp-md">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />
           </span>
-          <span className="text-neutral-500 t-small">
+          <span className="text-neutral-500 text-sm">
             50+ участников в клубе{" "}
             <span className="text-neutral-400">Низшая Лига</span>
           </span>
