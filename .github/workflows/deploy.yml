@@ -1,0 +1,59 @@
+name: Deploy
+
+on:
+  push:
+    branches: [nizshaya_club_v1]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -euo pipefail
+
+            cd ~/tripwire
+            git pull origin nizshaya_club_v1
+
+            IMAGE_TAG="tripwire:$(git rev-parse --short HEAD)"
+
+            docker build -t "$IMAGE_TAG" -t tripwire:latest .
+
+            docker stop tripwire 2>/dev/null || true
+            docker rm tripwire 2>/dev/null || true
+
+            docker run -d \
+              --name tripwire \
+              --restart unless-stopped \
+              --memory=512m \
+              --cpus=1 \
+              -p 3000:3000 \
+              tripwire:latest
+
+            echo "Waiting for container to become healthy..."
+            for i in $(seq 1 12); do
+              STATUS=$(docker inspect --format='{{.State.Health.Status}}' tripwire 2>/dev/null || echo "unknown")
+              if [ "$STATUS" = "healthy" ]; then
+                echo "Container is healthy!"
+                break
+              fi
+              if [ "$i" -eq 12 ]; then
+                echo "ERROR: Container did not become healthy within 60 seconds"
+                docker logs tripwire --tail 50
+                exit 1
+              fi
+              sleep 5
+            done
+
+            docker image prune -f

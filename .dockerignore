@@ -1,0 +1,35 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies (rebuilt in container)
+node_modules
+
+# Build artifacts (rebuilt in container)
+.next
+out
+build
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+
+# Documentation and local assets
+docs
+voice_vlad_demo
+README.md
+
+# CI/CD and tooling
+.github
+.claude
+
+# IDE and OS
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
