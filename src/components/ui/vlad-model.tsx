@@ -5,23 +5,14 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, Environment, SpotLight } from '@react-three/drei'
 import * as THREE from 'three'
 
-function Model() {
-  const { scene, animations } = useGLTF('/vlad-walking.glb')
-  const groupRef = useRef<THREE.Group>(null)
-  const mouse = useRef({ x: 0, y: 0 })
-  const smoothMouse = useRef({ x: 0, y: 0 })
-  const { camera } = useThree()
-  const [fitted, setFitted] = useState(false)
-  const headRef = useRef<THREE.Object3D | null>(null)
+function useWalkAnimation(scene: THREE.Group, animations: THREE.AnimationClip[]) {
   const mixerRef = useRef<THREE.AnimationMixer | null>(null)
 
-  // Play walk animation with root motion stripped
   useEffect(() => {
     if (!scene || !animations.length) return
     const mixer = new THREE.AnimationMixer(scene)
     mixerRef.current = mixer
     animations.forEach((clip) => {
-      // Strip root motion and head rotation so head is mouse-only
       const cleaned = clip.clone()
       cleaned.tracks = cleaned.tracks.filter((track) => {
         if (track.name.match(/^(Armature|Hips|mixamorig.*Hips)\.position/)) return false
@@ -35,6 +26,13 @@ function Model() {
     return () => { mixer.stopAllAction() }
   }, [scene, animations])
 
+  return mixerRef
+}
+
+function useCameraFit(scene: THREE.Group, camera: THREE.PerspectiveCamera) {
+  const [fitted, setFitted] = useState(false)
+  const headRef = useRef<THREE.Object3D | null>(null)
+
   useEffect(() => {
     if (!scene || fitted) return
     const box = new THREE.Box3().setFromObject(scene)
@@ -43,13 +41,12 @@ function Model() {
 
     scene.position.sub(center)
 
-    const fov = (camera as THREE.PerspectiveCamera).fov * (Math.PI / 180)
+    const fov = camera.fov * (Math.PI / 180)
     const dist = (size.y / 2) / Math.tan(fov / 2)
     camera.position.set(0, 0, dist * 1.15)
     camera.lookAt(0, 0, 0)
     camera.updateProjectionMatrix()
 
-    // Apply glossy dark material & find head bone
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh
@@ -70,6 +67,12 @@ function Model() {
     setFitted(true)
   }, [scene, camera, fitted])
 
+  return { headRef }
+}
+
+function useMouseTracking() {
+  const mouse = useRef({ x: 0, y: 0 })
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1
@@ -79,23 +82,26 @@ function Model() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
+  return mouse
+}
+
+function Model() {
+  const { scene, animations } = useGLTF('/vlad-walking.glb')
+  const groupRef = useRef<THREE.Group>(null)
+  const { camera } = useThree()
+
+  const mixerRef = useWalkAnimation(scene, animations)
+  const { headRef } = useCameraFit(scene, camera as THREE.PerspectiveCamera)
+  const mouse = useMouseTracking()
+
   useFrame((_, delta) => {
-    // Update animations first — this sets bone rotations
     if (mixerRef.current) mixerRef.current.update(delta)
 
-    // Then layer mouse rotation on top of animation's head pose
     const head = headRef.current
     if (!head) return
 
-    const targetX = mouse.current.x * 1.6
-    const targetY = mouse.current.y * 1.0
-
-    smoothMouse.current.x = targetX
-    smoothMouse.current.y = targetY
-
-    // Head is not animated — set rotation directly from mouse, clamped
-    head.rotation.y = smoothMouse.current.x
-    head.rotation.x = Math.max(smoothMouse.current.y, -0.1)
+    head.rotation.y = mouse.current.x * 1.6
+    head.rotation.x = Math.max(mouse.current.y * 1.0, -0.1)
   })
 
   return (

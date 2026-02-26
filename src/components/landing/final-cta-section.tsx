@@ -2,17 +2,14 @@
 
 import { ArrowRight, Users } from "lucide-react"
 import Link from "next/link"
-import { useScrollReveal } from "@/lib/gsap"
 import { FINAL_CTA_REVEAL } from "@/constants/animations"
 import { LINKS } from "@/constants/links"
-import { SectionContainer } from "@/components/landing/section-container"
+import { AnimatedSection } from "@/components/landing/animated-section"
 import { CtaButton } from "@/components/landing/cta-button"
 
 export function FinalCtaSection() {
-  const ref = useScrollReveal(FINAL_CTA_REVEAL)
-
   return (
-    <SectionContainer ref={ref} bg="bg-linear-to-b from-neutral-950 to-black">
+    <AnimatedSection reveal={FINAL_CTA_REVEAL} bg="bg-linear-to-b from-neutral-950 to-black">
 
       {/* Header */}
       <div className="cta-header grid-section mb-sp-md">
@@ -75,6 +72,6 @@ export function FinalCtaSection() {
         </div>
       </div>
 
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

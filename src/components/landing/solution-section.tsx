@@ -11,6 +11,8 @@ export function SolutionSection() {
   const ref = useRef<HTMLElement>(null)
 
   useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
     gsap.from(".solution-header > *", {
       opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
       scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },

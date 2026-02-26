@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from "react"
+import { useRef } from "react"
 import dynamic from "next/dynamic"
 import { gsap, useGSAP } from "@/lib/gsap"
 
@@ -10,34 +10,14 @@ const VladScene = dynamic(
 )
 import { Spotlight } from "@/components/ui/spotlight"
 import { CtaButton } from "@/components/landing/cta-button"
+import { RotatingBadge } from "@/components/landing/hero/rotating-badge"
 import { heroBadgeTexts } from "@/constants/content"
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
-  const badgeTextRef = useRef<HTMLSpanElement>(null)
-  const tweenRef = useRef<gsap.core.Tween | null>(null)
-  const [badgeIdx, setBadgeIdx] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const el = badgeTextRef.current
-      if (!el) return
-      tweenRef.current?.kill()
-      tweenRef.current = gsap.to(el, {
-        opacity: 0, y: -6, duration: 0.25, ease: "power2.in",
-        onComplete: () => {
-          setBadgeIdx(i => (i + 1) % heroBadgeTexts.length)
-          tweenRef.current = gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" })
-        },
-      })
-    }, 2500)
-    return () => {
-      clearInterval(interval)
-      tweenRef.current?.kill()
-    }
-  }, [])
 
   useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } })
     tl.from(".hero-badge", { opacity: 0, y: -12, duration: 0.5 })
       .from(".hero-h1",   { opacity: 0, y: 40,  duration: 0.7 }, "-=0.25")
@@ -64,13 +44,10 @@ export function HeroSection() {
           {/* Text — 2 cols */}
           <div className="sm:col-span-2 flex flex-col justify-center py-sp-lg">
             {/* Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 badge-accent rounded-full px-4 py-1.5 w-fit mb-sp-lg">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500" />
-              </span>
-              <span ref={badgeTextRef} className="text-rose-400 text-sm font-medium">{heroBadgeTexts[badgeIdx]}</span>
-            </div>
+            <RotatingBadge
+              texts={heroBadgeTexts}
+              className="hero-badge inline-flex items-center gap-2 badge-accent rounded-full px-4 py-1.5 w-fit mb-sp-lg"
+            />
 
             {/* H1 */}
             <h1 className="hero-h1 text-4xl md:text-5xl lg:text-6xl leading-none font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 mb-sp-lg">

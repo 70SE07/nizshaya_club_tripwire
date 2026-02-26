@@ -46,6 +46,8 @@ export function useScrollReveal(entries: RevealEntry[]) {
 
   useGSAP(
     () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
       entries.forEach(
         ({
           selector,
