@@ -12,7 +12,7 @@ const members = [
   {
     name: "DEN",
     role: "Предприниматель, Испания",
-    desc: "Внедрил AI в работу, закрыл ипотеку за год. Создаёт продукты голосом, обучил 400 человек",
+    desc: "Внедрил AI в работу — закрыл ипотеку за год. Создаёт продукты голосом, обучил 400 человек. AI убрал всю операционку и дал время на то, что действительно важно.",
     metric: "Ипотека Закрыта",
     photo: "/members/den.jpg",
   },
@@ -26,7 +26,7 @@ const members = [
   {
     name: "Фёдор Пасеков",
     role: "Трафик и контент",
-    desc: "Контент-завод на нейросетях. 228K подписчиков за год без бюджета",
+    desc: "Контент-завод на нейросетях — 228 000 подписчиков за год. Без рекламного бюджета. Только системная работа с AI-инструментами, которые показывают на стримах.",
     metric: "228K Подписчиков",
     photo: "/members/fedor.jpg",
   },
@@ -39,8 +39,8 @@ const members = [
   },
   {
     name: "Max Shirko",
-    role: "Дизайнер, 20 лет",
-    desc: "20 лет в дизайне. Использует AI как замену целой команде",
+    role: "Дизайнер, 20 лет опыта",
+    desc: "Использует AI как замену целой команде. То, на что раньше уходило 3 дня — теперь 3 часа. Впервые за 20 лет чувствует, что не продаёт время, а продаёт результат.",
     metric: "AI = команда",
     photo: "/members/max.jpg",
   },
@@ -50,6 +50,21 @@ const members = [
     desc: "Владелец крупнейшего регистратора доменов. AI-продукты на стыке Web3 и SaaS",
     metric: "SaaS + AI",
     photo: "/members/andrey.jpg",
+  },
+]
+
+const testimonials = [
+  {
+    text: "«Знаешь, что самое ценное? Не промпты, не агенты — хотя они огонь. Самое ценное — это когда пишешь в чат: \"Ребят, у меня агент глючит, кто сталкивался?\" — и через 20 минут тебе три человека скидывают решение. Бесплатно. Вот это я понимаю — комьюнити.»",
+    author: "Участник клуба · Фрилансер, маркетинг",
+  },
+  {
+    text: "«Раньше я считал каждый доллар. Сейчас смотрю на счёт и думаю: \"Окей, как мне с этих пяти тысяч сделать десять?\" Это другое мышление. Оно появилось не потому что я работал над майндсетом — а потому что появились рабочие инструменты, которые дали результат.»",
+    author: "Участник клуба · Предприниматель",
+  },
+  {
+    text: "«Я вчера в 3 часа дня пошёл гулять в парк. Просто так. Не потому что выходной — потому что задачи на день были закрыты к обеду. Я шёл и думал: вот это и есть та свобода, о которой мечтал. Не Бали — просто возможность пойти гулять в среду и не чувствовать, что упускаю что-то важное.»",
+    author: "Участник клуба · Контент-мейкер · 4-й месяц в клубе",
   },
 ]
 
@@ -65,6 +80,10 @@ export function MembersSectionCircles() {
     gsap.from(".member-item", {
       opacity: 0, scale: 0.85, duration: 0.5, stagger: 0.07, ease: "back.out(1.4)",
       scrollTrigger: { trigger: ".members-grid", start: "top 80%", once: true },
+    })
+    gsap.from(".testimonial-card", {
+      opacity: 0, y: 24, duration: 0.5, stagger: 0.1, ease: "power2.out",
+      scrollTrigger: { trigger: ".testimonials-grid", start: "top 80%", once: true },
     })
     gsap.from(".members-counter", {
       opacity: 0, duration: 0.6, ease: "power2.out",
@@ -82,18 +101,17 @@ export function MembersSectionCircles() {
             <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
               Участники
             </p>
-            <h2 className="text-heading font-bold tracking-snug text-white mb-sp-sm">
-              Кто уже внутри
+            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
+              Кто уже внутри — и что говорит
             </h2>
             <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
-              Предприниматели, продакты и креаторы, которые уже зарабатывают с AI.
-              Не теоретики — практики с результатами.
+              Не теоретики. Люди, которые работают с AI и получают результат.
             </p>
           </div>
         </div>
 
         {/* Members grid */}
-        <div className="members-grid flex flex-wrap justify-start gap-sp-md">
+        <div className="members-grid flex flex-wrap justify-start gap-sp-md mb-sp-md">
           {members.map((m, i) => {
             const isActive = active === i
             const hasActive = active !== null
@@ -134,12 +152,12 @@ export function MembersSectionCircles() {
                 </p>
 
                 {/* Metric badge */}
-                <span className="inline-block font-medium text-rose-400 bg-rose-500/15 border border-rose-500/30 rounded-full whitespace-nowrap text-xs py-0.5 px-2.5">
+                <span className="inline-block font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full whitespace-nowrap text-xs py-0.5 px-2.5">
                   {m.metric}
                 </span>
 
                 {/* Desc — mobile always visible */}
-                <p className="text-neutral-300 text-center text-sm md:hidden mt-sp-xs">
+                <p className="text-neutral-400 text-center text-sm md:hidden mt-sp-xs">
                   {m.desc}
                 </p>
 
@@ -150,7 +168,7 @@ export function MembersSectionCircles() {
                   }`}
                   style={{ maxHeight: isActive ? 120 : 0 }}
                 >
-                  <p className="text-neutral-300 text-xs leading-normal">
+                  <p className="text-neutral-400 text-xs leading-normal">
                     {m.desc}
                   </p>
                 </div>
@@ -159,8 +177,27 @@ export function MembersSectionCircles() {
           })}
         </div>
 
+        {/* Testimonials */}
+        <div className="testimonials-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className={`testimonial-card bg-neutral-900/50 border border-neutral-800 rounded-2xl p-sp-sm ${
+                i === 2 ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"
+              }`}
+            >
+              <p className="text-sm leading-[1.65] text-neutral-300 italic mb-sp-sm">
+                {t.text}
+              </p>
+              <p className="text-xs text-neutral-500">
+                — {t.author}
+              </p>
+            </div>
+          ))}
+        </div>
+
         {/* Counter */}
-        <div className="members-counter flex items-center justify-center gap-2 mt-sp-md">
+        <div className="members-counter flex items-center justify-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />

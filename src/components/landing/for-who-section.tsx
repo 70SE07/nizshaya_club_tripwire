@@ -12,7 +12,7 @@ const pains = [
   "«Подписан на 40 AI-каналов. На счёту — столько же, сколько в январе»",
   "«Три вечера настраивал агента. На четвёртый он начал отвечать клиентам дичь. Удалил всё и решил, что просто не дорос»",
   "«Трачу по 6 часов в день на рутину, которую AI мог бы делать за 15 минут — если бы я знал как»",
-  "«Коллега говорит: ты всё ещё вручную? Мы уже полгода через AI гоним». Я молча киваю»",
+  "«Коллега говорит: ты всё ещё вручную? Мы уже полгода через AI гоним. Тебе надо подтянуться». Я молча киваю»",
   "«Заплатил за курс по AI. Прошёл 3 модуля из 12. Вкладка до сих пор открыта»",
 ]
 
@@ -40,8 +40,11 @@ export function ForWhoSection() {
       return next
     })
 
-    // Пульс на элементе
-    gsap.fromTo(`.pain-item-${i}`, { scale: 0.98 }, { scale: 1, duration: 0.2, ease: "back.out(2)" })
+    // Мягкая подсветка при клике
+    gsap.fromTo(`.pain-item-${i}`,
+      { boxShadow: "inset 0 0 20px 0 rgba(244,63,94,0.12)" },
+      { boxShadow: "inset 0 0 20px 0 rgba(244,63,94,0)", duration: 0.6, ease: "power2.out" },
+    )
   }
 
   // Плавная анимация высоты + fade — useLayoutEffect срабатывает ДО отрисовки браузером
@@ -104,7 +107,7 @@ export function ForWhoSection() {
             <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
               Узнаёшь себя?
             </p>
-            <h2 className="text-heading font-bold tracking-snug text-white mb-sp-sm">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
               Ты уже знаешь про AI.
               <br />
               Просто не применяешь.

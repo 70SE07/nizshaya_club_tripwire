@@ -68,11 +68,11 @@ export function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500" />
               </span>
-              <span ref={badgeTextRef} className="text-rose-300 text-sm font-medium">{badgeTexts[badgeIdx]}</span>
+              <span ref={badgeTextRef} className="text-rose-400 text-sm font-medium">{badgeTexts[badgeIdx]}</span>
             </div>
 
             {/* H1 */}
-            <h1 className="hero-h1 text-display font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 mb-sp-lg">
+            <h1 className="hero-h1 text-4xl md:text-5xl lg:text-6xl leading-none font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 mb-sp-lg">
               Первый результат —
               <br />
               <span className="bg-linear-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
@@ -81,7 +81,7 @@ export function HeroSection() {
             </h1>
 
             {/* Body */}
-            <p className="hero-body text-lg leading-[1.65] text-neutral-300 max-w-lg mb-sp-lg">
+            <p className="hero-body text-lg leading-[1.65] text-neutral-400 max-w-lg mb-sp-lg">
               «Низшая Лига» — закрытое AI комьюнити практиков, которые называют себя «низшей лигой» с самоиронией. Никакой теории — тебе отдают готовые связки, которые работают. Берёшь, копируешь, зарабатываешь.
             </p>
 
@@ -89,12 +89,12 @@ export function HeroSection() {
             <div className="hero-cta">
               <a
                 href="https://t.me/ligayasko_bot?start=tariffs"
-                className="inline-flex items-center justify-center px-8 py-4 bg-linear-to-r from-rose-500 to-pink-600 text-white font-semibold rounded-xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-105 transform"
+                className="inline-flex items-center justify-center py-sp-sm px-sp-md bg-linear-to-r from-rose-500 to-pink-600 text-white font-semibold rounded-xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-105 transform"
               >
                 Вступить в клуб за $79 / мес
               </a>
               <p className="text-sm text-neutral-500 mt-sp-sm">
-                Или 3 месяца за $150 (экономия 37%). Гарантия возврата после первого стрима — если не получишь рабочий инструмент, вернём деньги.
+                Сэкономь 37% — возьми сразу 3 месяца за $150. Не понравится после первого стрима — вернём деньги.
               </p>
             </div>
           </div>

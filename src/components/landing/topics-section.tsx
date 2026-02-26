@@ -64,7 +64,7 @@ export function TopicsSection() {
             <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
               Темы стримов
             </p>
-            <h2 className="text-heading font-bold tracking-snug text-white mb-sp-sm">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
               Разбираем то, что уже приносит деньги
             </h2>
             <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
@@ -79,13 +79,13 @@ export function TopicsSection() {
           {highlights.map((item, i) => (
             <div
               key={i}
-              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-5 ${item.full ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"}`}
+              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-sm ${item.full ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"}`}
             >
-              <span className="inline-block text-sm font-medium text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1 mb-sp-sm">
+              <span className="inline-block text-sm font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1 mb-sp-sm">
                 {item.tag}
               </span>
               <item.icon className="w-7 h-7 text-rose-400 mb-sp-sm" />
-              <h3 className="text-subheading font-semibold text-white mb-sp-xs">{item.title}</h3>
+              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">{item.title}</h3>
               <p className="text-sm text-neutral-400">{item.desc}</p>
             </div>
           ))}
@@ -96,13 +96,13 @@ export function TopicsSection() {
           <div className="topics-schedule bg-neutral-900/50 border border-neutral-800 rounded-2xl mt-sp-md p-sp-md">
             <div className="flex items-center gap-2 mb-sp-sm">
               <Calendar className="w-5 h-5 text-rose-400" />
-              <h3 className="text-subheading font-semibold text-white">Стримы в {month}е</h3>
+              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стримы в {month}е</h3>
             </div>
             <div className="flex flex-col gap-sp-xs">
               {topics.map((topic, i) => (
                 <div key={i} className="flex items-center gap-3 py-2">
                   <span className="text-rose-400 font-bold text-sm w-6 shrink-0">{i + 1}.</span>
-                  <span className="text-neutral-300 text-sm">{topic}</span>
+                  <span className="text-neutral-400 text-sm">{topic}</span>
                 </div>
               ))}
             </div>
