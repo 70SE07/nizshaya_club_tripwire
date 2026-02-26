@@ -2,19 +2,11 @@
 
 import { useRef, useState, useLayoutEffect } from "react"
 import { Check, ArrowRight } from "lucide-react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useGSAP } from "@gsap/react"
-
-gsap.registerPlugin(ScrollTrigger, useGSAP)
-
-const pains = [
-  "«Подписан на 40 AI-каналов. На счёту — столько же, сколько в январе»",
-  "«Три вечера настраивал агента. На четвёртый он начал отвечать клиентам дичь. Удалил всё и решил, что просто не дорос»",
-  "«Трачу по 6 часов в день на рутину, которую AI мог бы делать за 15 минут — если бы я знал как»",
-  "«Коллега говорит: ты всё ещё вручную? Мы уже полгода через AI гоним. Тебе надо подтянуться». Я молча киваю»",
-  "«Заплатил за курс по AI. Прошёл 3 модуля из 12. Вкладка до сих пор открыта»",
-]
+import { gsap, useGSAP } from "@/lib/gsap"
+import { pains } from "@/constants/content"
+import { SectionContainer } from "@/components/landing/section-container"
+import { SectionHeader } from "@/components/landing/section-header"
+import { CtaButton } from "@/components/landing/cta-button"
 
 export function ForWhoSection() {
   const ref = useRef<HTMLElement>(null)
@@ -98,95 +90,81 @@ export function ForWhoSection() {
   }, { scope: ref })
 
   return (
-    <section ref={ref} className="bg-neutral-950 py-sp-lg">
-      <div className="max-w-300 mx-auto px-container-px">
+    <SectionContainer ref={ref}>
 
-        {/* Header */}
-        <div className="for-who-header grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
-              Узнаёшь себя?
-            </p>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
-              Ты уже знаешь про AI.
-              <br />
-              Просто не применяешь.
-            </h2>
-            <p className="text-sm text-muted">
-              Отметь пункты, которые про тебя
-            </p>
-          </div>
-        </div>
+      {/* Header */}
+      <SectionHeader
+        label="Узнаёшь себя?"
+        title={<>Ты уже знаешь про AI.<br />Просто не применяешь.</>}
+        subtitle={<p className="text-sm text-muted">Отметь пункты, которые про тебя</p>}
+        className="for-who-header"
+      />
 
-        {/* Pain list */}
-        <div className="pain-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-4">
-            {pains.map((pain, i) => {
-              const isChecked = checked.has(i)
-              return (
-                <div
-                  key={i}
-                  className={`pain-item pain-item-${i} flex items-start gap-4 border-b border-neutral-800/50 last:border-0 cursor-pointer select-none rounded-xl transition-colors duration-200 p-sp-sm ${
-                    isChecked ? "bg-rose-500/5" : "hover:bg-neutral-800/20"
+      {/* Pain list */}
+      <div className="pain-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+        <div className="col-span-1 sm:col-span-2 lg:col-span-4">
+          {pains.map((pain, i) => {
+            const isChecked = checked.has(i)
+            return (
+              <div
+                key={i}
+                className={`pain-item pain-item-${i} flex items-start gap-4 border-b border-neutral-800/50 last:border-0 cursor-pointer select-none rounded-xl transition-colors duration-200 p-sp-sm ${
+                  isChecked ? "bg-rose-500/5" : "hover:bg-neutral-800/20"
+                }`}
+                onClick={() => toggle(i)}
+              >
+                <span
+                  className={`shrink-0 rounded border flex items-center justify-center transition-all duration-200 mt-1 size-5 ${
+                    isChecked
+                      ? "bg-rose-500 border-rose-500"
+                      : "border-neutral-600 bg-transparent"
                   }`}
-                  onClick={() => toggle(i)}
                 >
-                  <span
-                    className={`shrink-0 rounded border flex items-center justify-center transition-all duration-200 mt-1 size-5 ${
-                      isChecked
-                        ? "bg-rose-500 border-rose-500"
-                        : "border-neutral-600 bg-transparent"
-                    }`}
-                  >
-                    {isChecked && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
-                  </span>
-                  <p className={`text-lg leading-[1.65] transition-colors duration-200 ${isChecked ? "text-white" : "text-body"}`}>
-                    {pain}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
+                  {isChecked && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+                </span>
+                <p className={`text-lg leading-[1.65] transition-colors duration-200 ${isChecked ? "text-white" : "text-body"}`}>
+                  {pain}
+                </p>
+              </div>
+            )
+          })}
         </div>
-
-        {/* Footer — динамический */}
-        <div className="for-who-footer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div ref={footerWrapRef} className="col-span-1 sm:col-span-2 lg:col-span-3 overflow-hidden">
-            <div ref={footerRef}>
-              {showCta ? (
-                <div>
-                  <p className="text-lg leading-[1.65] text-rose-400 font-medium mb-sp-sm">
-                    Ты попал по адресу. Именно для этого и существует клуб.
-                  </p>
-                  <a
-                    href="https://t.me/ligayasko_bot?start=tariffs"
-                    className="inline-flex items-center gap-3 bg-linear-to-r from-rose-500 to-pink-600 text-white font-bold rounded-2xl hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:scale-[1.02] transform py-sp-sm px-sp-md mb-sp-xs"
-                  >
-                    Вступить в клуб за $79 / мес <ArrowRight className="w-5 h-5" />
-                  </a>
-                  <p className="text-sm text-muted mt-sp-xs">
-                    Доступ открывается мгновенно · Гарантия возврата после первого стрима
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-muted"}`}>
-                    {checkedCount === 1
-                      ? "Один пункт — уже сигнал. Ещё один — и ты точно наш."
-                      : "Если хотя бы два пункта — это про тебя, ты попал по адресу."}
-                  </p>
-                  <div className="border border-neutral-800 rounded-2xl p-sp-sm">
-                    <p className="text-sm text-muted">
-                      <span className="text-body font-medium">Клуб не для тебя</span>, если хочешь изучить AI «для общего развития» без конкретного применения — здесь только практика и инструменты под реальные задачи.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
       </div>
-    </section>
+
+      {/* Footer — динамический */}
+      <div className="for-who-footer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div ref={footerWrapRef} className="col-span-1 sm:col-span-2 lg:col-span-3 overflow-hidden">
+          <div ref={footerRef}>
+            {showCta ? (
+              <div>
+                <p className="text-lg leading-[1.65] text-rose-400 font-medium mb-sp-sm">
+                  Ты попал по адресу. Именно для этого и существует клуб.
+                </p>
+                <CtaButton variant="primary" className="rounded-2xl mb-sp-xs">
+                  Вступить в клуб за $79 / мес <ArrowRight className="w-5 h-5" />
+                </CtaButton>
+                <p className="text-sm text-muted mt-sp-xs">
+                  Доступ открывается мгновенно · Гарантия возврата после первого стрима
+                </p>
+              </div>
+            ) : (
+              <div>
+                <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-muted"}`}>
+                  {checkedCount === 1
+                    ? "Один пункт — уже сигнал. Ещё один — и ты точно наш."
+                    : "Если хотя бы два пункта — это про тебя, ты попал по адресу."}
+                </p>
+                <div className="card-base">
+                  <p className="text-sm text-muted">
+                    <span className="text-body font-medium">Клуб не для тебя</span>, если хочешь изучить AI «для общего развития» без конкретного применения — здесь только практика и инструменты под реальные задачи.
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+    </SectionContainer>
   )
 }

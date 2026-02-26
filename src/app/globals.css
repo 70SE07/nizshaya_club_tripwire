@@ -145,6 +145,15 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@layer components {
+  .card-base {
+    @apply bg-neutral-900/50 border border-neutral-800 rounded-2xl p-sp-sm;
+  }
+  .card-accent {
+    @apply bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-md;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -1,20 +1,11 @@
 'use client'
 
 import { useRef, useState, useEffect } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useGSAP } from "@gsap/react"
+import { gsap, useGSAP } from "@/lib/gsap"
 import { VladScene } from "@/components/ui/vlad-model"
 import { Spotlight } from "@/components/ui/spotlight"
-
-gsap.registerPlugin(ScrollTrigger, useGSAP)
-
-const badgeTexts = [
-  "Не курс. Не теория. Не очередной гайд.",
-  "Стримы 2 раза в месяц",
-  "Показываем экран, не слайды",
-  "Доступ открывается мгновенно",
-]
+import { CtaButton } from "@/components/landing/cta-button"
+import { heroBadgeTexts } from "@/constants/content"
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
@@ -28,7 +19,7 @@ export function HeroSection() {
       gsap.to(el, {
         opacity: 0, y: -6, duration: 0.25, ease: "power2.in",
         onComplete: () => {
-          setBadgeIdx(i => (i + 1) % badgeTexts.length)
+          setBadgeIdx(i => (i + 1) % heroBadgeTexts.length)
           gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" })
         },
       })
@@ -68,7 +59,7 @@ export function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500" />
               </span>
-              <span ref={badgeTextRef} className="text-rose-400 text-sm font-medium">{badgeTexts[badgeIdx]}</span>
+              <span ref={badgeTextRef} className="text-rose-400 text-sm font-medium">{heroBadgeTexts[badgeIdx]}</span>
             </div>
 
             {/* H1 */}
@@ -87,12 +78,9 @@ export function HeroSection() {
 
             {/* CTA */}
             <div className="hero-cta">
-              <a
-                href="https://t.me/ligayasko_bot?start=tariffs"
-                className="inline-flex items-center justify-center py-sp-sm px-sp-md bg-linear-to-r from-rose-500 to-pink-600 text-white font-semibold rounded-xl text-lg hover:from-rose-600 hover:to-pink-700 transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-105 transform"
-              >
+              <CtaButton>
                 Вступить в клуб за $79 / мес
-              </a>
+              </CtaButton>
               <p className="text-sm text-muted mt-sp-sm">
                 Сэкономь 37% — возьми сразу 3 месяца за $150. Не понравится после первого стрима — вернём деньги.
               </p>

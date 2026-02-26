@@ -2,33 +2,16 @@
 
 import { useRef } from "react"
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useGSAP } from "@gsap/react"
+import { gsap, useGSAP } from "@/lib/gsap"
+import { topicsSchedule, topicsHighlights } from "@/constants/content"
+import { SectionContainer } from "@/components/landing/section-container"
+import { SectionHeader } from "@/components/landing/section-header"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+const icons = [Bot, Layers, Code, Video, Lock]
 
 const monthNames = [
   "январь", "февраль", "март", "апрель", "май", "июнь",
   "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь",
-]
-
-const schedule: Record<string, string[]> = {
-  "2026-02": [
-    "OpenClaw — собираем AI-агента",
-    "Контент-завод на нейросетях",
-    "Вайб-кодинг: продукт без кода",
-    "AI-видео и креатив без продакшна",
-    "Закрытый эфир с экспертом",
-  ],
-}
-
-const highlights = [
-  { icon: Bot,   tag: "Хайп",         title: "OpenClaw",                        desc: "Собираем AI-агента, который работает за тебя: в браузере, пишет код и выполняет задачи" },
-  { icon: Layers,tag: "Кейс",         title: "Контент-завод",                   desc: "Конвейер: идея → текст → визуал → пост. Рилсы, сторис, Telegram, сайт" },
-  { icon: Code,  tag: "Новое",        title: "Вайб-кодинг",                     desc: "Сайт, приложение, программа и что угодно ещё — через AI, без программирования. Cursor, Claude Code — покажем как" },
-  { icon: Video, tag: "Тренд",        title: "AI-видео и креатив без продакшна", desc: "Kling, ElevenLabs, Seedream 2.0 и другие. Создание фото, видео, озвучки и дизайна нейросетями. Без дизайнера и монтажёра." },
-  { icon: Lock,  tag: "Только внутри",title: "Это не всё",                      desc: "Это только то, что мы показываем публично. Внутри — кейсы спикеров, связки от практиков и наработки комьюнити. То, что не выкладывают в открытый доступ. Потому что за это платят.", full: true },
 ]
 
 export function TopicsSection() {
@@ -51,49 +34,44 @@ export function TopicsSection() {
 
   const now = new Date()
   const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
-  const topics = schedule[key]
+  const topics = topicsSchedule[key]
   const month = monthNames[now.getMonth()]
 
   return (
-    <section ref={ref} className="bg-black py-sp-lg">
-      <div className="max-w-300 mx-auto px-container-px">
+    <SectionContainer ref={ref} bg="bg-black">
 
-        {/* Header */}
-        <div className="topics-header grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
-              Темы стримов
-            </p>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
-              Разбираем то, что уже приносит деньги
-            </h2>
-            <p className="text-lg leading-[1.65] text-body max-w-2xl">
-              2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка.
-              Показываем с экрана, повторяешь — забираешь.
-            </p>
-          </div>
-        </div>
+      <SectionHeader
+        label="Темы стримов"
+        title="Разбираем то, что уже приносит деньги"
+        subtitle="2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка. Показываем с экрана, повторяешь — забираешь."
+        className="topics-header"
+      />
 
-        {/* Cards 2×2 + full */}
-        <div className="topics-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {highlights.map((item, i) => (
+      {/* Cards 2×2 + full */}
+      <div className="topics-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {topicsHighlights.map((item, i) => {
+          const Icon = icons[i]
+          const isFull = 'full' in item && item.full
+          return (
             <div
               key={i}
-              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-sm ${item.full ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"}`}
+              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-sm ${isFull ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"}`}
             >
               <span className="inline-block text-sm font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1 mb-sp-sm">
                 {item.tag}
               </span>
-              <item.icon className="w-7 h-7 text-rose-400 mb-sp-sm" />
+              <Icon className="w-7 h-7 text-rose-400 mb-sp-sm" />
               <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">{item.title}</h3>
               <p className="text-sm text-body">{item.desc}</p>
             </div>
-          ))}
-        </div>
+          )
+        })}
+      </div>
 
-        {/* Schedule */}
+      {/* Schedule */}
+      <div className="mt-sp-md">
         {topics && (
-          <div className="topics-schedule bg-neutral-900/50 border border-neutral-800 rounded-2xl mt-sp-md p-sp-md">
+          <div className="topics-schedule card-base p-sp-md!">
             <div className="flex items-center gap-2 mb-sp-sm">
               <Calendar className="w-5 h-5 text-rose-400" />
               <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стримы в {month}е</h3>
@@ -108,8 +86,8 @@ export function TopicsSection() {
             </div>
           </div>
         )}
-
       </div>
-    </section>
+
+    </SectionContainer>
   )
 }
