@@ -77,7 +77,7 @@ export function SolutionSection() {
             <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
               Мы не учим. Мы отдаём готовое.
             </h2>
-            <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
+            <p className="text-lg leading-[1.65] text-body max-w-2xl">
               Низшая Лига — AI-клуб, где вместо презентаций ты видишь экран. Влад берёт реальную задачу из своего бизнеса и строит решение прямо при тебе: с ошибками, правками, живыми вопросами из чата. Ты повторяешь следом и уходишь с готовым инструментом.
             </p>
           </div>

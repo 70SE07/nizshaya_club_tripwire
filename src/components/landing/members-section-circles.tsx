@@ -104,7 +104,7 @@ export function MembersSectionCircles() {
             <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
               Кто уже внутри — и что говорит
             </h2>
-            <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
+            <p className="text-lg leading-[1.65] text-body max-w-2xl">
               Не теоретики. Люди, которые работают с AI и получают результат.
             </p>
           </div>

@@ -68,6 +68,10 @@
 
   /* Letter spacing */
   --letter-spacing-snug: -0.015em;
+
+  /* Body text colors — change here, applies site-wide */
+  --color-body: oklch(0.708 0 0);       /* neutral-400 */
+  --color-body-em: oklch(0.922 0 0);    /* neutral-200 — quotes, emphasis */
 }
 
 :root {

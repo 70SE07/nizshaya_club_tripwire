@@ -81,7 +81,7 @@ export function HeroSection() {
             </h1>
 
             {/* Body */}
-            <p className="hero-body text-lg leading-[1.65] text-neutral-400 max-w-lg mb-sp-lg">
+            <p className="hero-body text-lg leading-[1.65] text-body max-w-lg mb-sp-lg">
               «Низшая Лига» — закрытое AI комьюнити практиков, которые называют себя «низшей лигой» с самоиронией. Никакой теории — тебе отдают готовые связки, которые работают. Берёшь, копируешь, зарабатываешь.
             </p>
 

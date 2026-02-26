@@ -67,7 +67,7 @@ export function TopicsSection() {
             <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
               Разбираем то, что уже приносит деньги
             </h2>
-            <p className="text-lg leading-[1.65] text-neutral-400 max-w-2xl">
+            <p className="text-lg leading-[1.65] text-body max-w-2xl">
               2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка.
               Показываем с экрана, повторяешь — забираешь.
             </p>

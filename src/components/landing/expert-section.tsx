@@ -9,6 +9,9 @@ import { useGSAP } from "@gsap/react"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
+const QUOTE = "«Низшая Лига — это тренд на инклюзивность и антиуспешный успех. Мы продаём не членство в эфемерном клубе, а конкретный план действий. Никакой теории — делимся своим стеком нейронок, отдаём готовые воркфлоу, выдаём кастомных агентов и рабочие связки. Суть одна: каждый уходит с готовым AI-инструментом и начинает зарабатывать.»"
+const BIO = "Влад не преподаёт AI. Он применяет его в своих проектах каждый день — и показывает тебе то, что реально работает прямо сейчас, а не то, что работало полгода назад. Никаких слайдов. Только экран, живая задача и готовый инструмент на выходе."
+
 export function ExpertSection() {
   const ref = useRef<HTMLElement>(null)
 
@@ -43,50 +46,68 @@ export function ExpertSection() {
           </div>
         </div>
 
-        {/* Magazine-style card */}
-        <div className="expert-card bg-linear-to-b from-rose-500/10 to-neutral-900/50 border border-rose-500/20 rounded-2xl overflow-hidden mb-sp-md">
-          <div className="grid grid-cols-1 lg:grid-cols-3">
-
-            {/* Photo side */}
-            <div className="relative lg:col-span-1">
-              <div className="aspect-square lg:aspect-auto lg:h-full">
-                <Image
-                  src="/vlad-photo.jpg"
-                  alt="Влад Ясько"
-                  width={480}
-                  height={480}
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              {/* Name badge overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-sp-sm">
-                <div className="flex items-end justify-between gap-3">
-                  <div className="shrink-0">
-                    <p className="text-white font-bold text-lg">Влад Ясько</p>
-                    <p className="text-rose-400 text-sm">Основатель клуба</p>
-                  </div>
-                  <div className="lg:hidden flex-1 min-w-0">
-                    <AudioPlayerCompact src="/vlad_club_demo.mp3" />
-                  </div>
+        {/* Mobile */}
+        <div className="lg:hidden mb-sp-md">
+          <div className="relative">
+            <div className="aspect-square">
+              <Image
+                src="/vlad-photo.jpg"
+                alt="Влад Ясько"
+                width={480}
+                height={480}
+                className="w-full h-full object-cover object-top rounded-2xl"
+              />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-sp-sm rounded-b-2xl">
+              <div className="flex items-end justify-between gap-3">
+                <div className="shrink-0">
+                  <p className="text-white font-bold text-lg">Влад Ясько</p>
+                  <p className="text-rose-400 text-sm">Основатель клуба</p>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <AudioPlayerCompact src="/vlad_club_demo.mp3" />
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mt-sp-sm">
+            <p className="text-lg leading-[1.65] text-body-em mb-sp-sm">{QUOTE}</p>
+            <p className="text-sm text-neutral-400">{BIO}</p>
+          </div>
+        </div>
 
-            {/* Content side */}
-            <div className="lg:col-span-2 p-sp-md flex flex-col justify-between">
-              <div>
-                <p className="text-lg leading-[1.65] text-neutral-300 mb-sp-md">
-                  «Низшая Лига — это тренд на инклюзивность и антиуспешный успех. Мы продаём не членство в эфемерном клубе, а конкретный план действий. Никакой теории — делимся своим стеком нейронок, отдаём готовые воркфлоу, выдаём кастомных агентов и рабочие связки. Суть одна: каждый уходит с готовым AI-инструментом и начинает зарабатывать.»
-                </p>
-                <p className="text-sm text-neutral-400 mb-sp-md">
-                  Влад не преподаёт AI. Он применяет его в своих проектах каждый день — и показывает тебе то, что реально работает прямо сейчас, а не то, что работало полгода назад. Никаких слайдов. Только экран, живая задача и готовый инструмент на выходе.
-                </p>
-              </div>
-              <div className="hidden lg:block">
-                <AudioPlayer src="/vlad_club_demo.mp3" />
-              </div>
+        {/* Desktop — cinematic card */}
+        <div className="expert-card hidden lg:block rounded-2xl overflow-hidden mb-sp-md border border-rose-500/20">
+          {/* Top: photo left + quote right */}
+          <div className="grid grid-cols-5">
+            <div className="col-span-2 relative">
+              <Image
+                src="/vlad-photo.jpg"
+                alt="Влад Ясько"
+                width={480}
+                height={480}
+                className="w-full h-full object-cover object-top"
+              />
             </div>
-
+            <div className="col-span-3 bg-linear-to-b from-rose-500/10 to-neutral-900/50 p-sp-md flex items-center">
+              <p className="text-xl leading-[1.65] text-body-em">
+                {QUOTE}
+              </p>
+            </div>
+          </div>
+          {/* Bottom bar: name + bio + player */}
+          <div className="bg-neutral-900/80 border-t border-neutral-800 p-sp-sm flex items-center gap-sp-md">
+            <div className="shrink-0">
+              <p className="text-white font-bold text-lg">Влад Ясько</p>
+              <p className="text-rose-400 text-sm">Основатель клуба</p>
+            </div>
+            <div className="h-8 w-px bg-neutral-700" />
+            <p className="text-sm text-neutral-400 flex-1 line-clamp-2">
+              {BIO}
+            </p>
+            <div className="shrink-0 w-72">
+              <AudioPlayer src="/vlad_club_demo.mp3" />
+            </div>
           </div>
         </div>
 

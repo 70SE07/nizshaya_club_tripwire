@@ -83,7 +83,7 @@ export function ProgramSection() {
             <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
               Что конкретно внутри клуба
             </h2>
-            <p className="text-lg leading-[1.65] text-neutral-400">
+            <p className="text-lg leading-[1.65] text-body">
               Не курс с модулями и «изучи урок 1 перед уроком 2». Живой клуб — два стрима в месяц, ежедневный стек, практики рядом.
             </p>
           </div>

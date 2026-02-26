@@ -40,10 +40,10 @@ export function FinalCtaSection() {
                 кто-то уже зарабатывает.
               </span>
             </h2>
-            <p className="text-lg leading-[1.65] text-neutral-400 mb-sp-xs">
+            <p className="text-lg leading-[1.65] text-body mb-sp-xs">
               Ты уже знаешь, что что-то надо менять. Иначе ты бы не дочитал до этого места.
             </p>
-            <p className="text-lg leading-[1.65] text-neutral-400">
+            <p className="text-lg leading-[1.65] text-body">
               AI тебе нужен — это ясно. Осталось перестать смотреть, как это делают другие, и начать самому.
             </p>
           </div>
