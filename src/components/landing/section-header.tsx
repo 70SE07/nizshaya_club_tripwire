@@ -3,13 +3,12 @@ interface SectionHeaderProps {
   title: React.ReactNode
   subtitle?: React.ReactNode
   className?: string
-  cols?: number
 }
 
-export function SectionHeader({ label, title, subtitle, className = "", cols = 3 }: SectionHeaderProps) {
+export function SectionHeader({ label, title, subtitle, className = "" }: SectionHeaderProps) {
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md ${className}`}>
-      <div className={`col-span-1 sm:col-span-2 lg:col-span-${cols}`}>
+    <div className={`grid-section mb-sp-md ${className}`}>
+      <div className="col-span-1 sm:col-span-2 lg:col-span-3">
         <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-xs">
           {label}
         </p>

@@ -1,7 +1,8 @@
 'use client'
 
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { TOPICS_REVEAL } from "@/constants/animations"
 import { topicsSchedule, topicsHighlights } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -14,11 +15,7 @@ const monthNames = [
 ]
 
 export function TopicsSection() {
-  const ref = useScrollReveal([
-    { selector: ".topics-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".topic-card", trigger: ".topics-grid", ...MOTION.card, offset: 24 },
-    { selector: ".topics-schedule", duration: 0.6, offset: 20, start: "top 85%" },
-  ])
+  const ref = useScrollReveal(TOPICS_REVEAL)
 
   const now = new Date()
   const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
@@ -36,16 +33,16 @@ export function TopicsSection() {
       />
 
       {/* Cards 2×2 + full */}
-      <div className="topics-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="topics-grid grid-section">
         {topicsHighlights.map((item, i) => {
           const Icon = icons[i]
           const isFull = item.full
           return (
             <div
               key={i}
-              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-sm ${isFull ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"}`}
+              className={`topic-card bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-sm ${isFull ? "col-full" : "sm:col-span-2"}`}
             >
-              <span className="inline-block text-sm font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full px-3 py-1 mb-sp-sm">
+              <span className="inline-block text-sm font-medium badge-accent rounded-full px-3 py-1 mb-sp-sm">
                 {item.tag}
               </span>
               <Icon className="w-7 h-7 text-rose-400 mb-sp-sm" />

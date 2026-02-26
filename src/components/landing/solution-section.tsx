@@ -73,8 +73,8 @@ export function SolutionSection() {
       </div>
 
       {/* Rows */}
-      <div className="solution-rows grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-col gap-2">
+      <div className="solution-rows grid-section">
+        <div className="col-full flex flex-col gap-2">
           {solutionRows.map((row, i) => (
             <div
               key={i}

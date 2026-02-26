@@ -143,7 +143,7 @@ export function AudioPlayer({ src }: { src: string }) {
             )
           })}
         </div>
-        <div className="flex justify-between text-xs text-neutral-500">
+        <div className="flex justify-between text-xs text-muted">
           <span>{fmt(currentTime)}</span>
           <span>{duration ? fmt(duration) : "—"}</span>
         </div>

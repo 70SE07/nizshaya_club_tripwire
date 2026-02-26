@@ -1,8 +1,13 @@
 'use client'
 
 import { useRef, useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import { gsap, useGSAP } from "@/lib/gsap"
-import { VladScene } from "@/components/ui/vlad-model"
+
+const VladScene = dynamic(
+  () => import("@/components/ui/vlad-model").then(m => ({ default: m.VladScene })),
+  { ssr: false, loading: () => <div className="w-full h-full" /> }
+)
 import { Spotlight } from "@/components/ui/spotlight"
 import { CtaButton } from "@/components/landing/cta-button"
 import { heroBadgeTexts } from "@/constants/content"
@@ -49,12 +54,12 @@ export function HeroSection() {
       </div>
 
       <div className="max-w-300 mx-auto px-container-px w-full relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid-section">
 
           {/* Text — 2 cols */}
           <div className="sm:col-span-2 flex flex-col justify-center py-sp-lg">
             {/* Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 rounded-full px-4 py-1.5 w-fit mb-sp-lg">
+            <div className="hero-badge inline-flex items-center gap-2 badge-accent rounded-full px-4 py-1.5 w-fit mb-sp-lg">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500" />

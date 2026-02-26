@@ -11,7 +11,7 @@ interface ForWhoFooterProps {
 
 export function ForWhoFooter({ showCta, checkedCount, footerWrapRef, footerRef }: ForWhoFooterProps) {
   return (
-    <div className="for-who-footer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div className="for-who-footer grid-section">
       <div ref={footerWrapRef} className="col-span-1 sm:col-span-2 lg:col-span-3 overflow-hidden">
         <div ref={footerRef}>
           {showCta ? (

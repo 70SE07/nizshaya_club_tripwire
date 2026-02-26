@@ -8,8 +8,8 @@ interface PainListProps {
 
 export function PainList({ checked, toggle }: PainListProps) {
   return (
-    <div className="pain-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-      <div className="col-span-1 sm:col-span-2 lg:col-span-4">
+    <div className="pain-list grid-section mb-sp-md">
+      <div className="col-full">
         {pains.map((pain, i) => {
           const isChecked = checked.has(i)
           return (

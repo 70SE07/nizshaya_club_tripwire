@@ -1,17 +1,14 @@
 'use client'
 
 import Image from "next/image"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { MEMBERS_REVEAL } from "@/constants/animations"
 import { members } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function MembersSectionCircles() {
-  const ref = useScrollReveal([
-    { selector: ".members-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".member-strip", trigger: ".members-strips", direction: "left", duration: 0.4, stagger: 0.06, offset: 20 },
-    { selector: ".members-counter", direction: "fade", duration: 0.6, start: "top 90%" },
-  ])
+  const ref = useScrollReveal(MEMBERS_REVEAL)
 
   return (
     <SectionContainer ref={ref}>
@@ -36,7 +33,7 @@ export function MembersSectionCircles() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <p className="text-white font-bold text-sm truncate">{m.name}</p>
-                <span className="shrink-0 font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full whitespace-nowrap text-[10px] py-0.5 px-2">
+                <span className="shrink-0 font-medium badge-accent rounded-full whitespace-nowrap text-[10px] py-0.5 px-2">
                   {m.metric}
                 </span>
               </div>

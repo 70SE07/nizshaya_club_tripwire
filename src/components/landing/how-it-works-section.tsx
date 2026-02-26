@@ -1,15 +1,13 @@
 'use client'
 
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { HOW_IT_WORKS_REVEAL } from "@/constants/animations"
 import { howItWorksSteps } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function HowItWorksSection() {
-  const ref = useScrollReveal([
-    { selector: ".hiw-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".hiw-step", trigger: ".hiw-steps", duration: 0.5, stagger: 0.1, offset: 24 },
-  ])
+  const ref = useScrollReveal(HOW_IT_WORKS_REVEAL)
 
   return (
     <SectionContainer ref={ref} bg="bg-black">
@@ -22,13 +20,13 @@ export function HowItWorksSection() {
       />
 
       {/* Steps */}
-      <div className="hiw-steps grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+      <div className="hiw-steps grid-section mb-sp-md">
         {howItWorksSteps.map((step, i) => (
           <div
             key={i}
             className="hiw-step card-base"
           >
-            <span className="inline-flex items-center justify-center size-8 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 font-bold text-sm mb-sp-sm">
+            <span className="inline-flex items-center justify-center size-8 rounded-full badge-accent font-bold text-sm mb-sp-sm">
               {i + 1}
             </span>
             <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">

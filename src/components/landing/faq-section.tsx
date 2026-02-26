@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { FAQ_REVEAL } from "@/constants/animations"
 import { faqs } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -40,11 +41,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export function FaqSection() {
-  const ref = useScrollReveal([
-    { selector: ".faq-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".faq-item", trigger: ".faq-list", ...MOTION.list },
-    { selector: ".faq-cta", duration: 0.5, offset: 16, start: "top 90%" },
-  ])
+  const ref = useScrollReveal(FAQ_REVEAL)
 
   return (
     <SectionContainer ref={ref}>
@@ -56,8 +53,8 @@ export function FaqSection() {
       />
 
       {/* Questions */}
-      <div className="faq-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-        <div className="col-span-1 sm:col-span-2 lg:col-span-4 card-base">
+      <div className="faq-list grid-section mb-sp-md">
+        <div className="col-full card-base">
           {faqs.map((faq, i) => (
             <FaqItem key={i} q={faq.q} a={faq.a} />
           ))}
@@ -65,8 +62,8 @@ export function FaqSection() {
       </div>
 
       {/* CTA */}
-      <div className="faq-cta grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="col-span-1 sm:col-span-2 lg:col-span-4 text-center">
+      <div className="faq-cta grid-section">
+        <div className="col-full text-center">
           <CtaButton variant="ghost">
             Вступить в клуб →
           </CtaButton>

@@ -1,7 +1,8 @@
 'use client'
 
 import { Monitor, Zap, Mic, Users, MessageSquare } from "lucide-react"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { PROGRAM_REVEAL } from "@/constants/animations"
 import { programItems } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -9,11 +10,7 @@ import { SectionHeader } from "@/components/landing/section-header"
 const icons = [Monitor, Zap, Mic, Users, MessageSquare]
 
 export function ProgramSection() {
-  const ref = useScrollReveal([
-    { selector: ".program-row", trigger: ".program-mobile", direction: "left", duration: 0.4, stagger: 0.08, offset: 20 },
-    { selector: ".program-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".program-card", trigger: ".program-desktop", ...MOTION.list, offset: 20 },
-  ])
+  const ref = useScrollReveal(PROGRAM_REVEAL)
 
   return (
     <SectionContainer ref={ref}>
@@ -41,7 +38,7 @@ export function ProgramSection() {
             >
               <span className={`inline-block text-xs font-medium rounded-full px-2.5 py-1 mb-3 ${
                 isPremium
-                  ? "text-rose-400 bg-rose-500/10 border border-rose-500/20"
+                  ? "badge-accent"
                   : "text-body bg-neutral-800 border border-neutral-700"
               }`}>
                 {item.freq}
@@ -76,7 +73,7 @@ export function ProgramSection() {
             >
               <span className={`absolute top-4 right-4 text-xs font-medium rounded-full px-2.5 py-1 ${
                 isPremium
-                  ? "text-rose-400 bg-rose-500/10 border border-rose-500/20"
+                  ? "badge-accent"
                   : "text-body bg-neutral-800 border border-neutral-700"
               }`}>
                 {item.freq}

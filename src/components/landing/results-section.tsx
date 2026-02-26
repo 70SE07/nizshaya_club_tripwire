@@ -1,7 +1,8 @@
 'use client'
 
 import { Clock, Zap, TrendingUp, Gem, Check } from "lucide-react"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { RESULTS_REVEAL } from "@/constants/animations"
 import { resultsMetrics, resultsOutcomes } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -9,11 +10,7 @@ import { SectionHeader } from "@/components/landing/section-header"
 const metricIcons = [Clock, Zap, TrendingUp, Gem]
 
 export function ResultsSection() {
-  const ref = useScrollReveal([
-    { selector: ".results-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".results-metric", trigger: ".results-metrics", ...MOTION.card },
-    { selector: ".results-outcome", trigger: ".results-outcomes", direction: "left", ...MOTION.list },
-  ])
+  const ref = useScrollReveal(RESULTS_REVEAL)
 
   return (
     <SectionContainer ref={ref}>
@@ -26,7 +23,7 @@ export function ResultsSection() {
       />
 
       {/* Metrics -- 4 tiles */}
-      <div className="results-metrics grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+      <div className="results-metrics grid-section mb-sp-md">
         {resultsMetrics.map((m, i) => {
           const Icon = metricIcons[i]
           return (
@@ -40,8 +37,8 @@ export function ResultsSection() {
       </div>
 
       {/* Outcomes */}
-      <div className="results-outcomes grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-        <div className="col-span-1 sm:col-span-2 lg:col-span-4">
+      <div className="results-outcomes grid-section mb-sp-md">
+        <div className="col-full">
           <p className="text-lg leading-[1.65] text-body mb-sp-sm">
             После первого месяца ты уходишь с:
           </p>

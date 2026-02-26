@@ -2,16 +2,14 @@
 
 import Image from "next/image"
 import { AudioPlayer, AudioPlayerCompact } from "@/components/ui/audio-player"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { EXPERT_REVEAL } from "@/constants/animations"
 import { expertQuote, expertBio } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function ExpertSection() {
-  const ref = useScrollReveal([
-    { selector: ".expert-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".expert-card", duration: 0.7, offset: 32, start: "top 85%" },
-  ])
+  const ref = useScrollReveal(EXPERT_REVEAL)
 
   return (
     <SectionContainer ref={ref} bg="bg-black">

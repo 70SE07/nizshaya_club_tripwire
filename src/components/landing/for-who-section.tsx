@@ -1,18 +1,15 @@
 'use client'
 
 import { useRef, useState, useLayoutEffect } from "react"
-import { gsap, useScrollReveal, MOTION } from "@/lib/gsap"
+import { gsap, useScrollReveal } from "@/lib/gsap"
+import { FOR_WHO_REVEAL } from "@/constants/animations"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 import { PainList } from "@/components/landing/for-who/pain-list"
 import { ForWhoFooter } from "@/components/landing/for-who/for-who-footer"
 
 export function ForWhoSection() {
-  const ref = useScrollReveal([
-    { selector: ".for-who-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".pain-item", trigger: ".pain-list", direction: "left", duration: 0.5, stagger: 0.07, offset: 16 },
-    { selector: ".for-who-footer", duration: 0.5, offset: 16, start: "top 85%" },
-  ])
+  const ref = useScrollReveal(FOR_WHO_REVEAL)
   const [checked, setChecked] = useState<Set<number>>(new Set())
   const footerRef = useRef<HTMLDivElement>(null)
   const footerWrapRef = useRef<HTMLDivElement>(null)

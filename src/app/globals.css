@@ -152,6 +152,15 @@
   .card-accent {
     @apply bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-md;
   }
+  .grid-section {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5;
+  }
+  .col-full {
+    @apply col-span-1 sm:col-span-2 lg:col-span-4;
+  }
+  .badge-accent {
+    @apply text-rose-400 bg-rose-500/10 border border-rose-500/20;
+  }
 }
 
 @layer base {

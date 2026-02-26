@@ -2,23 +2,20 @@
 
 import { ArrowRight, Users } from "lucide-react"
 import Link from "next/link"
-import { useScrollReveal, MOTION } from "@/lib/gsap"
+import { useScrollReveal } from "@/lib/gsap"
+import { FINAL_CTA_REVEAL } from "@/constants/animations"
 import { LINKS } from "@/constants/links"
 import { SectionContainer } from "@/components/landing/section-container"
 import { CtaButton } from "@/components/landing/cta-button"
 
 export function FinalCtaSection() {
-  const ref = useScrollReveal([
-    { selector: ".cta-header > *", trigger: "section", ...MOTION.header },
-    { selector: ".cta-urgency", duration: 0.6, offset: 24 },
-    { selector: ".cta-buttons", duration: 0.5, offset: 20, start: "top 85%" },
-  ])
+  const ref = useScrollReveal(FINAL_CTA_REVEAL)
 
   return (
     <SectionContainer ref={ref} bg="bg-linear-to-b from-neutral-950 to-black">
 
       {/* Header */}
-      <div className="cta-header grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+      <div className="cta-header grid-section mb-sp-md">
         <div className="col-span-1 sm:col-span-2 lg:col-span-3">
           <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
             Пока ты читаешь —{" "}
@@ -36,7 +33,7 @@ export function FinalCtaSection() {
       </div>
 
       {/* Urgency */}
-      <div className="cta-urgency grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
+      <div className="cta-urgency grid-section mb-sp-md">
         <div className="col-span-1 sm:col-span-2 lg:col-span-3 card-base">
           <div className="flex items-center gap-3 mb-sp-sm">
             <Users className="w-5 h-5 text-rose-400 shrink-0" />
@@ -52,8 +49,8 @@ export function FinalCtaSection() {
       </div>
 
       {/* Buttons */}
-      <div className="cta-buttons grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-        <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-col sm:flex-row items-center gap-sp-sm">
+      <div className="cta-buttons grid-section mb-sp-md">
+        <div className="col-full flex flex-col sm:flex-row items-center gap-sp-sm">
           <CtaButton variant="primary" className="rounded-2xl shadow-2xl shadow-rose-500/30 hover:shadow-rose-500/50">
             Вступить за $79/мес <ArrowRight className="w-5 h-5" />
           </CtaButton>
@@ -62,7 +59,7 @@ export function FinalCtaSection() {
             3 месяца за $150 · экономия 37%
           </CtaButton>
         </div>
-        <div className="col-span-1 sm:col-span-2 lg:col-span-4">
+        <div className="col-full">
           <p className="text-dimmed text-sm text-center sm:text-left">
             Доступ открывается мгновенно · Отмена в один клик
           </p>
