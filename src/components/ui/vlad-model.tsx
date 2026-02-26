@@ -78,7 +78,7 @@ function useMouseTracking() {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1
       mouse.current.y = (e.clientY / window.innerHeight) * 2 - 1
     }
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
@@ -86,7 +86,7 @@ function useMouseTracking() {
 }
 
 function Model() {
-  const { scene, animations } = useGLTF('/vlad-walking.glb')
+  const { scene, animations } = useGLTF('/vlad-walking.glb', true)
   const groupRef = useRef<THREE.Group>(null)
   const { camera } = useThree()
 

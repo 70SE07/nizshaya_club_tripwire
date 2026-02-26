@@ -1,12 +1,10 @@
-'use client'
-
 import { HOW_IT_WORKS_REVEAL } from "@/constants/animations"
 import { howItWorksSteps } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 export function HowItWorksSection() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={HOW_IT_WORKS_REVEAL}
       bg="bg-black"
       label="Как это работает"
@@ -30,6 +28,6 @@ export function HowItWorksSection() {
           </div>
         ))}
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

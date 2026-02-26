@@ -43,7 +43,7 @@ export function AudioPlayer({ src, variant = "full" }: { src: string; variant?: 
 
   return (
     <div className={v.container}>
-      <audio ref={audioRef} src={src} preload="metadata" />
+      <audio ref={audioRef} src={src} preload="none" />
 
       <button
         onClick={toggle}

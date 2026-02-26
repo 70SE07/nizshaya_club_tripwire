@@ -19,48 +19,44 @@ export function useAudioPlayer(src: string, barCount: number) {
   const [currentTime, setCurrent] = useState(0)
   const [duration, setDuration] = useState(0)
   const [bars, setBars] = useState<number[]>(getFallback(barCount))
+  const decodedRef = useRef(false)
 
-  useEffect(() => {
-    let cancelled = false
+  const decodeWaveform = useCallback(async () => {
+    if (decodedRef.current) return
+    decodedRef.current = true
     let ctx: AudioContext | null = null
+    try {
+      ctx = new AudioContext()
+      const response = await fetch(src)
+      const buf = await response.arrayBuffer()
+      const decoded = await ctx.decodeAudioData(buf)
 
-    async function decode() {
-      try {
-        ctx = new AudioContext()
-        const response = await fetch(src)
-        const buf = await response.arrayBuffer()
-        const decoded = await ctx.decodeAudioData(buf)
-        if (cancelled) return
-
-        const raw = decoded.getChannelData(0)
-        const step = Math.floor(raw.length / barCount)
-        const peaks: number[] = []
-        for (let i = 0; i < barCount; i++) {
-          let sum = 0
-          for (let j = 0; j < step; j++) {
-            sum += Math.abs(raw[i * step + j])
-          }
-          peaks.push(sum / step)
+      const raw = decoded.getChannelData(0)
+      const step = Math.floor(raw.length / barCount)
+      const peaks: number[] = []
+      for (let i = 0; i < barCount; i++) {
+        let sum = 0
+        for (let j = 0; j < step; j++) {
+          sum += Math.abs(raw[i * step + j])
         }
-        const max = Math.max(...peaks)
-        setBars(peaks.map(p => Math.max(0.08, p / max)))
-      } catch {
-        // Keep fallback bars
-      } finally {
-        ctx?.close().catch(() => {})
+        peaks.push(sum / step)
       }
+      const max = Math.max(...peaks)
+      setBars(peaks.map(p => Math.max(0.08, p / max)))
+    } catch {
+      // Keep fallback bars
+    } finally {
+      ctx?.close().catch(() => {})
     }
-
-    decode()
-    return () => { cancelled = true }
   }, [src, barCount])
 
   const toggle = useCallback(() => {
     const a = audioRef.current
     if (!a) return
+    decodeWaveform()
     if (playing) { a.pause(); setPlaying(false) }
     else { a.play().catch(() => {}); setPlaying(true) }
-  }, [playing])
+  }, [playing, decodeWaveform])
 
   useEffect(() => {
     const a = audioRef.current

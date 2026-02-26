@@ -4,7 +4,7 @@ import { useScrollReveal, type RevealEntry } from "@/lib/gsap"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
-interface AnimatedSectionProps {
+interface ScrollAnimationWrapperProps {
   reveal: RevealEntry[]
   bg?: string
   id?: string
@@ -16,7 +16,7 @@ interface AnimatedSectionProps {
   children: React.ReactNode
 }
 
-export function AnimatedSection({
+export function ScrollAnimationWrapper({
   reveal,
   bg,
   id,
@@ -26,7 +26,7 @@ export function AnimatedSection({
   headerClassName,
   className,
   children,
-}: AnimatedSectionProps) {
+}: ScrollAnimationWrapperProps) {
   const ref = useScrollReveal(reveal)
 
   return (

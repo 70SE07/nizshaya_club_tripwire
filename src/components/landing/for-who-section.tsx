@@ -3,7 +3,7 @@
 import { useRef, useState, useLayoutEffect } from "react"
 import { gsap } from "@/lib/gsap"
 import { FOR_WHO_REVEAL } from "@/constants/animations"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 import { PainList } from "@/components/landing/for-who/pain-list"
 import { ForWhoFooter } from "@/components/landing/for-who/for-who-footer"
 
@@ -65,7 +65,7 @@ export function ForWhoSection() {
   }, [footerKey])
 
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={FOR_WHO_REVEAL}
       label="Узнаёшь себя?"
       title={<>Ты уже знаешь про AI.<br />Просто не применяешь.</>}
@@ -80,6 +80,6 @@ export function ForWhoSection() {
         footerWrapRef={footerWrapRef}
         footerRef={footerRef}
       />
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

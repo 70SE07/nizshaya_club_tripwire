@@ -1,16 +1,14 @@
-'use client'
-
 import { Monitor, Zap, Mic, Users, MessageSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { PROGRAM_REVEAL } from "@/constants/animations"
 import { programItems } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 const icons = [Monitor, Zap, Mic, Users, MessageSquare]
 
 export function ProgramSection() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={PROGRAM_REVEAL}
       label="Программа"
       title="Что конкретно внутри клуба"
@@ -79,6 +77,6 @@ export function ProgramSection() {
           )
         })}
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

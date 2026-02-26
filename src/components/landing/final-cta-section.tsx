@@ -1,15 +1,13 @@
-'use client'
-
 import { ArrowRight, Users } from "lucide-react"
 import Link from "next/link"
 import { FINAL_CTA_REVEAL } from "@/constants/animations"
 import { LINKS } from "@/constants/links"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 import { CtaButton } from "@/components/landing/cta-button"
 
 export function FinalCtaSection() {
   return (
-    <AnimatedSection reveal={FINAL_CTA_REVEAL} bg="bg-linear-to-b from-neutral-950 to-black">
+    <ScrollAnimationWrapper reveal={FINAL_CTA_REVEAL} bg="bg-linear-to-b from-neutral-950 to-black">
 
       {/* Header */}
       <div className="cta-header grid-section mb-sp-md">
@@ -72,6 +70,6 @@ export function FinalCtaSection() {
         </div>
       </div>
 
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

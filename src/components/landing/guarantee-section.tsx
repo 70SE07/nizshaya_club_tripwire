@@ -1,12 +1,10 @@
-'use client'
-
 import { ShieldCheck } from "lucide-react"
 import { GUARANTEE_REVEAL } from "@/constants/animations"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 export function GuaranteeSection() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={GUARANTEE_REVEAL}
       bg="bg-black"
       label="Гарантия"
@@ -31,6 +29,6 @@ export function GuaranteeSection() {
           </p>
         </div>
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

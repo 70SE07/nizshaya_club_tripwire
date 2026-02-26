@@ -1,14 +1,12 @@
-'use client'
-
 import Image from "next/image"
 import { AudioPlayer } from "@/components/ui/audio-player"
 import { EXPERT_REVEAL } from "@/constants/animations"
 import { expertQuote, expertBio } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 export function ExpertSection() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={EXPERT_REVEAL}
       bg="bg-black"
       label="Эксперт"
@@ -24,6 +22,7 @@ export function ExpertSection() {
               alt="Влад Ясько"
               width={480}
               height={480}
+              sizes="100vw"
               className="w-full h-full object-cover object-top rounded-2xl"
             />
           </div>
@@ -55,6 +54,7 @@ export function ExpertSection() {
               alt="Влад Ясько"
               width={480}
               height={480}
+              sizes="40vw"
               className="w-full h-full object-cover object-top"
             />
           </div>
@@ -79,6 +79,6 @@ export function ExpertSection() {
           </div>
         </div>
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

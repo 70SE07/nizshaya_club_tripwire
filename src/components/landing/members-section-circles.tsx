@@ -1,13 +1,11 @@
-'use client'
-
 import Image from "next/image"
 import { MEMBERS_REVEAL } from "@/constants/animations"
 import { members } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 export function MembersSectionCircles() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={MEMBERS_REVEAL}
       label="Участники"
       title="Кто уже внутри"
@@ -22,7 +20,7 @@ export function MembersSectionCircles() {
             className="member-strip group flex items-center gap-4 bg-neutral-900/50 border border-neutral-800 rounded-xl p-3 hover:border-rose-500/30 transition-colors"
           >
             <div className="shrink-0 size-14 rounded-full overflow-hidden ring-1 ring-rose-500/20 group-hover:ring-rose-500/50 transition-all">
-              <Image src={m.photo} alt={m.name} width={56} height={56} className="w-full h-full object-cover" />
+              <Image src={m.photo} alt={m.name} width={56} height={56} sizes="56px" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
@@ -48,6 +46,6 @@ export function MembersSectionCircles() {
           50+ участников в клубе{" "}<span className="text-body">Низшая Лига</span>
         </span>
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

@@ -1,4 +1,4 @@
-import { MOTION, type RevealEntry } from "@/lib/gsap"
+import { MOTION, type RevealEntry } from "@/lib/animation-presets"
 
 export const FOR_WHO_REVEAL: RevealEntry[] = [
   { selector: ".for-who-header > *", trigger: "section", ...MOTION.header },

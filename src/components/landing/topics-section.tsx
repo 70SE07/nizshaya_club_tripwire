@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
 import { TOPICS_REVEAL } from "@/constants/animations"
 import { topicsSchedule, topicsHighlights } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 const icons = [Bot, Layers, Code, Video, Lock]
 
@@ -26,7 +26,7 @@ export function TopicsSection() {
   }, [])
 
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={TOPICS_REVEAL}
       bg="bg-black"
       label="Темы стримов"
@@ -74,6 +74,6 @@ export function TopicsSection() {
           </div>
         </div>
       )}
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

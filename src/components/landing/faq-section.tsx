@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { FAQ_REVEAL } from "@/constants/animations"
 import { faqs } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 import { CtaButton } from "@/components/landing/cta-button"
 
 function FaqItem({ q, a }: { q: string; a: string }) {
@@ -40,7 +40,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export function FaqSection() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={FAQ_REVEAL}
       label="FAQ"
       title="Часто задают. Отвечаем честно."
@@ -63,6 +63,6 @@ export function FaqSection() {
           </CtaButton>
         </div>
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }

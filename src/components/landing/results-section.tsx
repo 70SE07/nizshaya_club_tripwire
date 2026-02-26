@@ -1,15 +1,13 @@
-'use client'
-
 import { Clock, Zap, TrendingUp, Gem, Check } from "lucide-react"
 import { RESULTS_REVEAL } from "@/constants/animations"
 import { resultsMetrics, resultsOutcomes } from "@/constants/content"
-import { AnimatedSection } from "@/components/landing/animated-section"
+import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 const metricIcons = [Clock, Zap, TrendingUp, Gem]
 
 export function ResultsSection() {
   return (
-    <AnimatedSection
+    <ScrollAnimationWrapper
       reveal={RESULTS_REVEAL}
       label="Результат"
       title="Что изменится. Конкретно."
@@ -45,6 +43,6 @@ export function ResultsSection() {
           </div>
         </div>
       </div>
-    </AnimatedSection>
+    </ScrollAnimationWrapper>
   )
 }
