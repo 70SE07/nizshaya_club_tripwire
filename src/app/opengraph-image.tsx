@@ -10,7 +10,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #0a0a0a 100%)',
+          background: '#000000',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -20,27 +20,32 @@ export default async function Image() {
           position: 'relative',
         }}
       >
-        {/* Rose accent glow */}
+        {/* Rose accent glow — top-left like Spotlight on site */}
         <div
           style={{
             position: 'absolute',
-            top: '-100px',
-            right: '-100px',
-            width: '500px',
-            height: '500px',
+            top: '-200px',
+            left: '-100px',
+            width: '700px',
+            height: '700px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(225,29,72,0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(244,63,94,0.12) 0%, transparent 65%)',
             display: 'flex',
           }}
         />
 
-        {/* Badge */}
+        {/* Badge — pill like hero badge on site */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            marginBottom: '24px',
+            gap: '10px',
+            marginBottom: '32px',
+            background: 'rgba(244,63,94,0.1)',
+            border: '1.5px solid rgba(244,63,94,0.2)',
+            borderRadius: '9999px',
+            padding: '8px 20px',
+            alignSelf: 'flex-start',
           }}
         >
           <div
@@ -48,23 +53,23 @@ export default async function Image() {
               width: '12px',
               height: '12px',
               borderRadius: '50%',
-              background: '#e11d48',
+              background: '#f43f5e',
               display: 'flex',
             }}
           />
-          <span style={{ color: '#fb7185', fontSize: '24px' }}>
+          <span style={{ color: '#fb7185', fontSize: '22px', fontWeight: 500 }}>
             Закрытое AI комьюнити практиков
           </span>
         </div>
 
-        {/* Title */}
+        {/* Title — white like hero h1 */}
         <div
           style={{
             fontSize: '72px',
             fontWeight: 'bold',
             color: '#fafafa',
             lineHeight: 1.1,
-            marginBottom: '24px',
+            marginBottom: '28px',
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -77,7 +82,7 @@ export default async function Image() {
           }}>уже на первом стриме.</span>
         </div>
 
-        {/* Subtitle */}
+        {/* Subtitle — body color */}
         <div
           style={{
             fontSize: '28px',
@@ -114,9 +119,24 @@ export default async function Image() {
           >
             nizshaya.club
           </span>
-          <span style={{ fontSize: '20px', color: '#737373', display: 'flex' }}>
-            $79 / мес
-          </span>
+
+          {/* CTA button — rose→pink gradient like site */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'linear-gradient(to right, #f43f5e, #db2777)',
+              color: '#ffffff',
+              fontSize: '20px',
+              fontWeight: 600,
+              padding: '12px 28px',
+              borderRadius: '12px',
+              boxShadow: '0 10px 25px rgba(244,63,94,0.25)',
+            }}
+          >
+            Вступить за $79 / мес
+          </div>
         </div>
       </div>
     ),
