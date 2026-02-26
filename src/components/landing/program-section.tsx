@@ -56,17 +56,19 @@ export function ProgramSection() {
   const ref = useRef<HTMLElement>(null)
 
   useGSAP(() => {
+    /* Mobile — strips */
+    gsap.from(".program-row", {
+      opacity: 0, x: -20, duration: 0.4, stagger: 0.08, ease: "power2.out",
+      scrollTrigger: { trigger: ".program-mobile", start: "top 80%", once: true },
+    })
+    /* Desktop — bento */
     gsap.from(".program-header > *", {
       opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
       scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
     })
     gsap.from(".program-card", {
-      opacity: 0, y: 24, duration: 0.5, stagger: 0.08, ease: "power2.out",
-      scrollTrigger: { trigger: ".program-grid", start: "top 80%", once: true },
-    })
-    gsap.from(".program-footer", {
-      opacity: 0, y: 16, duration: 0.5, ease: "power2.out",
-      scrollTrigger: { trigger: ".program-footer", start: "top 90%", once: true },
+      opacity: 0, y: 20, duration: 0.4, stagger: 0.06, ease: "power2.out",
+      scrollTrigger: { trigger: ".program-desktop", start: "top 80%", once: true },
     })
   }, { scope: ref })
 
@@ -84,55 +86,66 @@ export function ProgramSection() {
               Что конкретно внутри клуба
             </h2>
             <p className="text-lg leading-[1.65] text-body">
-              Не курс с модулями и «изучи урок 1 перед уроком 2». Живой клуб — два стрима в месяц, ежедневный стек, практики рядом.
+              Не курс с модулями. Живой клуб — стримы, стек, практики рядом.
             </p>
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="program-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* ── Mobile: cards ── */}
+        <div className="program-mobile sm:hidden space-y-3">
           {items.map((item, i) => (
             <div
               key={i}
-              className={`program-card rounded-2xl p-sp-sm ${
+              className={`program-row rounded-xl px-4 py-4 ${
                 item.premium
-                  ? "col-span-1 sm:col-span-2 lg:col-span-4 bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20"
-                  : "sm:col-span-2 bg-neutral-900/50 border border-neutral-800"
+                  ? "bg-linear-to-r from-rose-500/10 to-transparent border border-rose-500/20"
+                  : "bg-neutral-900/50 border border-neutral-800"
               }`}
             >
-              <div className="flex items-center gap-3 mb-sp-sm">
-                <span className={`inline-block text-sm font-medium rounded-full px-3 py-1 ${
-                  item.premium
-                    ? "text-rose-400 bg-rose-500/10 border border-rose-500/20"
-                    : "text-body bg-neutral-800 border border-neutral-700"
-                }`}>
-                  {item.freq}
-                </span>
+              <span className={`inline-block text-xs font-medium rounded-full px-2.5 py-1 mb-3 ${
+                item.premium
+                  ? "text-rose-400 bg-rose-500/10 border border-rose-500/20"
+                  : "text-body bg-neutral-800 border border-neutral-700"
+              }`}>
+                {item.freq}
+              </span>
+              <div className="flex items-center gap-2.5 mb-1">
+                <item.icon className={`w-5 h-5 shrink-0 ${item.premium ? "text-rose-400" : "text-body"}`} />
+                <h3 className="text-base font-semibold text-white">{item.title}</h3>
               </div>
-              <item.icon className={`w-7 h-7 mb-sp-sm ${item.premium ? "text-rose-400" : "text-body"}`} />
-              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">{item.title}</h3>
-              <p className="text-sm text-body mb-sp-sm">{item.desc}</p>
-              {item.list && (
-                <div className="flex flex-col gap-1.5">
-                  {item.list.map((line, j) => (
-                    <div key={j} className="flex items-start gap-2">
-                      <span className="text-rose-400 text-sm mt-px shrink-0">—</span>
-                      <span className="text-sm text-muted">{line}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <p className="text-sm text-body">{item.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Footer */}
-        <div className="program-footer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-sp-md">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-muted text-sm italic">
-              Это не курс, который ты купишь и забудешь на вкладке. Это среда, которая держит тебя в движении — пока не выстроишь свою систему.
-            </p>
-          </div>
+        {/* ── Desktop: bento grid (Variant C) ── */}
+        <div className="program-desktop hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {items.map((item, i) => (
+            <div
+              key={i}
+              className={`program-card relative rounded-2xl p-sp-sm flex flex-col ${
+                item.premium
+                  ? "col-span-1 lg:col-span-2 bg-linear-to-r from-rose-500/10 to-transparent border border-rose-500/20"
+                  : i === 0
+                    ? "col-span-2 bg-neutral-900/50 border border-neutral-800"
+                    : i >= 3
+                      ? "col-span-1 lg:col-span-2 bg-neutral-900/50 border border-neutral-800"
+                      : "col-span-1 bg-neutral-900/50 border border-neutral-800"
+              }`}
+            >
+              <span className={`absolute top-4 right-4 text-xs font-medium rounded-full px-2.5 py-1 ${
+                item.premium
+                  ? "text-rose-400 bg-rose-500/10 border border-rose-500/20"
+                  : "text-body bg-neutral-800 border border-neutral-700"
+              }`}>
+                {item.freq}
+              </span>
+
+              <item.icon className={`w-7 h-7 mb-sp-sm ${item.premium ? "text-rose-400" : "text-body"}`} />
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-sp-xs pr-24">{item.title}</h3>
+              <p className="text-sm text-body">{item.desc}</p>
+            </div>
+          ))}
         </div>
 
       </div>

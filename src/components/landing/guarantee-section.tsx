@@ -20,10 +20,6 @@ export function GuaranteeSection() {
       opacity: 0, y: 24, duration: 0.6, ease: "power2.out",
       scrollTrigger: { trigger: ".guarantee-content", start: "top 80%", once: true },
     })
-    gsap.from(".guarantee-math", {
-      opacity: 0, y: 16, duration: 0.5, ease: "power2.out",
-      scrollTrigger: { trigger: ".guarantee-math", start: "top 85%", once: true },
-    })
   }, { scope: ref })
 
   return (
@@ -61,20 +57,6 @@ export function GuaranteeSection() {
           </div>
         </div>
 
-        {/* Risk math */}
-        <div className="guarantee-math grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-sm text-body mb-sp-xs">
-              Максимальный убыток, если тебе не понравится: <span className="text-white font-bold">$79</span> и 2 часа первого стрима.
-            </p>
-            <p className="text-sm text-body mb-sp-xs">
-              Альтернатива — ещё 6 месяцев читать бесплатные каналы без результата.
-            </p>
-            <p className="text-sm text-muted">
-              Если час твоего времени стоит $15 — за последние полгода ты уже потратил <span className="text-body font-bold">$2 400+</span> на «бесплатные» исследования. $79 — это самая дешёвая проверка гипотезы, которую ты можешь сделать.
-            </p>
-          </div>
-        </div>
 
       </div>
     </section>
