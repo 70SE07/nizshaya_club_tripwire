@@ -1,27 +1,22 @@
 'use client'
 
 import { Monitor, Zap, Mic, Users, MessageSquare } from "lucide-react"
-import { useScrollReveal } from "@/lib/gsap"
+import { cn } from "@/lib/utils"
 import { PROGRAM_REVEAL } from "@/constants/animations"
 import { programItems } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 const icons = [Monitor, Zap, Mic, Users, MessageSquare]
 
 export function ProgramSection() {
-  const ref = useScrollReveal(PROGRAM_REVEAL)
-
   return (
-    <SectionContainer ref={ref}>
-
-      <SectionHeader
-        label="Программа"
-        title="Что конкретно внутри клуба"
-        subtitle="Не курс с модулями. Живой клуб — стримы, стек, практики рядом."
-        className="program-header"
-      />
-
+    <AnimatedSection
+      reveal={PROGRAM_REVEAL}
+      label="Программа"
+      title="Что конкретно внутри клуба"
+      subtitle="Не курс с модулями. Живой клуб — стримы, стек, практики рядом."
+      headerClassName="program-header"
+    >
       {/* ── Mobile: cards ── */}
       <div className="program-mobile sm:hidden space-y-3">
         {programItems.map((item, i) => {
@@ -31,9 +26,7 @@ export function ProgramSection() {
             <div
               key={i}
               className={`program-row rounded-xl px-4 py-4 ${
-                isPremium
-                  ? "bg-linear-to-r from-rose-500/10 to-transparent border border-rose-500/20"
-                  : "bg-neutral-900/50 border border-neutral-800"
+                isPremium ? "card-premium" : "bg-neutral-900/50 border border-neutral-800"
               }`}
             >
               <span className={`inline-block text-xs font-medium rounded-full px-2.5 py-1 mb-3 ${
@@ -61,15 +54,15 @@ export function ProgramSection() {
           return (
             <div
               key={i}
-              className={`program-card relative flex flex-col ${
+              className={cn(
+                "program-card relative flex flex-col",
                 isPremium
-                  ? "col-span-1 lg:col-span-2 rounded-2xl p-sp-sm bg-linear-to-r from-rose-500/10 to-transparent border border-rose-500/20"
-                  : i === 0
-                    ? "col-span-2 card-base"
-                    : i >= 3
-                      ? "col-span-1 lg:col-span-2 card-base"
-                      : "col-span-1 card-base"
-              }`}
+                  ? "col-span-1 lg:col-span-2 rounded-2xl p-sp-sm card-premium"
+                  : "card-base",
+                !isPremium && i === 0 && "col-span-2",
+                !isPremium && i >= 3 && "col-span-1 lg:col-span-2",
+                !isPremium && i > 0 && i < 3 && "col-span-1",
+              )}
             >
               <span className={`absolute top-4 right-4 text-xs font-medium rounded-full px-2.5 py-1 ${
                 isPremium
@@ -86,7 +79,6 @@ export function ProgramSection() {
           )
         })}
       </div>
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

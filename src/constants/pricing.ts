@@ -1,4 +1,4 @@
-import type { ValueStackRow, Bonus } from "@/types/content"
+import type { ValueStackRow, Bonus, Tariff } from "@/types/content"
 
 export const valueStack: readonly ValueStackRow[] = [
   { item: "2 стрима в месяц с разбором экрана + записи", price: "$200/мес" },
@@ -32,6 +32,29 @@ export const bonuses: readonly Bonus[] = [
     desc: "Раз в месяц — живой созвон. Приходишь со своей задачей, Влад разбирает её прямо на звонке: какой агент применить, где ошибка, как масштабировать.",
     note: "Рыночная стоимость: $500/час · Только в 3-месячном тарифе",
     premium: true,
+  },
+]
+
+export const tariffs: readonly Tariff[] = [
+  {
+    label: "Подписка · 1 месяц",
+    price: "$79",
+    priceNote: "/мес",
+    extraFeatures: [{ label: "Q&A-сессии не входят", included: false }],
+    cta: { text: "Вступить за $79" },
+  },
+  {
+    label: "Подписка · 3 месяца",
+    price: "$150",
+    priceNote: undefined,
+    oldPrice: "$237",
+    discountBadge: "-37%",
+    highlighted: true,
+    extraFeatures: [
+      { label: "Q&A: личный разбор кейса с Владом", included: true },
+      { label: "Приоритетный доступ к материалам", included: true },
+    ],
+    cta: { text: "Взять 3 месяца за $150", highlighted: true },
   },
 ]
 

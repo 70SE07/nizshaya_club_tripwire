@@ -1,15 +1,13 @@
 'use client'
 
 import { useRef, useState, useLayoutEffect } from "react"
-import { gsap, useScrollReveal } from "@/lib/gsap"
+import { gsap } from "@/lib/gsap"
 import { FOR_WHO_REVEAL } from "@/constants/animations"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 import { PainList } from "@/components/landing/for-who/pain-list"
 import { ForWhoFooter } from "@/components/landing/for-who/for-who-footer"
 
 export function ForWhoSection() {
-  const ref = useScrollReveal(FOR_WHO_REVEAL)
   const [checked, setChecked] = useState<Set<number>>(new Set())
   const footerRef = useRef<HTMLDivElement>(null)
   const footerWrapRef = useRef<HTMLDivElement>(null)
@@ -67,15 +65,13 @@ export function ForWhoSection() {
   }, [footerKey])
 
   return (
-    <SectionContainer ref={ref}>
-
-      <SectionHeader
-        label="Узнаёшь себя?"
-        title={<>Ты уже знаешь про AI.<br />Просто не применяешь.</>}
-        subtitle={<p className="text-sm text-muted">Отметь пункты, которые про тебя</p>}
-        className="for-who-header"
-      />
-
+    <AnimatedSection
+      reveal={FOR_WHO_REVEAL}
+      label="Узнаёшь себя?"
+      title={<>Ты уже знаешь про AI.<br />Просто не применяешь.</>}
+      subtitle={<p className="text-sm text-muted">Отметь пункты, которые про тебя</p>}
+      headerClassName="for-who-header"
+    >
       <PainList checked={checked} toggle={toggle} />
 
       <ForWhoFooter
@@ -84,7 +80,6 @@ export function ForWhoSection() {
         footerWrapRef={footerWrapRef}
         footerRef={footerRef}
       />
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

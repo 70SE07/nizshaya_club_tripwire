@@ -14,9 +14,7 @@ export function BonusList() {
             <div
               key={i}
               className={`offer-bonus rounded-xl px-4 py-3.5 ${
-                isPremium
-                  ? "bg-linear-to-r from-rose-500/10 to-transparent border border-rose-500/20"
-                  : "bg-neutral-900/50 border border-neutral-800"
+                isPremium ? "card-premium" : "bg-neutral-900/50 border border-neutral-800"
               }`}
             >
               <div className="flex items-start gap-3">

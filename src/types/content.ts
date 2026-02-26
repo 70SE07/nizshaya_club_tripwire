@@ -53,3 +53,19 @@ export interface Bonus {
   note: string
   premium?: boolean
 }
+
+export interface TariffExtraFeature {
+  label: string
+  included: boolean
+}
+
+export interface Tariff {
+  label: string
+  price: string
+  priceNote?: string
+  oldPrice?: string
+  discountBadge?: string
+  extraFeatures: readonly TariffExtraFeature[]
+  cta: { text: string; highlighted?: boolean }
+  highlighted?: boolean
+}

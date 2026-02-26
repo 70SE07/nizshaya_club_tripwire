@@ -1,25 +1,20 @@
 'use client'
 
 import Image from "next/image"
-import { AudioPlayer, AudioPlayerCompact } from "@/components/ui/audio-player"
-import { useScrollReveal } from "@/lib/gsap"
+import { AudioPlayer } from "@/components/ui/audio-player"
 import { EXPERT_REVEAL } from "@/constants/animations"
 import { expertQuote, expertBio } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 export function ExpertSection() {
-  const ref = useScrollReveal(EXPERT_REVEAL)
-
   return (
-    <SectionContainer ref={ref} bg="bg-black">
-
-      <SectionHeader
-        label="Эксперт"
-        title="Почему это называется «Низшая Лига»"
-        className="expert-header"
-      />
-
+    <AnimatedSection
+      reveal={EXPERT_REVEAL}
+      bg="bg-black"
+      label="Эксперт"
+      title="Почему это называется «Низшая Лига»"
+      headerClassName="expert-header"
+    >
       {/* Mobile */}
       <div className="lg:hidden mb-sp-md">
         <div className="relative">
@@ -39,7 +34,7 @@ export function ExpertSection() {
                 <p className="text-rose-400 text-sm">Основатель клуба</p>
               </div>
               <div className="flex-1 min-w-0">
-                <AudioPlayerCompact src="/vlad_club_demo.mp3" />
+                <AudioPlayer variant="compact" src="/vlad_club_demo.mp3" />
               </div>
             </div>
           </div>
@@ -84,7 +79,6 @@ export function ExpertSection() {
           </div>
         </div>
       </div>
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

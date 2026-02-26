@@ -2,11 +2,9 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { useScrollReveal } from "@/lib/gsap"
 import { FAQ_REVEAL } from "@/constants/animations"
 import { faqs } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 import { CtaButton } from "@/components/landing/cta-button"
 
 function FaqItem({ q, a }: { q: string; a: string }) {
@@ -41,17 +39,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export function FaqSection() {
-  const ref = useScrollReveal(FAQ_REVEAL)
-
   return (
-    <SectionContainer ref={ref}>
-
-      <SectionHeader
-        label="FAQ"
-        title="Часто задают. Отвечаем честно."
-        className="faq-header"
-      />
-
+    <AnimatedSection
+      reveal={FAQ_REVEAL}
+      label="FAQ"
+      title="Часто задают. Отвечаем честно."
+      headerClassName="faq-header"
+    >
       {/* Questions */}
       <div className="faq-list grid-section mb-sp-md">
         <div className="col-full card-base">
@@ -69,7 +63,6 @@ export function FaqSection() {
           </CtaButton>
         </div>
       </div>
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

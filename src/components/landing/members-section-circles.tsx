@@ -1,25 +1,19 @@
 'use client'
 
 import Image from "next/image"
-import { useScrollReveal } from "@/lib/gsap"
 import { MEMBERS_REVEAL } from "@/constants/animations"
 import { members } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 export function MembersSectionCircles() {
-  const ref = useScrollReveal(MEMBERS_REVEAL)
-
   return (
-    <SectionContainer ref={ref}>
-
-      <SectionHeader
-        label="Участники"
-        title="Кто уже внутри"
-        subtitle="Не теоретики. Люди, которые работают с AI и получают результат."
-        className="members-header"
-      />
-
+    <AnimatedSection
+      reveal={MEMBERS_REVEAL}
+      label="Участники"
+      title="Кто уже внутри"
+      subtitle="Не теоретики. Люди, которые работают с AI и получают результат."
+      headerClassName="members-header"
+    >
       {/* Members — horizontal strips, 2 columns on desktop */}
       <div className="members-strips grid grid-cols-1 lg:grid-cols-2 gap-3 mb-sp-md">
         {members.map((m) => (
@@ -54,7 +48,6 @@ export function MembersSectionCircles() {
           50+ участников в клубе{" "}<span className="text-body">Низшая Лига</span>
         </span>
       </div>
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

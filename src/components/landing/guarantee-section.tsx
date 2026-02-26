@@ -1,23 +1,18 @@
 'use client'
 
 import { ShieldCheck } from "lucide-react"
-import { useScrollReveal } from "@/lib/gsap"
 import { GUARANTEE_REVEAL } from "@/constants/animations"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 export function GuaranteeSection() {
-  const ref = useScrollReveal(GUARANTEE_REVEAL)
-
   return (
-    <SectionContainer ref={ref} bg="bg-black">
-
-      <SectionHeader
-        label="Гарантия"
-        title="Никакого риска с твоей стороны."
-        className="guarantee-header"
-      />
-
+    <AnimatedSection
+      reveal={GUARANTEE_REVEAL}
+      bg="bg-black"
+      label="Гарантия"
+      title="Никакого риска с твоей стороны."
+      headerClassName="guarantee-header"
+    >
       {/* Content */}
       <div className="guarantee-content grid-section mb-sp-md">
         <div className="col-full card-accent">
@@ -36,7 +31,6 @@ export function GuaranteeSection() {
           </p>
         </div>
       </div>
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

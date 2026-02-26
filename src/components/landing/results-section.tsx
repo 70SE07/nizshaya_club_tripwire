@@ -1,27 +1,20 @@
 'use client'
 
 import { Clock, Zap, TrendingUp, Gem, Check } from "lucide-react"
-import { useScrollReveal } from "@/lib/gsap"
 import { RESULTS_REVEAL } from "@/constants/animations"
 import { resultsMetrics, resultsOutcomes } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 const metricIcons = [Clock, Zap, TrendingUp, Gem]
 
 export function ResultsSection() {
-  const ref = useScrollReveal(RESULTS_REVEAL)
-
   return (
-    <SectionContainer ref={ref}>
-
-      {/* Header */}
-      <SectionHeader
-        label="Результат"
-        title="Что изменится. Конкретно."
-        className="results-header"
-      />
-
+    <AnimatedSection
+      reveal={RESULTS_REVEAL}
+      label="Результат"
+      title="Что изменится. Конкретно."
+      headerClassName="results-header"
+    >
       {/* Metrics -- 4 tiles */}
       <div className="results-metrics grid-section mb-sp-md">
         {resultsMetrics.map((m, i) => {
@@ -52,8 +45,6 @@ export function ResultsSection() {
           </div>
         </div>
       </div>
-
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

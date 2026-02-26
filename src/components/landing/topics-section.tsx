@@ -1,11 +1,9 @@
 'use client'
 
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
-import { useScrollReveal } from "@/lib/gsap"
 import { TOPICS_REVEAL } from "@/constants/animations"
 import { topicsSchedule, topicsHighlights } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 const icons = [Bot, Layers, Code, Video, Lock]
 
@@ -15,23 +13,20 @@ const monthNames = [
 ]
 
 export function TopicsSection() {
-  const ref = useScrollReveal(TOPICS_REVEAL)
-
   const now = new Date()
   const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
   const topics = topicsSchedule[key]
   const month = monthNames[now.getMonth()]
 
   return (
-    <SectionContainer ref={ref} bg="bg-black">
-
-      <SectionHeader
-        label="Темы стримов"
-        title="Разбираем то, что уже приносит деньги"
-        subtitle="2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка. Показываем с экрана, повторяешь — забираешь."
-        className="topics-header"
-      />
-
+    <AnimatedSection
+      reveal={TOPICS_REVEAL}
+      bg="bg-black"
+      label="Темы стримов"
+      title="Разбираем то, что уже приносит деньги"
+      subtitle="2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка. Показываем с экрана, повторяешь — забираешь."
+      headerClassName="topics-header"
+    >
       {/* Cards 2×2 + full */}
       <div className="topics-grid grid-section">
         {topicsHighlights.map((item, i) => {
@@ -72,7 +67,6 @@ export function TopicsSection() {
           </div>
         )}
       </div>
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

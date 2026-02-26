@@ -1,24 +1,18 @@
 'use client'
 
-import { useScrollReveal } from "@/lib/gsap"
 import { HOW_IT_WORKS_REVEAL } from "@/constants/animations"
 import { howItWorksSteps } from "@/constants/content"
-import { SectionContainer } from "@/components/landing/section-container"
-import { SectionHeader } from "@/components/landing/section-header"
+import { AnimatedSection } from "@/components/landing/animated-section"
 
 export function HowItWorksSection() {
-  const ref = useScrollReveal(HOW_IT_WORKS_REVEAL)
-
   return (
-    <SectionContainer ref={ref} bg="bg-black">
-
-      {/* Header */}
-      <SectionHeader
-        label="Как это работает"
-        title="Как это устроено"
-        className="hiw-header"
-      />
-
+    <AnimatedSection
+      reveal={HOW_IT_WORKS_REVEAL}
+      bg="bg-black"
+      label="Как это работает"
+      title="Как это устроено"
+      headerClassName="hiw-header"
+    >
       {/* Steps */}
       <div className="hiw-steps grid-section mb-sp-md">
         {howItWorksSteps.map((step, i) => (
@@ -36,8 +30,6 @@ export function HowItWorksSection() {
           </div>
         ))}
       </div>
-
-
-    </SectionContainer>
+    </AnimatedSection>
   )
 }

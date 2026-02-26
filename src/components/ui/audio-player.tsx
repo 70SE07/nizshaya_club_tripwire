@@ -2,9 +2,32 @@
 
 import { useRef, useState, useCallback, useEffect } from "react"
 import { Play, Pause } from "lucide-react"
+import { cn } from "@/lib/utils"
 
-const BAR_COUNT = 60
-const BAR_COUNT_COMPACT = 28
+const VARIANTS = {
+  full: {
+    barCount: 60,
+    container: "flex items-center gap-3 bg-neutral-900/50 border border-neutral-800 rounded-2xl p-sp-sm",
+    button: "shrink-0 flex items-center justify-center size-10 rounded-full bg-rose-500 hover:bg-rose-600 transition-colors",
+    icon: "w-4 h-4",
+    waveHeight: "h-8",
+    playedColor: "bg-rose-500",
+    unplayedColor: "bg-neutral-700",
+    showTime: true,
+  },
+  compact: {
+    barCount: 28,
+    container: "flex items-center gap-2",
+    button: "shrink-0 flex items-center justify-center size-8 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-colors backdrop-blur-sm",
+    icon: "w-3.5 h-3.5",
+    waveHeight: "h-5",
+    playedColor: "bg-rose-400",
+    unplayedColor: "bg-white/20",
+    showTime: false,
+  },
+} as const
+
+type Variant = keyof typeof VARIANTS
 
 // Static fallback waveform (deterministic, no randomness)
 const makeFallback = (count: number) =>
@@ -12,8 +35,11 @@ const makeFallback = (count: number) =>
     0.15 + 0.7 * Math.abs(Math.sin(i * 0.7) * Math.cos(i * 0.3))
   )
 
-const FALLBACK_BARS = makeFallback(BAR_COUNT)
-const FALLBACK_BARS_COMPACT = makeFallback(BAR_COUNT_COMPACT)
+const FALLBACK_CACHE = new Map<number, number[]>()
+function getFallback(count: number) {
+  if (!FALLBACK_CACHE.has(count)) FALLBACK_CACHE.set(count, makeFallback(count))
+  return FALLBACK_CACHE.get(count)!
+}
 
 function useAudioPlayer(src: string, barCount: number) {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -21,7 +47,7 @@ function useAudioPlayer(src: string, barCount: number) {
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrent] = useState(0)
   const [duration, setDuration] = useState(0)
-  const [bars, setBars] = useState<number[]>(barCount === BAR_COUNT ? FALLBACK_BARS : FALLBACK_BARS_COMPACT)
+  const [bars, setBars] = useState<number[]>(getFallback(barCount))
 
   useEffect(() => {
     let cancelled = false
@@ -104,29 +130,30 @@ const fmt = (s: number) => {
   return `${m}:${sec.toString().padStart(2, "0")}`
 }
 
-export function AudioPlayer({ src }: { src: string }) {
+export function AudioPlayer({ src, variant = "full" }: { src: string; variant?: Variant }) {
+  const v = VARIANTS[variant]
   const waveRef = useRef<HTMLDivElement>(null)
-  const { audioRef, playing, progress, currentTime, duration, bars, toggle, seek } = useAudioPlayer(src, BAR_COUNT)
+  const { audioRef, playing, progress, currentTime, duration, bars, toggle, seek } = useAudioPlayer(src, v.barCount)
 
   return (
-    <div className="flex items-center gap-3 bg-neutral-900/50 border border-neutral-800 rounded-2xl p-sp-sm">
+    <div className={v.container}>
       <audio ref={audioRef} src={src} preload="metadata" />
 
       <button
         onClick={toggle}
-        className="shrink-0 flex items-center justify-center size-10 rounded-full bg-rose-500 hover:bg-rose-600 transition-colors"
+        className={v.button}
         aria-label={playing ? "Пауза" : "Воспроизвести"}
       >
         {playing
-          ? <Pause className="w-4 h-4 text-white" fill="white" />
-          : <Play className="w-4 h-4 text-white ml-0.5" fill="white" />
+          ? <Pause className={cn(v.icon, "text-white")} fill="white" />
+          : <Play className={cn(v.icon, "text-white ml-0.5")} fill="white" />
         }
       </button>
 
-      <div className="flex-1 flex flex-col gap-1.5">
+      <div className={cn("flex-1", v.showTime && "flex flex-col gap-1.5")}>
         <div
           ref={waveRef}
-          className="flex items-end gap-px h-8 cursor-pointer"
+          className={cn("flex items-end gap-px cursor-pointer", v.showTime ? v.waveHeight : cn(v.waveHeight, "flex-1"))}
           onClick={(e) => seek(e, waveRef.current)}
         >
           {bars.map((h, i) => {
@@ -135,60 +162,21 @@ export function AudioPlayer({ src }: { src: string }) {
             return (
               <div
                 key={i}
-                className={`flex-1 rounded-sm transition-colors duration-150 ${
-                  played ? "bg-rose-500" : "bg-neutral-700"
-                }`}
+                className={cn(
+                  "flex-1 rounded-sm transition-colors duration-150",
+                  played ? v.playedColor : v.unplayedColor,
+                )}
                 style={{ height: `${h * 100}%` }}
               />
             )
           })}
         </div>
-        <div className="flex justify-between text-xs text-muted">
-          <span>{fmt(currentTime)}</span>
-          <span>{duration ? fmt(duration) : "—"}</span>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export function AudioPlayerCompact({ src }: { src: string }) {
-  const waveRef = useRef<HTMLDivElement>(null)
-  const { audioRef, playing, progress, bars, toggle, seek } = useAudioPlayer(src, BAR_COUNT_COMPACT)
-
-  return (
-    <div className="flex items-center gap-2">
-      <audio ref={audioRef} src={src} preload="metadata" />
-
-      <button
-        onClick={toggle}
-        className="shrink-0 flex items-center justify-center size-8 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-colors backdrop-blur-sm"
-        aria-label={playing ? "Пауза" : "Воспроизвести"}
-      >
-        {playing
-          ? <Pause className="w-3.5 h-3.5 text-white" fill="white" />
-          : <Play className="w-3.5 h-3.5 text-white ml-0.5" fill="white" />
-        }
-      </button>
-
-      <div
-        ref={waveRef}
-        className="flex items-end gap-px h-5 flex-1 cursor-pointer"
-        onClick={(e) => seek(e, waveRef.current)}
-      >
-        {bars.map((h, i) => {
-          const pct = (i / bars.length) * 100
-          const played = pct < progress
-          return (
-            <div
-              key={i}
-              className={`flex-1 rounded-sm transition-colors duration-150 ${
-                played ? "bg-rose-400" : "bg-white/20"
-              }`}
-              style={{ height: `${h * 100}%` }}
-            />
-          )
-        })}
+        {v.showTime && (
+          <div className="flex justify-between text-xs text-muted">
+            <span>{fmt(currentTime)}</span>
+            <span>{duration ? fmt(duration) : "—"}</span>
+          </div>
+        )}
       </div>
     </div>
   )
