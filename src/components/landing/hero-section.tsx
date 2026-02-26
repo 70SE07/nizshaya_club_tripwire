@@ -1,6 +1,7 @@
 'use client'
 
-import { useRef, useState, useEffect } from "react"
+import { Component, useRef, useState, useEffect } from "react"
+import type { ErrorInfo, ReactNode } from "react"
 import dynamic from "next/dynamic"
 import { gsap, useGSAP } from "@/lib/gsap"
 
@@ -8,6 +9,18 @@ const VladScene = dynamic(
   () => import("@/components/ui/vlad-model").then(m => ({ default: m.VladScene })),
   { ssr: false, loading: () => <div className="w-full h-full" /> }
 )
+
+class SceneErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false }
+  static getDerivedStateFromError() { return { hasError: true } }
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.warn("3D scene failed to load:", error, info)
+  }
+  render() {
+    if (this.state.hasError) return <div className="w-full h-full" />
+    return this.props.children
+  }
+}
 import { Spotlight } from "@/components/ui/spotlight"
 import { CtaButton } from "@/components/landing/cta-button"
 import { heroBadgeTexts } from "@/constants/content"
@@ -50,7 +63,9 @@ export function HeroSection() {
 
       {/* 3D — right side layer, desktop only, behind text */}
       <div className="absolute right-0 hidden md:flex items-center z-0 top-1/2 -translate-y-1/2 w-[65%] h-[clamp(460px,80vh,800px)]">
-        <VladScene className="w-full h-full" />
+        <SceneErrorBoundary>
+          <VladScene className="w-full h-full" />
+        </SceneErrorBoundary>
       </div>
 
       <div className="max-w-300 mx-auto px-container-px w-full relative z-10">
