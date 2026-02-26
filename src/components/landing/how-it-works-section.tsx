@@ -13,25 +13,19 @@ const steps = [
     desc: "Никакого «ожидания на неделю». Кликнул → оплатил → уже внутри. Сразу видишь приватный канал, группу и архив предыдущих стримов.",
   },
   {
-    title: "Приходишь на стрим — смотришь, как собирают инструмент с экрана",
-    desc: "Влад включает экран и строит AI-агента, контент-машину или воркфлоу в реальном времени. Ты видишь каждый клик, каждую ошибку, каждое исправление. Настоящая работа, а не идеальный прогон.",
+    title: "Смотришь стрим — видишь сборку с экрана",
+    desc: "Влад включает экран и строит AI-агента или воркфлоу в реальном времени. Каждый клик, каждая ошибка, каждое исправление. Настоящая работа, не идеальный прогон.",
   },
   {
-    title: "Берёшь готовый воркфлоу — адаптируешь за 30–60 минут",
-    desc: "После стрима ты получаешь файл: агент, схему, шаблон. Рабочий инструмент, не «вдохновение». Вставляешь свои данные — запускаешь. Без программирования. Без «разберись сам».",
+    title: "Забираешь воркфлоу — запускаешь за час",
+    desc: "После стрима получаешь файл: агент, схему, шаблон. Рабочий инструмент, не «вдохновение». Вставляешь свои данные — запускаешь. Без кода, без «разберись сам».",
   },
   {
-    title: "Задаёшь вопросы — получаешь ответы от практиков",
+    title: "Спрашиваешь — практики отвечают",
     desc: "50+ человек, которые применяют те же инструменты. Написал вопрос → через 20 минут три человека скинули решение. На 3-месячном тарифе — плюс личная Q&A-сессия с Владом по твоему конкретному кейсу.",
   },
 ]
 
-const rhythm = [
-  "2 стрима/мес",
-  "Ежедневный стек нейронок",
-  "1 Joker Speaker/мес",
-  "Q&A (тариф 3 мес)",
-]
 
 export function HowItWorksSection() {
   const ref = useRef<HTMLElement>(null)
@@ -44,10 +38,6 @@ export function HowItWorksSection() {
     gsap.from(".hiw-step", {
       opacity: 0, y: 24, duration: 0.5, stagger: 0.1, ease: "power2.out",
       scrollTrigger: { trigger: ".hiw-steps", start: "top 80%", once: true },
-    })
-    gsap.from(".hiw-rhythm", {
-      opacity: 0, y: 16, duration: 0.5, ease: "power2.out",
-      scrollTrigger: { trigger: ".hiw-rhythm", start: "top 90%", once: true },
     })
   }, { scope: ref })
 
@@ -85,17 +75,6 @@ export function HowItWorksSection() {
           ))}
         </div>
 
-        {/* Ритм клуба */}
-        <div className="hiw-rhythm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-wrap items-center gap-sp-sm">
-            <span className="text-sm font-semibold text-muted uppercase tracking-wider">Ритм клуба</span>
-            {rhythm.map((item, i) => (
-              <span key={i} className="text-sm text-body bg-neutral-900/50 border border-neutral-800 rounded-full px-3 py-1">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
 
       </div>
     </section>

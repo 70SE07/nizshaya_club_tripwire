@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from "react"
+import { useRef } from "react"
 import Image from "next/image"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -53,37 +53,17 @@ const members = [
   },
 ]
 
-const testimonials = [
-  {
-    text: "«Знаешь, что самое ценное? Не промпты, не агенты — хотя они огонь. Самое ценное — это когда пишешь в чат: \"Ребят, у меня агент глючит, кто сталкивался?\" — и через 20 минут тебе три человека скидывают решение. Бесплатно. Вот это я понимаю — комьюнити.»",
-    author: "Участник клуба · Фрилансер, маркетинг",
-  },
-  {
-    text: "«Раньше я считал каждый доллар. Сейчас смотрю на счёт и думаю: \"Окей, как мне с этих пяти тысяч сделать десять?\" Это другое мышление. Оно появилось не потому что я работал над майндсетом — а потому что появились рабочие инструменты, которые дали результат.»",
-    author: "Участник клуба · Предприниматель",
-  },
-  {
-    text: "«Я вчера в 3 часа дня пошёл гулять в парк. Просто так. Не потому что выходной — потому что задачи на день были закрыты к обеду. Я шёл и думал: вот это и есть та свобода, о которой мечтал. Не Бали — просто возможность пойти гулять в среду и не чувствовать, что упускаю что-то важное.»",
-    author: "Участник клуба · Контент-мейкер · 4-й месяц в клубе",
-  },
-]
-
 export function MembersSectionCircles() {
   const ref = useRef<HTMLElement>(null)
-  const [active, setActive] = useState<number | null>(null)
 
   useGSAP(() => {
     gsap.from(".members-header > *", {
       opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
       scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
     })
-    gsap.from(".member-item", {
-      opacity: 0, scale: 0.85, duration: 0.5, stagger: 0.07, ease: "back.out(1.4)",
-      scrollTrigger: { trigger: ".members-grid", start: "top 80%", once: true },
-    })
-    gsap.from(".testimonial-card", {
-      opacity: 0, y: 24, duration: 0.5, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ".testimonials-grid", start: "top 80%", once: true },
+    gsap.from(".member-strip", {
+      opacity: 0, x: -20, duration: 0.4, stagger: 0.06, ease: "power2.out",
+      scrollTrigger: { trigger: ".members-strips", start: "top 80%", once: true },
     })
     gsap.from(".members-counter", {
       opacity: 0, duration: 0.6, ease: "power2.out",
@@ -102,7 +82,7 @@ export function MembersSectionCircles() {
               Участники
             </p>
             <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight font-bold tracking-snug text-white mb-sp-sm">
-              Кто уже внутри — и что говорит
+              Кто уже внутри
             </h2>
             <p className="text-lg leading-[1.65] text-body max-w-2xl">
               Не теоретики. Люди, которые работают с AI и получают результат.
@@ -110,88 +90,26 @@ export function MembersSectionCircles() {
           </div>
         </div>
 
-        {/* Members grid */}
-        <div className="members-grid flex flex-wrap justify-start gap-sp-md mb-sp-md">
-          {members.map((m, i) => {
-            const isActive = active === i
-            const hasActive = active !== null
-
-            return (
-              <div
-                key={m.name}
-                className="member-item flex flex-col items-center cursor-pointer select-none w-[140px]"
-                onMouseEnter={() => setActive(i)}
-                onMouseLeave={() => setActive(null)}
-                onTouchStart={() => setActive(isActive ? null : i)}
-              >
-                {/* Avatar */}
-                <div
-                  className={`rounded-full overflow-hidden transition-all duration-200 size-28 mb-sp-sm ${
-                    isActive
-                      ? "ring-2 ring-rose-500 shadow-lg shadow-rose-500/20 scale-110"
-                      : "ring-2 ring-rose-500/20 scale-100"
-                  } ${
-                    hasActive && !isActive ? "blur-[1px] opacity-60" : "blur-0 opacity-100"
-                  }`}
-                >
-                  <Image
-                    src={m.photo}
-                    alt={m.name}
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Name + role */}
-                <p className="text-white font-bold text-center text-sm leading-tight">
-                  {m.name}
-                </p>
-                <p className="text-body text-center text-xs mb-sp-xs">
-                  {m.role}
-                </p>
-
-                {/* Metric badge */}
-                <span className="inline-block font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full whitespace-nowrap text-xs py-0.5 px-2.5">
-                  {m.metric}
-                </span>
-
-                {/* Desc — mobile always visible */}
-                <p className="text-body text-center text-sm md:hidden mt-sp-xs">
-                  {m.desc}
-                </p>
-
-                {/* Desc — desktop on hover */}
-                <div
-                  className={`hidden md:block overflow-hidden text-center transition-all duration-200 ${
-                    isActive ? "mt-sp-xs opacity-100" : "mt-0 opacity-0"
-                  }`}
-                  style={{ maxHeight: isActive ? 120 : 0 }}
-                >
-                  <p className="text-body text-xs leading-normal">
-                    {m.desc}
-                  </p>
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Testimonials */}
-        <div className="testimonials-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-          {testimonials.map((t, i) => (
+        {/* Members — horizontal strips, 2 columns on desktop */}
+        <div className="members-strips grid grid-cols-1 lg:grid-cols-2 gap-3 mb-sp-md">
+          {members.map((m) => (
             <div
-              key={i}
-              className={`testimonial-card bg-neutral-900/50 border border-neutral-800 rounded-2xl p-sp-sm ${
-                i === 2 ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"
-              }`}
+              key={m.name}
+              className="member-strip group flex items-center gap-4 bg-neutral-900/50 border border-neutral-800 rounded-xl p-3 hover:border-rose-500/30 transition-colors"
             >
-              <p className="text-sm leading-[1.65] text-body-em italic mb-sp-sm">
-                {t.text}
-              </p>
-              <p className="text-xs text-muted">
-                — {t.author}
-              </p>
+              <div className="shrink-0 size-14 rounded-full overflow-hidden ring-1 ring-rose-500/20 group-hover:ring-rose-500/50 transition-all">
+                <Image src={m.photo} alt={m.name} width={56} height={56} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <p className="text-white font-bold text-sm truncate">{m.name}</p>
+                  <span className="shrink-0 font-medium text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-full whitespace-nowrap text-[10px] py-0.5 px-2">
+                    {m.metric}
+                  </span>
+                </div>
+                <p className="text-muted text-xs mb-1">{m.role}</p>
+                <p className="text-body text-xs leading-relaxed line-clamp-2">{m.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -203,8 +121,7 @@ export function MembersSectionCircles() {
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />
           </span>
           <span className="text-muted text-sm">
-            50+ участников в клубе{" "}
-            <span className="text-body">Низшая Лига</span>
+            50+ участников в клубе{" "}<span className="text-body">Низшая Лига</span>
           </span>
         </div>
 

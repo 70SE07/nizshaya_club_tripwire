@@ -40,10 +40,6 @@ export function ResultsSection() {
       opacity: 0, x: -16, duration: 0.4, stagger: 0.06, ease: "power2.out",
       scrollTrigger: { trigger: ".results-outcomes", start: "top 80%", once: true },
     })
-    gsap.from(".results-dream", {
-      opacity: 0, y: 16, duration: 0.6, ease: "power2.out",
-      scrollTrigger: { trigger: ".results-dream", start: "top 85%", once: true },
-    })
   }, { scope: ref })
 
   return (
@@ -90,16 +86,6 @@ export function ResultsSection() {
           </div>
         </div>
 
-        {/* Dream state */}
-        <div className="results-dream grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <blockquote className="bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-md">
-              <p className="text-lg leading-[1.65] text-body-em italic">
-                «Ты просыпаешься утром, берёшь телефон — и видишь не тревожные уведомления, а уведомления о поступлениях. Агент обработал заявки ночью. Контент-машина выложила посты. Ты наливаешь кофе и думаешь: что там за ночь прилетело?»
-              </p>
-            </blockquote>
-          </div>
-        </div>
 
       </div>
     </section>
