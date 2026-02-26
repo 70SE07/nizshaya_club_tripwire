@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef } from "react"
 import { Clock, Zap, TrendingUp, Gem, Check } from "lucide-react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { resultsMetrics, resultsOutcomes } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -10,22 +9,11 @@ import { SectionHeader } from "@/components/landing/section-header"
 const metricIcons = [Clock, Zap, TrendingUp, Gem]
 
 export function ResultsSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".results-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".results-metric", {
-      opacity: 0, y: 20, duration: 0.5, stagger: 0.08, ease: "power2.out",
-      scrollTrigger: { trigger: ".results-metrics", start: "top 80%", once: true },
-    })
-    gsap.from(".results-outcome", {
-      opacity: 0, x: -16, duration: 0.4, stagger: 0.06, ease: "power2.out",
-      scrollTrigger: { trigger: ".results-outcomes", start: "top 80%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".results-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".results-metric", trigger: ".results-metrics", ...MOTION.card },
+    { selector: ".results-outcome", trigger: ".results-outcomes", direction: "left", ...MOTION.list },
+  ])
 
   return (
     <SectionContainer ref={ref}>

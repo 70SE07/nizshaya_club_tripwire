@@ -1,24 +1,15 @@
 'use client'
 
-import { useRef } from "react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { howItWorksSteps } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function HowItWorksSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".hiw-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".hiw-step", {
-      opacity: 0, y: 24, duration: 0.5, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ".hiw-steps", start: "top 80%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".hiw-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".hiw-step", trigger: ".hiw-steps", duration: 0.5, stagger: 0.1, offset: 24 },
+  ])
 
   return (
     <SectionContainer ref={ref} bg="bg-black">

@@ -1,24 +1,15 @@
 'use client'
 
-import { useRef } from "react"
 import { ShieldCheck } from "lucide-react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function GuaranteeSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".guarantee-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".guarantee-content", {
-      opacity: 0, y: 24, duration: 0.6, ease: "power2.out",
-      scrollTrigger: { trigger: ".guarantee-content", start: "top 80%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".guarantee-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".guarantee-content", duration: 0.6, offset: 24 },
+  ])
 
   return (
     <SectionContainer ref={ref} bg="bg-black">

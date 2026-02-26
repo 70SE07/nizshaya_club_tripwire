@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef } from "react"
 import { Monitor, Zap, Mic, Users, MessageSquare } from "lucide-react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { programItems } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -10,24 +9,11 @@ import { SectionHeader } from "@/components/landing/section-header"
 const icons = [Monitor, Zap, Mic, Users, MessageSquare]
 
 export function ProgramSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    /* Mobile — strips */
-    gsap.from(".program-row", {
-      opacity: 0, x: -20, duration: 0.4, stagger: 0.08, ease: "power2.out",
-      scrollTrigger: { trigger: ".program-mobile", start: "top 80%", once: true },
-    })
-    /* Desktop — bento */
-    gsap.from(".program-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".program-card", {
-      opacity: 0, y: 20, duration: 0.4, stagger: 0.06, ease: "power2.out",
-      scrollTrigger: { trigger: ".program-desktop", start: "top 80%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".program-row", trigger: ".program-mobile", direction: "left", duration: 0.4, stagger: 0.08, offset: 20 },
+    { selector: ".program-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".program-card", trigger: ".program-desktop", ...MOTION.list, offset: 20 },
+  ])
 
   return (
     <SectionContainer ref={ref}>
@@ -43,7 +29,7 @@ export function ProgramSection() {
       <div className="program-mobile sm:hidden space-y-3">
         {programItems.map((item, i) => {
           const Icon = icons[i]
-          const isPremium = 'premium' in item && item.premium
+          const isPremium = item.premium
           return (
             <div
               key={i}
@@ -74,7 +60,7 @@ export function ProgramSection() {
       <div className="program-desktop hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-3">
         {programItems.map((item, i) => {
           const Icon = icons[i]
-          const isPremium = 'premium' in item && item.premium
+          const isPremium = item.premium
           return (
             <div
               key={i}

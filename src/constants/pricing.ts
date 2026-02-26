@@ -1,4 +1,6 @@
-export const valueStack = [
+import type { ValueStackRow, Bonus } from "@/types/content"
+
+export const valueStack: readonly ValueStackRow[] = [
   { item: "2 стрима в месяц с разбором экрана + записи", price: "$200/мес" },
   { item: "Готовые AI-агенты и рабочие воркфлоу", price: "$500" },
   { item: "Ежедневный проверенный стек нейронок", price: "$100/мес" },
@@ -7,9 +9,9 @@ export const valueStack = [
   { item: "Joker Speaker: Дэн — Clowbot для автоматизации продаж", price: "$500", bonus: true },
   { item: "Готовые воркфлоу контент-завода для инстаблогеров", price: "$300", bonus: true },
   { item: "Q&A с разбором кейса лично с Владом (тариф 3 мес)", price: "$500/час", bonus: true },
-] as const
+]
 
-export const bonuses = [
+export const bonuses: readonly Bonus[] = [
   {
     title: "Бонус #1 — Joker Speaker: Стас Цис",
     desc: "Закрытый эфир по контент-заводам и YouTube. Как построить систему, которая производит 50+ единиц контента в день — без копирайтера и SMM-менеджера.",
@@ -31,7 +33,7 @@ export const bonuses = [
     note: "Рыночная стоимость: $500/час · Только в 3-месячном тарифе",
     premium: true,
   },
-] as const
+]
 
 export const monthlyFeatures = [
   "2 стрима/мес с записью",

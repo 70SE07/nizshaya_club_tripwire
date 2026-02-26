@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef } from "react"
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { topicsSchedule, topicsHighlights } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -15,22 +14,11 @@ const monthNames = [
 ]
 
 export function TopicsSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".topics-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".topic-card", {
-      opacity: 0, y: 24, duration: 0.5, stagger: 0.08, ease: "power2.out",
-      scrollTrigger: { trigger: ".topics-grid", start: "top 80%", once: true },
-    })
-    gsap.from(".topics-schedule", {
-      opacity: 0, y: 20, duration: 0.6, ease: "power2.out",
-      scrollTrigger: { trigger: ".topics-schedule", start: "top 85%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".topics-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".topic-card", trigger: ".topics-grid", ...MOTION.card, offset: 24 },
+    { selector: ".topics-schedule", duration: 0.6, offset: 20, start: "top 85%" },
+  ])
 
   const now = new Date()
   const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
@@ -51,7 +39,7 @@ export function TopicsSection() {
       <div className="topics-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {topicsHighlights.map((item, i) => {
           const Icon = icons[i]
-          const isFull = 'full' in item && item.full
+          const isFull = item.full
           return (
             <div
               key={i}

@@ -1,30 +1,18 @@
 'use client'
 
-import { useRef } from "react"
 import { ArrowRight, Users } from "lucide-react"
 import Link from "next/link"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { LINKS } from "@/constants/links"
 import { SectionContainer } from "@/components/landing/section-container"
 import { CtaButton } from "@/components/landing/cta-button"
 
 export function FinalCtaSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".cta-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".cta-urgency", {
-      opacity: 0, y: 24, duration: 0.6, ease: "power2.out",
-      scrollTrigger: { trigger: ".cta-urgency", start: "top 80%", once: true },
-    })
-    gsap.from(".cta-buttons", {
-      opacity: 0, y: 20, duration: 0.5, ease: "power2.out",
-      scrollTrigger: { trigger: ".cta-buttons", start: "top 85%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".cta-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".cta-urgency", duration: 0.6, offset: 24 },
+    { selector: ".cta-buttons", duration: 0.5, offset: 20, start: "top 85%" },
+  ])
 
   return (
     <SectionContainer ref={ref} bg="bg-linear-to-b from-neutral-950 to-black">

@@ -1,29 +1,17 @@
 'use client'
 
-import { useRef } from "react"
 import Image from "next/image"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { members } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function MembersSectionCircles() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".members-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".member-strip", {
-      opacity: 0, x: -20, duration: 0.4, stagger: 0.06, ease: "power2.out",
-      scrollTrigger: { trigger: ".members-strips", start: "top 80%", once: true },
-    })
-    gsap.from(".members-counter", {
-      opacity: 0, duration: 0.6, ease: "power2.out",
-      scrollTrigger: { trigger: ".members-counter", start: "top 90%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".members-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".member-strip", trigger: ".members-strips", direction: "left", duration: 0.4, stagger: 0.06, offset: 20 },
+    { selector: ".members-counter", direction: "fade", duration: 0.6, start: "top 90%" },
+  ])
 
   return (
     <SectionContainer ref={ref}>

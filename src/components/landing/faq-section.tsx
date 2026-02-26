@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { faqs } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
@@ -40,22 +40,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export function FaqSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".faq-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".faq-item", {
-      opacity: 0, y: 16, duration: 0.4, stagger: 0.06, ease: "power2.out",
-      scrollTrigger: { trigger: ".faq-list", start: "top 80%", once: true },
-    })
-    gsap.from(".faq-cta", {
-      opacity: 0, y: 16, duration: 0.5, ease: "power2.out",
-      scrollTrigger: { trigger: ".faq-cta", start: "top 90%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".faq-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".faq-item", trigger: ".faq-list", ...MOTION.list },
+    { selector: ".faq-cta", duration: 0.5, offset: 16, start: "top 90%" },
+  ])
 
   return (
     <SectionContainer ref={ref}>

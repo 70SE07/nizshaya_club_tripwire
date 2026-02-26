@@ -1,26 +1,17 @@
 'use client'
 
-import { useRef } from "react"
 import Image from "next/image"
 import { AudioPlayer, AudioPlayerCompact } from "@/components/ui/audio-player"
-import { gsap, useGSAP } from "@/lib/gsap"
+import { useScrollReveal, MOTION } from "@/lib/gsap"
 import { expertQuote, expertBio } from "@/constants/content"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function ExpertSection() {
-  const ref = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    gsap.from(".expert-header > *", {
-      opacity: 0, y: 28, duration: 0.6, stagger: 0.1, ease: "power2.out",
-      scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
-    })
-    gsap.from(".expert-card", {
-      opacity: 0, y: 32, duration: 0.7, ease: "power2.out",
-      scrollTrigger: { trigger: ".expert-card", start: "top 85%", once: true },
-    })
-  }, { scope: ref })
+  const ref = useScrollReveal([
+    { selector: ".expert-header > *", trigger: "section", ...MOTION.header },
+    { selector: ".expert-card", duration: 0.7, offset: 32, start: "top 85%" },
+  ])
 
   return (
     <SectionContainer ref={ref} bg="bg-black">
