@@ -100,9 +100,9 @@ export function SolutionSection() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   {/* Old */}
-                  <div className={`sol-old-${i} flex items-center gap-2 sm:flex-1`}>
-                    <span className="text-dimmed text-xs font-medium uppercase tracking-wider sm:hidden">Курсы</span>
-                    <p className="text-lg leading-[1.65] text-body">
+                  <div className={`sol-old-${i} flex items-baseline gap-2 sm:items-center sm:flex-1`}>
+                    <span className="text-muted text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">Курсы</span>
+                    <p className="text-sm sm:text-lg leading-[1.65] text-body">
                       {row.old}
                     </p>
                   </div>
@@ -111,9 +111,9 @@ export function SolutionSection() {
                   <ArrowRight className={`sol-arrow-${i} w-4 h-4 text-rose-500 shrink-0 hidden sm:block`} />
 
                   {/* New */}
-                  <div className={`sol-new-${i} flex items-center gap-2 sm:flex-1`}>
-                    <span className="text-rose-400 text-xs font-medium uppercase tracking-wider sm:hidden">Клуб</span>
-                    <p className="text-lg leading-[1.65] text-white font-medium">
+                  <div className={`sol-new-${i} flex items-baseline gap-2 sm:items-center sm:flex-1`}>
+                    <span className="text-rose-400 text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">Клуб</span>
+                    <p className="text-sm sm:text-lg leading-[1.65] text-white font-medium">
                       {row.now}
                     </p>
                   </div>
