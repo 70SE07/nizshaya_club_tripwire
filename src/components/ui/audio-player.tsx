@@ -87,9 +87,8 @@ function useAudioPlayer(src: string, barCount: number) {
   const toggle = useCallback(() => {
     const a = audioRef.current
     if (!a) return
-    if (playing) a.pause()
-    else a.play()
-    setPlaying(!playing)
+    if (playing) { a.pause(); setPlaying(false) }
+    else { a.play().catch(() => {}); setPlaying(true) }
   }, [playing])
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from "react"
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
 import { TOPICS_REVEAL } from "@/constants/animations"
 import { topicsSchedule, topicsHighlights } from "@/constants/content"
@@ -13,10 +14,16 @@ const monthNames = [
 ]
 
 export function TopicsSection() {
-  const now = new Date()
-  const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
-  const topics = topicsSchedule[key]
-  const month = monthNames[now.getMonth()]
+  const [schedule, setSchedule] = useState<{ topics: string[]; month: string } | null>(null)
+
+  useEffect(() => {
+    const now = new Date()
+    const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
+    const topics = topicsSchedule[key]
+    if (topics) {
+      setSchedule({ topics, month: monthNames[now.getMonth()] })
+    }
+  }, [])
 
   return (
     <AnimatedSection
@@ -48,16 +55,16 @@ export function TopicsSection() {
         })}
       </div>
 
-      {/* Schedule */}
-      <div className="mt-sp-md">
-        {topics && (
+      {/* Schedule — rendered only on client to avoid hydration mismatch */}
+      {schedule && (
+        <div className="mt-sp-md">
           <div className="topics-schedule card-base p-sp-md!">
             <div className="flex items-center gap-2 mb-sp-sm">
               <Calendar className="w-5 h-5 text-rose-400" />
-              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стримы в {month}е</h3>
+              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стримы в {schedule.month}е</h3>
             </div>
             <div className="flex flex-col gap-sp-xs">
-              {topics.map((topic, i) => (
+              {schedule.topics.map((topic, i) => (
                 <div key={i} className="flex items-center gap-3 py-2">
                   <span className="text-rose-400 font-bold text-sm w-6 shrink-0">{i + 1}.</span>
                   <span className="text-body text-sm">{topic}</span>
@@ -65,8 +72,8 @@ export function TopicsSection() {
               ))}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </AnimatedSection>
   )
 }

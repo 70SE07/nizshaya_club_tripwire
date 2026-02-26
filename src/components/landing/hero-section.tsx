@@ -1,7 +1,6 @@
 'use client'
 
-import { Component, useRef, useState, useEffect } from "react"
-import type { ErrorInfo, ReactNode } from "react"
+import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 import { gsap, useGSAP } from "@/lib/gsap"
 
@@ -9,18 +8,6 @@ const VladScene = dynamic(
   () => import("@/components/ui/vlad-model").then(m => ({ default: m.VladScene })),
   { ssr: false, loading: () => <div className="w-full h-full" /> }
 )
-
-class SceneErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
-  state = { hasError: false }
-  static getDerivedStateFromError() { return { hasError: true } }
-  componentDidCatch(error: Error, info: ErrorInfo) {
-    console.warn("3D scene failed to load:", error, info)
-  }
-  render() {
-    if (this.state.hasError) return <div className="w-full h-full" />
-    return this.props.children
-  }
-}
 import { Spotlight } from "@/components/ui/spotlight"
 import { CtaButton } from "@/components/landing/cta-button"
 import { heroBadgeTexts } from "@/constants/content"
@@ -28,21 +15,26 @@ import { heroBadgeTexts } from "@/constants/content"
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
   const badgeTextRef = useRef<HTMLSpanElement>(null)
+  const tweenRef = useRef<gsap.core.Tween | null>(null)
   const [badgeIdx, setBadgeIdx] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
       const el = badgeTextRef.current
       if (!el) return
-      gsap.to(el, {
+      tweenRef.current?.kill()
+      tweenRef.current = gsap.to(el, {
         opacity: 0, y: -6, duration: 0.25, ease: "power2.in",
         onComplete: () => {
           setBadgeIdx(i => (i + 1) % heroBadgeTexts.length)
-          gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" })
+          tweenRef.current = gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" })
         },
       })
     }, 2500)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      tweenRef.current?.kill()
+    }
   }, [])
 
   useGSAP(() => {
@@ -63,9 +55,7 @@ export function HeroSection() {
 
       {/* 3D — right side layer, desktop only, behind text */}
       <div className="absolute right-0 hidden md:flex items-center z-0 top-1/2 -translate-y-1/2 w-[65%] h-[clamp(460px,80vh,800px)]">
-        <SceneErrorBoundary>
-          <VladScene className="w-full h-full" />
-        </SceneErrorBoundary>
+        <VladScene className="w-full h-full" />
       </div>
 
       <div className="max-w-300 mx-auto px-container-px w-full relative z-10">
