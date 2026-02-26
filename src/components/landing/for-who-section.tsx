@@ -170,7 +170,7 @@ export function ForWhoSection() {
                 </div>
               ) : (
                 <div>
-                  <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-gray-500"}`}>
+                  <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-neutral-500"}`}>
                     {checkedCount === 1
                       ? "Один пункт — уже сигнал. Ещё один — и ты точно наш."
                       : "Если хотя бы два пункта — это про тебя, ты попал по адресу."}
