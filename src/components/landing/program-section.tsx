@@ -104,20 +104,20 @@ export function ProgramSection() {
                 <span className={`inline-block text-sm font-medium rounded-full px-3 py-1 ${
                   item.premium
                     ? "text-rose-400 bg-rose-500/10 border border-rose-500/20"
-                    : "text-neutral-400 bg-neutral-800 border border-neutral-700"
+                    : "text-body bg-neutral-800 border border-neutral-700"
                 }`}>
                   {item.freq}
                 </span>
               </div>
-              <item.icon className={`w-7 h-7 mb-sp-sm ${item.premium ? "text-rose-400" : "text-neutral-400"}`} />
+              <item.icon className={`w-7 h-7 mb-sp-sm ${item.premium ? "text-rose-400" : "text-body"}`} />
               <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">{item.title}</h3>
-              <p className="text-sm text-neutral-400 mb-sp-sm">{item.desc}</p>
+              <p className="text-sm text-body mb-sp-sm">{item.desc}</p>
               {item.list && (
                 <div className="flex flex-col gap-1.5">
                   {item.list.map((line, j) => (
                     <div key={j} className="flex items-start gap-2">
                       <span className="text-rose-400 text-sm mt-px shrink-0">—</span>
-                      <span className="text-sm text-neutral-500">{line}</span>
+                      <span className="text-sm text-muted">{line}</span>
                     </div>
                   ))}
                 </div>
@@ -129,7 +129,7 @@ export function ProgramSection() {
         {/* Footer */}
         <div className="program-footer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-sp-md">
           <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-neutral-500 text-sm italic">
+            <p className="text-muted text-sm italic">
               Это не курс, который ты купишь и забудешь на вкладке. Это среда, которая держит тебя в движении — пока не выстроишь свою систему.
             </p>
           </div>

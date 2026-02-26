@@ -86,7 +86,7 @@ export function TopicsSection() {
               </span>
               <item.icon className="w-7 h-7 text-rose-400 mb-sp-sm" />
               <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">{item.title}</h3>
-              <p className="text-sm text-neutral-400">{item.desc}</p>
+              <p className="text-sm text-body">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -102,7 +102,7 @@ export function TopicsSection() {
               {topics.map((topic, i) => (
                 <div key={i} className="flex items-center gap-3 py-2">
                   <span className="text-rose-400 font-bold text-sm w-6 shrink-0">{i + 1}.</span>
-                  <span className="text-neutral-400 text-sm">{topic}</span>
+                  <span className="text-body text-sm">{topic}</span>
                 </div>
               ))}
             </div>

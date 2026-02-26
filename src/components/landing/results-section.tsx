@@ -68,7 +68,7 @@ export function ResultsSection() {
             <div key={i} className="results-metric bg-neutral-900/50 border border-neutral-800 rounded-2xl p-sp-sm text-center">
               <m.icon className="w-6 h-6 text-rose-400 mx-auto mb-sp-xs" />
               <p className="text-white font-bold text-2xl mb-sp-xs">{m.value}</p>
-              <p className="text-sm text-neutral-400">{m.desc}</p>
+              <p className="text-sm text-body">{m.desc}</p>
             </div>
           ))}
         </div>
@@ -83,7 +83,7 @@ export function ResultsSection() {
               {outcomes.map((item, i) => (
                 <div key={i} className="results-outcome flex items-start gap-3">
                   <Check className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-                  <p className="text-sm text-neutral-400">{item}</p>
+                  <p className="text-sm text-body">{item}</p>
                 </div>
               ))}
             </div>

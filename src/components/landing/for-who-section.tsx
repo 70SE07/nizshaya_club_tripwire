@@ -112,7 +112,7 @@ export function ForWhoSection() {
               <br />
               Просто не применяешь.
             </h2>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-muted">
               Отметь пункты, которые про тебя
             </p>
           </div>
@@ -140,7 +140,7 @@ export function ForWhoSection() {
                   >
                     {isChecked && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
                   </span>
-                  <p className={`text-lg leading-[1.65] transition-colors duration-200 ${isChecked ? "text-white" : "text-neutral-400"}`}>
+                  <p className={`text-lg leading-[1.65] transition-colors duration-200 ${isChecked ? "text-white" : "text-body"}`}>
                     {pain}
                   </p>
                 </div>
@@ -164,20 +164,20 @@ export function ForWhoSection() {
                   >
                     Вступить в клуб за $79 / мес <ArrowRight className="w-5 h-5" />
                   </a>
-                  <p className="text-sm text-neutral-500 mt-sp-xs">
+                  <p className="text-sm text-muted mt-sp-xs">
                     Доступ открывается мгновенно · Гарантия возврата после первого стрима
                   </p>
                 </div>
               ) : (
                 <div>
-                  <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-neutral-500"}`}>
+                  <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-muted"}`}>
                     {checkedCount === 1
                       ? "Один пункт — уже сигнал. Ещё один — и ты точно наш."
                       : "Если хотя бы два пункта — это про тебя, ты попал по адресу."}
                   </p>
                   <div className="border border-neutral-800 rounded-2xl p-sp-sm">
-                    <p className="text-sm text-neutral-500">
-                      <span className="text-neutral-400 font-medium">Клуб не для тебя</span>, если хочешь изучить AI «для общего развития» без конкретного применения — здесь только практика и инструменты под реальные задачи.
+                    <p className="text-sm text-muted">
+                      <span className="text-body font-medium">Клуб не для тебя</span>, если хочешь изучить AI «для общего развития» без конкретного применения — здесь только практика и инструменты под реальные задачи.
                     </p>
                   </div>
                 </div>

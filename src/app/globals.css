@@ -69,9 +69,11 @@
   /* Letter spacing */
   --letter-spacing-snug: -0.015em;
 
-  /* Body text colors — change here, applies site-wide */
-  --color-body: oklch(0.708 0 0);       /* neutral-400 */
-  --color-body-em: oklch(0.922 0 0);    /* neutral-200 — quotes, emphasis */
+  /* Text colors — single source of truth, change here → applies site-wide */
+  --color-body-em: oklch(0.922 0 0);    /* ~neutral-200 — quotes, emphasis, feature lists */
+  --color-body:    oklch(0.708 0 0);    /* ~neutral-400 — body paragraphs, descriptions */
+  --color-muted:   oklch(0.556 0 0);    /* ~neutral-500 — labels, meta, hints */
+  --color-dimmed:  oklch(0.371 0 0);    /* ~neutral-700 — footer, copyright */
 }
 
 :root {

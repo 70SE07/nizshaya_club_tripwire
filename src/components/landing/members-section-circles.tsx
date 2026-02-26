@@ -147,7 +147,7 @@ export function MembersSectionCircles() {
                 <p className="text-white font-bold text-center text-sm leading-tight">
                   {m.name}
                 </p>
-                <p className="text-neutral-400 text-center text-xs mb-sp-xs">
+                <p className="text-body text-center text-xs mb-sp-xs">
                   {m.role}
                 </p>
 
@@ -157,7 +157,7 @@ export function MembersSectionCircles() {
                 </span>
 
                 {/* Desc — mobile always visible */}
-                <p className="text-neutral-400 text-center text-sm md:hidden mt-sp-xs">
+                <p className="text-body text-center text-sm md:hidden mt-sp-xs">
                   {m.desc}
                 </p>
 
@@ -168,7 +168,7 @@ export function MembersSectionCircles() {
                   }`}
                   style={{ maxHeight: isActive ? 120 : 0 }}
                 >
-                  <p className="text-neutral-400 text-xs leading-normal">
+                  <p className="text-body text-xs leading-normal">
                     {m.desc}
                   </p>
                 </div>
@@ -186,10 +186,10 @@ export function MembersSectionCircles() {
                 i === 2 ? "col-span-1 sm:col-span-2 lg:col-span-4" : "sm:col-span-2"
               }`}
             >
-              <p className="text-sm leading-[1.65] text-neutral-300 italic mb-sp-sm">
+              <p className="text-sm leading-[1.65] text-body-em italic mb-sp-sm">
                 {t.text}
               </p>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-muted">
                 — {t.author}
               </p>
             </div>
@@ -202,9 +202,9 @@ export function MembersSectionCircles() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500" />
           </span>
-          <span className="text-neutral-500 text-sm">
+          <span className="text-muted text-sm">
             50+ участников в клубе{" "}
-            <span className="text-neutral-400">Низшая Лига</span>
+            <span className="text-body">Низшая Лига</span>
           </span>
         </div>
 

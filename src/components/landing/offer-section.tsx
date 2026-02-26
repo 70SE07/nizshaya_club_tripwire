@@ -107,8 +107,8 @@ export function OfferSection() {
             <div className="min-w-120">
               {/* Table header */}
               <div className="flex items-center justify-between border-b border-neutral-700 pb-sp-xs mb-sp-xs">
-                <span className="text-sm font-semibold text-neutral-400">Что включено</span>
-                <span className="text-sm font-semibold text-neutral-400">Рыночная цена</span>
+                <span className="text-sm font-semibold text-body">Что включено</span>
+                <span className="text-sm font-semibold text-body">Рыночная цена</span>
               </div>
               {/* Rows */}
               {valueStack.map((row, i) => (
@@ -118,11 +118,11 @@ export function OfferSection() {
                     i < valueStack.length - 1 ? "border-b border-neutral-800/50" : ""
                   }`}
                 >
-                  <span className="text-sm text-neutral-300 flex items-center gap-2">
+                  <span className="text-sm text-body-em flex items-center gap-2">
                     {row.bonus && <Gift className="w-4 h-4 text-amber-400 shrink-0" />}
                     {row.item}
                   </span>
-                  <span className="text-sm text-neutral-400 shrink-0 ml-4">{row.price}</span>
+                  <span className="text-sm text-body shrink-0 ml-4">{row.price}</span>
                 </div>
               ))}
               {/* Total */}
@@ -149,8 +149,8 @@ export function OfferSection() {
                 <Gift className={`w-5 h-5 shrink-0 ${b.premium ? "text-rose-400" : "text-amber-400"}`} />
                 <h3 className="text-base font-semibold text-white">{b.title}</h3>
               </div>
-              <p className="text-sm text-neutral-400 mb-sp-xs">{b.desc}</p>
-              <p className="text-xs text-neutral-500 italic">{b.note}</p>
+              <p className="text-sm text-body mb-sp-xs">{b.desc}</p>
+              <p className="text-xs text-muted italic">{b.note}</p>
             </div>
           ))}
         </div>
@@ -162,11 +162,11 @@ export function OfferSection() {
           <div className="offer-card sm:col-span-2 bg-linear-to-b from-neutral-900 to-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-rose-500/30 transition-colors flex flex-col">
             <div className="flex flex-col flex-1 p-sp-md">
               <div className="mb-sp-md">
-                <p className="text-sm text-neutral-500 font-medium mb-sp-xs">Подписка</p>
+                <p className="text-sm text-muted font-medium mb-sp-xs">Подписка</p>
                 <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">1 месяц</h3>
                 <div className="flex items-end gap-2">
                   <span className="text-white font-bold text-[2.5rem] leading-none">$79</span>
-                  <span className="text-neutral-500 text-lg leading-[1.65]">/мес</span>
+                  <span className="text-muted text-lg leading-[1.65]">/мес</span>
                 </div>
               </div>
 
@@ -174,12 +174,12 @@ export function OfferSection() {
                 {monthlyFeatures.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 mb-sp-xs">
                     <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="text-neutral-300 text-sm">{item}</span>
+                    <span className="text-body-em text-sm">{item}</span>
                   </div>
                 ))}
                 <div className="flex items-start gap-3 mb-sp-xs">
-                  <X className="w-5 h-5 text-neutral-600 shrink-0 mt-0.5" />
-                  <span className="text-neutral-500 text-sm">Q&A-сессии не входят</span>
+                  <X className="w-5 h-5 text-dimmed shrink-0 mt-0.5" />
+                  <span className="text-muted text-sm">Q&A-сессии не входят</span>
                 </div>
               </div>
 
@@ -199,7 +199,7 @@ export function OfferSection() {
             </div>
             <div className="flex flex-col flex-1 p-sp-md">
               <div className="mb-sp-md">
-                <p className="text-sm text-neutral-500 font-medium mb-sp-xs">Подписка</p>
+                <p className="text-sm text-muted font-medium mb-sp-xs">Подписка</p>
                 <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">3 месяца</h3>
                 <div className="flex items-end gap-2">
                   <span className="text-white/50 line-through text-2xl">$237</span>
@@ -212,7 +212,7 @@ export function OfferSection() {
                 {quarterlyExtra.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 mb-sp-xs">
                     <Check className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="text-neutral-300 text-sm">{item}</span>
+                    <span className="text-body-em text-sm">{item}</span>
                   </div>
                 ))}
               </div>
@@ -231,7 +231,7 @@ export function OfferSection() {
         {/* Anchor */}
         <div className="offer-anchor grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-muted">
               Соотношение ценности к цене: <span className="text-rose-400 font-bold">35:1</span> на месячном тарифе. За $79 ты получаешь то, что стоит $2 800 при отдельной покупке.
             </p>
           </div>

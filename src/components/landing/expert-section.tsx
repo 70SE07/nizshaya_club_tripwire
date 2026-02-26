@@ -10,7 +10,7 @@ import { useGSAP } from "@gsap/react"
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const QUOTE = "«Низшая Лига — это тренд на инклюзивность и антиуспешный успех. Мы продаём не членство в эфемерном клубе, а конкретный план действий. Никакой теории — делимся своим стеком нейронок, отдаём готовые воркфлоу, выдаём кастомных агентов и рабочие связки. Суть одна: каждый уходит с готовым AI-инструментом и начинает зарабатывать.»"
-const BIO = "Влад не преподаёт AI. Он применяет его в своих проектах каждый день — и показывает тебе то, что реально работает прямо сейчас, а не то, что работало полгода назад. Никаких слайдов. Только экран, живая задача и готовый инструмент на выходе."
+const BIO = "Если ты ждёшь очередного «эксперта с Lamborghini на обложке» — это не сюда. Здесь практики, которые называют себя низшей лигой с самоиронией — и делают результат."
 
 export function ExpertSection() {
   const ref = useRef<HTMLElement>(null)
@@ -23,10 +23,6 @@ export function ExpertSection() {
     gsap.from(".expert-card", {
       opacity: 0, y: 32, duration: 0.7, ease: "power2.out",
       scrollTrigger: { trigger: ".expert-card", start: "top 85%", once: true },
-    })
-    gsap.from(".expert-footnote", {
-      opacity: 0, y: 16, duration: 0.5, ease: "power2.out",
-      scrollTrigger: { trigger: ".expert-footnote", start: "top 90%", once: true },
     })
   }, { scope: ref })
 
@@ -72,7 +68,7 @@ export function ExpertSection() {
           </div>
           <div className="mt-sp-sm">
             <p className="text-lg leading-[1.65] text-body-em mb-sp-sm">{QUOTE}</p>
-            <p className="text-sm text-neutral-400">{BIO}</p>
+            <p className="text-sm text-body">{BIO}</p>
           </div>
         </div>
 
@@ -102,7 +98,7 @@ export function ExpertSection() {
               <p className="text-rose-400 text-sm">Основатель клуба</p>
             </div>
             <div className="h-8 w-px bg-neutral-700" />
-            <p className="text-sm text-neutral-400 flex-1 line-clamp-2">
+            <p className="text-sm text-body flex-1">
               {BIO}
             </p>
             <div className="shrink-0 w-72">
@@ -111,14 +107,6 @@ export function ExpertSection() {
           </div>
         </div>
 
-        {/* Footnote */}
-        <div className="expert-footnote grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3">
-            <p className="text-neutral-500 text-sm italic">
-              Если ты ждёшь очередного «эксперта с Lamborghini на обложке» — это не сюда. Здесь практики, которые называют себя низшей лигой с самоиронией — и делают результат без понтов.
-            </p>
-          </div>
-        </div>
 
       </div>
     </section>

@@ -42,7 +42,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
       >
         <span className="text-sm font-semibold text-white">{q}</span>
         <ChevronDown
-          className={`w-5 h-5 text-neutral-500 shrink-0 mt-0.5 transition-transform duration-200 ${
+          className={`w-5 h-5 text-muted shrink-0 mt-0.5 transition-transform duration-200 ${
             open ? "rotate-180" : ""
           }`}
         />
@@ -53,7 +53,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
         }`}
       >
         {a.split("\n\n").map((paragraph, i) => (
-          <p key={i} className="text-sm text-neutral-400 mb-sp-xs last:mb-0">
+          <p key={i} className="text-sm text-body mb-sp-xs last:mb-0">
             {paragraph}
           </p>
         ))}

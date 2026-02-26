@@ -85,7 +85,7 @@ export function SolutionSection() {
 
         {/* Column headers — desktop */}
         <div className="hidden sm:grid sm:grid-cols-[1fr_auto_1fr] items-center gap-4 mb-sp-sm">
-          <span className="text-sm font-semibold text-neutral-500 border-b border-neutral-800 pb-sp-xs">Обычные курсы и каналы</span>
+          <span className="text-sm font-semibold text-body border-b border-neutral-800 pb-sp-xs">Обычные курсы и каналы</span>
           <span className="w-4" />
           <span className="text-sm font-semibold text-rose-400 border-b border-rose-500/20 pb-sp-xs">Низшая Лига</span>
         </div>
@@ -101,8 +101,8 @@ export function SolutionSection() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   {/* Old */}
                   <div className={`sol-old-${i} flex items-center gap-2 sm:flex-1`}>
-                    <span className="text-neutral-600 text-xs font-medium uppercase tracking-wider sm:hidden">Курсы</span>
-                    <p className="text-sm text-neutral-400">
+                    <span className="text-dimmed text-xs font-medium uppercase tracking-wider sm:hidden">Курсы</span>
+                    <p className="text-lg leading-[1.65] text-body">
                       {row.old}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export function SolutionSection() {
                   {/* New */}
                   <div className={`sol-new-${i} flex items-center gap-2 sm:flex-1`}>
                     <span className="text-rose-400 text-xs font-medium uppercase tracking-wider sm:hidden">Клуб</span>
-                    <p className="text-sm text-white font-medium">
+                    <p className="text-lg leading-[1.65] text-white font-medium">
                       {row.now}
                     </p>
                   </div>

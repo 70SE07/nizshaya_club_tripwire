@@ -56,10 +56,10 @@ export function FinalCtaSection() {
               <Users className="w-5 h-5 text-rose-400 shrink-0" />
               <p className="text-base font-semibold text-white">Первый набор — до 100 участников</p>
             </div>
-            <p className="text-sm text-neutral-400 mb-sp-xs">
+            <p className="text-sm text-body mb-sp-xs">
               Февральский стримовый цикл уже запланирован. Зайдёшь сейчас — попадёшь с самого начала и заберёшь все бонусы от Joker Speaker. Опоздаешь — начнёшь с середины цикла.
             </p>
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-body">
               При ограниченном составе Влад может лично разбирать кейсы каждого. При 500+ участниках формат изменится. Войти сейчас = максимальное внимание по минимальной цене.
             </p>
           </div>
@@ -74,7 +74,7 @@ export function FinalCtaSection() {
             >
               Вступить за $79/мес <ArrowRight className="w-5 h-5" />
             </a>
-            <span className="text-neutral-600 text-sm">или</span>
+            <span className="text-dimmed text-sm">или</span>
             <a
               href="https://t.me/ligayasko_bot?start=tariffs"
               className="inline-flex items-center justify-center gap-3 bg-neutral-900/50 border border-rose-500/30 text-white font-bold rounded-2xl hover:border-rose-500/60 hover:bg-neutral-900 transition-all py-sp-sm px-sp-md text-lg"
@@ -83,18 +83,18 @@ export function FinalCtaSection() {
             </a>
           </div>
           <div className="col-span-1 sm:col-span-2 lg:col-span-4">
-            <p className="text-neutral-600 text-sm text-center sm:text-left">
+            <p className="text-dimmed text-sm text-center sm:text-left">
               Доступ открывается мгновенно · Отмена в один клик
             </p>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="border-t border-neutral-900 text-neutral-700 text-sm pt-sp-md">
+        <div className="border-t border-neutral-900 text-dimmed text-sm pt-sp-md">
           <p className="mb-sp-xs">© Низшая Лига | Все права защищены</p>
           <div className="flex gap-4">
-            <Link href="/oferta" className="hover:text-neutral-400 transition-colors">Публичная оферта</Link>
-            <Link href="/policy" className="hover:text-neutral-400 transition-colors">Политика конфиденциальности</Link>
+            <Link href="/oferta" className="hover:text-body transition-colors">Публичная оферта</Link>
+            <Link href="/policy" className="hover:text-body transition-colors">Политика конфиденциальности</Link>
           </div>
         </div>
 

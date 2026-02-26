@@ -80,7 +80,7 @@ export function HowItWorksSection() {
               <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white mb-sp-xs">
                 {step.title}
               </h3>
-              <p className="text-sm text-neutral-400">{step.desc}</p>
+              <p className="text-sm text-body">{step.desc}</p>
             </div>
           ))}
         </div>
@@ -88,9 +88,9 @@ export function HowItWorksSection() {
         {/* Ритм клуба */}
         <div className="hiw-rhythm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-wrap items-center gap-sp-sm">
-            <span className="text-sm font-semibold text-neutral-500 uppercase tracking-wider">Ритм клуба</span>
+            <span className="text-sm font-semibold text-muted uppercase tracking-wider">Ритм клуба</span>
             {rhythm.map((item, i) => (
-              <span key={i} className="text-sm text-neutral-400 bg-neutral-900/50 border border-neutral-800 rounded-full px-3 py-1">
+              <span key={i} className="text-sm text-body bg-neutral-900/50 border border-neutral-800 rounded-full px-3 py-1">
                 {item}
               </span>
             ))}

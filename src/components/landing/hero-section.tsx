@@ -93,7 +93,7 @@ export function HeroSection() {
               >
                 Вступить в клуб за $79 / мес
               </a>
-              <p className="text-sm text-neutral-500 mt-sp-sm">
+              <p className="text-sm text-muted mt-sp-sm">
                 Сэкономь 37% — возьми сразу 3 месяца за $150. Не понравится после первого стрима — вернём деньги.
               </p>
             </div>

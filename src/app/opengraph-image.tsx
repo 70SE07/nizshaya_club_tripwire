@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Низшая Лига — AI-клуб'
+export const alt = 'Низшая Лига — закрытое AI комьюнити практиков'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -53,7 +53,7 @@ export default async function Image() {
             }}
           />
           <span style={{ color: '#fb7185', fontSize: '24px' }}>
-            Стримы 2 раза в месяц
+            Закрытое AI комьюнити практиков
           </span>
         </div>
 
@@ -69,8 +69,12 @@ export default async function Image() {
             flexDirection: 'column',
           }}
         >
-          <span>Из низшей лиги</span>
-          <span>в высшую.</span>
+          <span>Первый результат —</span>
+          <span style={{
+            background: 'linear-gradient(to right, #fb7185, #ec4899)',
+            backgroundClip: 'text',
+            color: 'transparent',
+          }}>уже на первом стриме.</span>
         </div>
 
         {/* Subtitle */}
@@ -83,7 +87,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          Клуб в котором не обсуждают нейросети — а зарабатывают на них.
+          Никакой теории — готовые связки, воркфлоу, агенты и боты. Берёшь, копируешь, зарабатываешь.
         </div>
 
         {/* Bottom bar */}
@@ -92,9 +96,10 @@ export default async function Image() {
             position: 'absolute',
             bottom: '60px',
             left: '80px',
+            right: '80px',
             display: 'flex',
             alignItems: 'center',
-            gap: '16px',
+            justifyContent: 'space-between',
           }}
         >
           <span
@@ -108,6 +113,9 @@ export default async function Image() {
             }}
           >
             nizshaya.club
+          </span>
+          <span style={{ fontSize: '20px', color: '#737373', display: 'flex' }}>
+            $79 / мес
           </span>
         </div>
       </div>
