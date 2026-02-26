@@ -40,7 +40,7 @@ export function GuaranteeSection() {
 
         {/* Content */}
         <div className="guarantee-content grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-sp-md">
-          <div className="col-span-1 sm:col-span-2 lg:col-span-3 bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-md">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-4 bg-linear-to-b from-rose-500/10 to-transparent border border-rose-500/20 rounded-2xl p-sp-md">
             <div className="flex items-center gap-3 mb-sp-sm">
               <ShieldCheck className="w-7 h-7 text-rose-400 shrink-0" />
               <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Гарантия первого стрима</h3>
