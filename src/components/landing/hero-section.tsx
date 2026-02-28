@@ -51,10 +51,10 @@ export function HeroSection() {
 
             {/* H1 */}
             <h1 className="hero-h1 text-4xl md:text-5xl lg:text-6xl leading-none font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 mb-sp-lg">
-              Первый результат —
+              Между «читаю про AI» и «зарабатываю» —
               <br />
               <span className="bg-linear-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
-                уже на первом стриме.
+                один стрим. Не веришь — вернём деньги.
               </span>
             </h1>
 
