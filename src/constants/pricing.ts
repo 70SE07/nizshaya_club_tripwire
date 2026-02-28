@@ -4,7 +4,7 @@ export const valueStack: readonly ValueStackRow[] = [
   { item: "2 стрима в месяц с разбором экрана + записи", price: "$200/мес" },
   { item: "Готовые AI-ассистенты и рабочие воркфлоу", price: "$500" },
   { item: "Еженедельный проверенный стек нейронок", price: "$100/мес" },
-  { item: "Закрытая группа 50+ практиков", price: "$200/мес" },
+  { item: "Закрытая группа практиков", price: "$200/мес" },
   { item: "Joker Speaker: Стас Цис — контент-маркетинг и YouTube", price: "$500", bonus: true },
   { item: "Joker Speaker: Дэн — Clowbot для автоматизации продаж", price: "$500", bonus: true },
   { item: "Готовый контент-план под любую нишу", price: "$300", bonus: true },
