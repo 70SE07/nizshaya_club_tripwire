@@ -40,7 +40,7 @@ export const tariffs: readonly Tariff[] = [
     label: "Подписка · 1 месяц",
     price: "$79",
     priceNote: "/мес",
-    extraFeatures: [{ label: "Q&A-сессии не входят", included: false }],
+    extraFeatures: [{ label: "Q&A и стратсессии не входят", included: false }],
     cta: { text: "Вступить за $79" },
   },
   {
