@@ -20,7 +20,7 @@ export function OfferSection() {
       {/* Anchor */}
       <div className="text-center">
         <p className="text-sm text-muted">
-          Соотношение ценности к цене: <span className="text-rose-400 font-bold">35:1</span> на месячном тарифе. За $79 ты получаешь то, что стоит $2 800 при отдельной покупке.
+          Соотношение ценности к цене: <span className="text-rose-400 font-bold">35:1</span>. От $50/мес ты получаешь то, что стоит $2 800 при отдельной покупке.
         </p>
       </div>
     </ScrollAnimationWrapper>

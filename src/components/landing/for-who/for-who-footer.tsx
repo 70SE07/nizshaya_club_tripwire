@@ -20,7 +20,7 @@ export function ForWhoFooter({ showCta, checkedCount, footerWrapRef, footerRef }
                 Ты попал по адресу. Именно для этого и существует клуб.
               </p>
               <CtaButton variant="primary" className="rounded-2xl mb-sp-xs">
-                Вступить в клуб за $79 / мес <ArrowRight className="w-5 h-5" />
+                Вступить в клуб от $50 / мес <ArrowRight className="w-5 h-5" />
               </CtaButton>
               <p className="text-sm text-muted mt-sp-xs">
                 Доступ открывается мгновенно · Гарантия возврата после первого стрима

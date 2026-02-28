@@ -66,10 +66,10 @@ export function HeroSection() {
             {/* CTA */}
             <div className="hero-cta">
               <CtaButton>
-                Вступить в клуб за $79 / мес
+                Вступить в клуб от $50 / мес
               </CtaButton>
               <p className="text-sm text-muted mt-sp-sm">
-                Не понравится после первого стрима — вернём деньги.
+                при оплате за 3 месяца · Не понравится после первого стрима — вернём деньги.
               </p>
             </div>
           </div>

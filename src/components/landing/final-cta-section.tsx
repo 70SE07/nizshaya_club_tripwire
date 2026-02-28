@@ -47,11 +47,11 @@ export function FinalCtaSection() {
       <div className="cta-buttons grid-section mb-sp-md">
         <div className="col-full flex flex-col sm:flex-row items-center gap-sp-sm">
           <CtaButton variant="primary" className="rounded-2xl shadow-2xl shadow-rose-500/30 hover:shadow-rose-500/50">
-            Вступить за $79/мес <ArrowRight className="w-5 h-5" />
+            Вступить от $50/мес <ArrowRight className="w-5 h-5" />
           </CtaButton>
           <span className="text-dimmed text-sm">или</span>
           <CtaButton variant="secondary">
-            3 месяца за $150 · экономия 37%
+            1 месяц за $79
           </CtaButton>
         </div>
         <div className="col-full">
