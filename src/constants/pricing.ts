@@ -51,7 +51,7 @@ export const tariffs: readonly Tariff[] = [
     discountBadge: "-37%",
     highlighted: true,
     extraFeatures: [
-      { label: "Q&A: личный разбор кейса с Владом", included: true },
+      { label: "Q&A и стратсессии: личный разбор кейса с Владом", included: true },
       { label: "Приоритетный доступ к материалам", included: true },
     ],
     cta: { text: "Взять 3 месяца за $150", highlighted: true },
