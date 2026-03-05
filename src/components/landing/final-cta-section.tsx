@@ -63,6 +63,39 @@ export function FinalCtaSection() {
 
       {/* Footer */}
       <div className="border-t border-neutral-900 text-dimmed text-sm pt-sp-md">
+
+        {/* Реквізити */}
+        <div className="grid grid-cols-2 gap-x-sp-md gap-y-sp-sm mb-sp-md max-w-lg">
+          <div>
+            <p className="text-muted mb-1">Отримувач</p>
+            <p className="text-body font-medium">Ясько Ігор Іванович</p>
+          </div>
+          <div>
+            <p className="text-muted mb-1">IBAN</p>
+            <p className="text-body font-medium break-all">UA693220010000026205309226813</p>
+          </div>
+          <div>
+            <p className="text-muted mb-1">ІПН/ЄДРПОУ</p>
+            <p className="text-body font-medium">2351811339</p>
+          </div>
+          <div>
+            <p className="text-muted mb-1">Банк</p>
+            <p className="text-body font-medium">АТ «УНІВЕРСАЛ БАНК»</p>
+          </div>
+          <div>
+            <p className="text-muted mb-1">МФО</p>
+            <p className="text-body font-medium">322001</p>
+          </div>
+          <div>
+            <p className="text-muted mb-1">ЄДРПОУ Банку</p>
+            <p className="text-body font-medium">21133352</p>
+          </div>
+          <div className="col-span-2">
+            <p className="text-muted mb-1">Призначення платежу</p>
+            <p className="text-body font-medium">Поповнення рахунку</p>
+          </div>
+        </div>
+
         <p className="mb-sp-xs">© Низшая Лига | Все права защищены</p>
         <div className="flex gap-4">
           <Link href={LINKS.oferta} className="hover:text-body transition-colors">Публичная оферта</Link>
