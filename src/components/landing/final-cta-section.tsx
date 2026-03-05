@@ -90,10 +90,6 @@ export function FinalCtaSection() {
             <p className="text-muted mb-1">ЄДРПОУ Банку</p>
             <p className="text-body font-medium">21133352</p>
           </div>
-          <div className="col-span-2">
-            <p className="text-muted mb-1">Призначення платежу</p>
-            <p className="text-body font-medium">Поповнення рахунку</p>
-          </div>
         </div>
 
         <p className="mb-sp-xs">© Низшая Лига | Все права защищены</p>
