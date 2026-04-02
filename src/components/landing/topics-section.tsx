@@ -3,50 +3,40 @@
 import { useState, useEffect } from "react"
 import { Bot, Layers, Code, Video, Lock, Calendar } from "lucide-react"
 import { TOPICS_REVEAL } from "@/constants/animations"
-import { topicsSchedule, topicsHighlights } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 const icons = [Bot, Layers, Code, Video, Lock]
 
-const monthNamesLocative: Record<number, string> = {
-  0: "січні",
-  1: "лютому",
-  2: "березні",
-  3: "квітні",
-  4: "травні",
-  5: "червні",
-  6: "липні",
-  7: "серпні",
-  8: "вересні",
-  9: "жовтні",
-  10: "листопаді",
-  11: "грудні",
-}
-
 export function TopicsSection() {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const ui = getUI(lang)
   const [schedule, setSchedule] = useState<{ topics: string[]; month: string } | null>(null)
 
   useEffect(() => {
     const now = new Date()
     const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
-    const topics = topicsSchedule[key]
+    const topics = content.topicsSchedule[key]
     if (topics) {
-      setSchedule({ topics, month: monthNamesLocative[now.getMonth()] })
+      setSchedule({ topics, month: ui.monthNames[now.getMonth()] })
     }
-  }, [])
+  }, [lang, content.topicsSchedule, ui.monthNames])
 
   return (
     <ScrollAnimationWrapper
       reveal={TOPICS_REVEAL}
       bg="bg-black"
-      label="Теми стримів"
-      title="Розбираємо те, що вже приносить гроші"
-      subtitle="2 рази на місяць — стрим. Новий інструмент, новий кейс, нова зв'язка. Показуємо з екрана, повторюєш — забираєш."
+      label={ui.topics.label}
+      title={ui.topics.title}
+      subtitle={ui.topics.subtitle}
       headerClassName="topics-header"
     >
       {/* Cards 2×2 + full */}
       <div className="topics-grid grid-section">
-        {topicsHighlights.map((item, i) => {
+        {content.topicsHighlights.map((item, i) => {
           const Icon = icons[i]
           const isFull = item.full
           return (
@@ -71,7 +61,7 @@ export function TopicsSection() {
           <div className="topics-schedule card-base p-sp-md!">
             <div className="flex items-center gap-2 mb-sp-sm">
               <Calendar className="w-5 h-5 text-rose-400" />
-              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стрими у {schedule.month}</h3>
+              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">{ui.topics.scheduleTitle.replace("{month}", schedule.month)}</h3>
             </div>
             <div className="flex flex-col gap-sp-xs">
               {schedule.topics.map((topic, i) => (

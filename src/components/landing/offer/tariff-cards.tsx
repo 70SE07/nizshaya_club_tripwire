@@ -1,9 +1,12 @@
+'use client'
+
 import { Check, X } from "lucide-react"
-import { monthlyFeatures, tariffs } from "@/constants/pricing"
+import { getPricing } from "@/constants/pricing"
+import { useLanguage } from "@/i18n/context"
 import { LINKS } from "@/constants/links"
 import type { Tariff } from "@/types/content"
 
-function TariffCard({ tariff }: { tariff: Tariff }) {
+function TariffCard({ tariff, perMonth }: { tariff: Tariff; perMonth: string }) {
   const { label, price, priceNote, oldPrice, discountBadge, highlighted, extraFeatures, cta } = tariff
 
   return (
@@ -23,16 +26,11 @@ function TariffCard({ tariff }: { tariff: Tariff }) {
           <span className="text-white font-bold text-[2.5rem] leading-none">{price}</span>
           {priceNote && <span className="text-muted text-lg">{priceNote}</span>}
         </div>
-        {highlighted && <p className="text-rose-400 text-sm">$50/мес</p>}
+        {highlighted && <p className="text-rose-400 text-sm">{perMonth}</p>}
       </div>
 
       <div className="flex-1 space-y-2.5 mb-sp-md">
-        {monthlyFeatures.map((item, i) => (
-          <div key={i} className="flex items-start gap-2.5">
-            <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-            <span className="text-body-em text-sm">{item}</span>
-          </div>
-        ))}
+        <MonthlyFeatures />
 
         {extraFeatures.length > 0 && (
           <div className={highlighted ? "border-t border-rose-500/20 pt-2.5 mt-1 space-y-2.5" : "space-y-2.5"}>
@@ -63,11 +61,31 @@ function TariffCard({ tariff }: { tariff: Tariff }) {
   )
 }
 
+function MonthlyFeatures() {
+  const { lang } = useLanguage()
+  const pricing = getPricing(lang)
+
+  return (
+    <>
+      {pricing.monthlyFeatures.map((item, i) => (
+        <div key={i} className="flex items-start gap-2.5">
+          <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <span className="text-body-em text-sm">{item}</span>
+        </div>
+      ))}
+    </>
+  )
+}
+
 export function TariffCards() {
+  const { lang } = useLanguage()
+  const pricing = getPricing(lang)
+  const perMonth = lang === "uk" ? "$50/міс" : "$50/мес"
+
   return (
     <div className="offer-tariffs grid grid-cols-1 lg:grid-cols-2 gap-5 mb-sp-md">
-      {tariffs.map((tariff, i) => (
-        <TariffCard key={i} tariff={tariff} />
+      {pricing.tariffs.map((tariff, i) => (
+        <TariffCard key={i} tariff={tariff} perMonth={perMonth} />
       ))}
     </div>
   )

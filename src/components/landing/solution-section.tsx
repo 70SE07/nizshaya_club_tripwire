@@ -3,12 +3,17 @@
 import { useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { gsap, useGSAP } from "@/lib/gsap"
-import { solutionRows } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 import { SectionContainer } from "@/components/landing/section-container"
 import { SectionHeader } from "@/components/landing/section-header"
 
 export function SolutionSection() {
   const ref = useRef<HTMLElement>(null)
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const ui = getUI(lang)
 
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
@@ -23,7 +28,7 @@ export function SolutionSection() {
       scrollTrigger: { trigger: ".solution-rows", start: "top 80%", once: true },
     })
 
-    solutionRows.forEach((_, i) => {
+    content.solutionRows.forEach((_, i) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".solution-rows",
@@ -56,23 +61,23 @@ export function SolutionSection() {
 
       {/* Header */}
       <SectionHeader
-        label="Рішення"
-        title="Ми не навчаємо. Ми віддаємо готове."
-        subtitle="Нижча Ліга — AI-клуб, де замість презентацій ти бачиш екран. Влад бере реальну задачу зі свого бізнесу і будує рішення прямо при тобі: з помилками, правками, живими запитаннями з чату. Ти повторюєш слідом і йдеш із готовим інструментом."
+        label={ui.solution.label}
+        title={ui.solution.title}
+        subtitle={ui.solution.subtitle}
         className="solution-header"
       />
 
       {/* Column headers — desktop */}
       <div className="hidden sm:grid sm:grid-cols-[1fr_auto_1fr] items-center gap-4 mb-sp-sm">
-        <span className="text-sm font-semibold text-body border-b border-neutral-800 pb-sp-xs">Звичайні курси та канали</span>
+        <span className="text-sm font-semibold text-body border-b border-neutral-800 pb-sp-xs">{ui.solution.colOld}</span>
         <span className="w-4" />
-        <span className="text-sm font-semibold text-rose-400 border-b border-rose-500/20 pb-sp-xs">Нижча Ліга</span>
+        <span className="text-sm font-semibold text-rose-400 border-b border-rose-500/20 pb-sp-xs">{ui.solution.colNew}</span>
       </div>
 
       {/* Rows */}
       <div className="solution-rows grid-section">
         <div className="col-full flex flex-col gap-2">
-          {solutionRows.map((row, i) => (
+          {content.solutionRows.map((row, i) => (
             <div
               key={i}
               className="solution-row rounded-xl border border-neutral-800/30 bg-neutral-900/20 p-sp-sm"
@@ -80,7 +85,7 @@ export function SolutionSection() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                 {/* Old */}
                 <div className={`sol-old-${i} flex items-baseline gap-2 sm:items-center sm:flex-1`}>
-                  <span className="text-muted text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">Курси</span>
+                  <span className="text-muted text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">{ui.solution.mobileOld}</span>
                   <p className="text-sm sm:text-lg leading-[1.65] text-body">
                     {row.old}
                   </p>
@@ -91,7 +96,7 @@ export function SolutionSection() {
 
                 {/* New */}
                 <div className={`sol-new-${i} flex items-baseline gap-2 sm:items-center sm:flex-1`}>
-                  <span className="text-rose-400 text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">Клуб</span>
+                  <span className="text-rose-400 text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">{ui.solution.mobileNew}</span>
                   <p className="text-sm sm:text-lg leading-[1.65] text-white font-medium">
                     {row.now}
                   </p>

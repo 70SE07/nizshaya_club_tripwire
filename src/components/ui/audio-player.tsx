@@ -4,6 +4,8 @@ import { useRef } from "react"
 import { Play, Pause } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAudioPlayer } from "@/hooks/use-audio-player"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 
 const VARIANTS = {
   full: {
@@ -40,6 +42,8 @@ export function AudioPlayer({ src, variant = "full" }: { src: string; variant?: 
   const v = VARIANTS[variant]
   const waveRef = useRef<HTMLDivElement>(null)
   const { audioRef, playing, progress, currentTime, duration, bars, toggle, seek } = useAudioPlayer(src, v.barCount)
+  const { lang } = useLanguage()
+  const ui = getUI(lang)
 
   return (
     <div className={v.container}>
@@ -48,7 +52,7 @@ export function AudioPlayer({ src, variant = "full" }: { src: string; variant?: 
       <button
         onClick={toggle}
         className={v.button}
-        aria-label={playing ? "Пауза" : "Відтворити"}
+        aria-label={playing ? ui.audio.pause : ui.audio.play}
       >
         {playing
           ? <Pause className={cn(v.icon, "text-white")} fill="white" />

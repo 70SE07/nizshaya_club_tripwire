@@ -1,21 +1,29 @@
+'use client'
+
 import { Clock, Zap, TrendingUp, Gem, Check } from "lucide-react"
 import { RESULTS_REVEAL } from "@/constants/animations"
-import { resultsMetrics, resultsOutcomes } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 const metricIcons = [Clock, Zap, TrendingUp, Gem]
 
 export function ResultsSection() {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const ui = getUI(lang)
+
   return (
     <ScrollAnimationWrapper
       reveal={RESULTS_REVEAL}
-      label="Результат"
-      title="Що зміниться. Конкретно."
+      label={ui.results.label}
+      title={ui.results.title}
       headerClassName="results-header"
     >
       {/* Metrics -- 4 tiles */}
       <div className="results-metrics grid-section mb-sp-md">
-        {resultsMetrics.map((m, i) => {
+        {content.resultsMetrics.map((m, i) => {
           const Icon = metricIcons[i]
           return (
             <div key={i} className="results-metric card-base text-center">
@@ -31,10 +39,10 @@ export function ResultsSection() {
       <div className="results-outcomes grid-section mb-sp-md">
         <div className="col-full">
           <p className="text-lg leading-[1.65] text-body mb-sp-sm">
-            Після першого місяця ти йдеш із:
+            {ui.results.outcomesIntro}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-sp-xs">
-            {resultsOutcomes.map((item, i) => (
+            {content.resultsOutcomes.map((item, i) => (
               <div key={i} className="results-outcome flex items-start gap-3">
                 <Check className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
                 <p className="text-sm text-body">{item}</p>

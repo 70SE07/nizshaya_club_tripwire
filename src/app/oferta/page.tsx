@@ -1,47 +1,26 @@
+'use client'
+
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
+
 export default function OfertaPage() {
+  const { lang } = useLanguage()
+  const ui = getUI(lang)
+
   return (
     <main className="bg-black min-h-screen px-8 md:px-16 py-16">
       <div className="max-w-3xl">
-        <a href="/" className="text-rose-400 text-sm hover:underline mb-8 inline-block">← Назад</a>
-        <h1 className="text-3xl font-bold text-white mb-8">Публічна оферта</h1>
+        <a href="/" className="text-rose-400 text-sm hover:underline mb-8 inline-block">{ui.oferta.back}</a>
+        <h1 className="text-3xl font-bold text-white mb-8">{ui.oferta.title}</h1>
         <div className="text-body space-y-6 leading-relaxed">
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">1. Загальні положення</h2>
-            <p>Ця публічна оферта (далі — «Оферта») є офіційною пропозицією сервісу «Нижча Ліга» (далі — «Виконавець») укласти договір на надання інформаційних послуг на умовах, викладених нижче.</p>
-            <p className="mt-2">Акцептом Оферти є оплата будь-якого тарифу на сайті. З моменту оплати договір вважається укладеним.</p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">2. Предмет договору</h2>
-            <p>Виконавець надає Замовнику доступ до закритого клубу, що включає: стріми 2 рази на місяць із записом, матеріали, готові рішення, закриту групу та приватний канал — відповідно до обраного тарифу.</p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">3. Вартість та порядок оплати</h2>
-            <p>Вартість послуг визначається обраним тарифом і зазначена на сайті. Оплата здійснюється в повному обсязі до початку надання послуг. Валюта оплати — долар США (USD).</p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">4. Повернення коштів</h2>
-            <p>Замовник має право запросити повне повернення коштів протягом 14 календарних днів з моменту оплати, надіславши запит на електронну пошту Виконавця. Повернення здійснюється тим самим способом, яким було здійснено оплату, протягом 10 робочих днів.</p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">5. Права та обов'язки сторін</h2>
-            <p>Виконавець зобов'язується надати доступ до матеріалів відповідно до тарифу. Замовник зобов'язується не розповсюджувати матеріали третім особам і не використовувати їх у комерційних цілях без згоди Виконавця.</p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">6. Відповідальність</h2>
-            <p>Виконавець не гарантує конкретних фінансових результатів. Усі матеріали мають інформаційний характер. Відповідальність за застосування отриманих знань несе Замовник.</p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-semibold text-lg mb-2">7. Інші умови</h2>
-            <p>Виконавець залишає за собою право вносити зміни до цієї Оферти. Актуальна версія завжди доступна на цій сторінці. Продовження використання сервісу після змін означає згоду з ними.</p>
-          </section>
-
+          {ui.oferta.sections.map((section, i) => (
+            <section key={i}>
+              <h2 className="text-white font-semibold text-lg mb-2">{section.title}</h2>
+              {section.paragraphs.map((p, j) => (
+                <p key={j} className={j > 0 ? "mt-2" : ""}>{p}</p>
+              ))}
+            </section>
+          ))}
         </div>
       </div>
     </main>
