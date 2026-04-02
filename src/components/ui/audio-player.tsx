@@ -48,7 +48,7 @@ export function AudioPlayer({ src, variant = "full" }: { src: string; variant?: 
       <button
         onClick={toggle}
         className={v.button}
-        aria-label={playing ? "Пауза" : "Воспроизвести"}
+        aria-label={playing ? "Пауза" : "Відтворити"}
       >
         {playing
           ? <Pause className={cn(v.icon, "text-white")} fill="white" />

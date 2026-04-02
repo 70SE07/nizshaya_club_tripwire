@@ -17,25 +17,25 @@ export function ForWhoFooter({ showCta, checkedCount, footerWrapRef, footerRef }
           {showCta ? (
             <div>
               <p className="text-lg leading-[1.65] text-rose-400 font-medium mb-sp-sm">
-                Ты попал по адресу. Именно для этого и существует клуб.
+                Ти потрапив за адресою. Саме для цього й існує клуб.
               </p>
               <CtaButton variant="primary" className="rounded-2xl mb-sp-xs">
-                Вступить в клуб от $50 / мес <ArrowRight className="w-5 h-5" />
+                Вступити до клубу від $50 / міс <ArrowRight className="w-5 h-5" />
               </CtaButton>
               <p className="text-sm text-muted mt-sp-xs">
-                Доступ открывается мгновенно · Гарантия возврата после первого стрима
+                Доступ відкривається миттєво · Гарантія повернення після першого стриму
               </p>
             </div>
           ) : (
             <div>
               <p className={`text-lg leading-[1.65] font-medium mb-sp-sm ${checkedCount === 1 ? "text-rose-400" : "text-muted"}`}>
                 {checkedCount === 1
-                  ? "Один пункт — уже сигнал. Ещё один — и ты точно наш."
-                  : "Если хотя бы два пункта — это про тебя, ты попал по адресу."}
+                  ? "Один пункт — уже сигнал. Ще один — і ти точно наш."
+                  : "Якщо хоча б два пункти — це про тебе, ти потрапив за адресою."}
               </p>
               <div className="card-base">
                 <p className="text-sm text-muted">
-                  <span className="text-body font-medium">Клуб не для тебя</span>, если хочешь изучить AI «для общего развития» без конкретного применения — здесь только практика и инструменты под реальные задачи.
+                  <span className="text-body font-medium">Клуб не для тебе</span>, якщо хочеш вивчити AI «для загального розвитку» без конкретного застосування — тут лише практика та інструменти під реальні задачі.
                 </p>
               </div>
             </div>

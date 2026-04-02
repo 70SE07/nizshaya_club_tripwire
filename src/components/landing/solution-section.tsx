@@ -18,13 +18,11 @@ export function SolutionSection() {
       scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
     })
 
-    // Фаза 1: строки появляются (только "old" часть видна)
     gsap.from(".solution-row", {
       opacity: 0, y: 16, duration: 0.3, stagger: 0.04, ease: "power2.out",
       scrollTrigger: { trigger: ".solution-rows", start: "top 80%", once: true },
     })
 
-    // Фаза 2: трансформация — old затухает, стрелка и new появляются
     solutionRows.forEach((_, i) => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -35,19 +33,16 @@ export function SolutionSection() {
         delay: 0.4 + i * 0.1,
       })
 
-      // Затухаем old
       tl.to(`.sol-old-${i}`, {
         opacity: 0.4,
         duration: 0.2,
         ease: "power2.out",
       })
-      // Показываем стрелку
       tl.from(`.sol-arrow-${i}`, {
         opacity: 0, scale: 0.5,
         duration: 0.15,
         ease: "back.out(2)",
       }, "-=0.08")
-      // Показываем new
       tl.from(`.sol-new-${i}`, {
         opacity: 0, x: 20,
         duration: 0.25,
@@ -61,17 +56,17 @@ export function SolutionSection() {
 
       {/* Header */}
       <SectionHeader
-        label="Решение"
-        title="Мы не учим. Мы отдаём готовое."
-        subtitle="Низшая Лига — AI-клуб, где вместо презентаций ты видишь экран. Влад берёт реальную задачу из своего бизнеса и строит решение прямо при тебе: с ошибками, правками, живыми вопросами из чата. Ты повторяешь следом и уходишь с готовым инструментом."
+        label="Рішення"
+        title="Ми не навчаємо. Ми віддаємо готове."
+        subtitle="Нижча Ліга — AI-клуб, де замість презентацій ти бачиш екран. Влад бере реальну задачу зі свого бізнесу і будує рішення прямо при тобі: з помилками, правками, живими запитаннями з чату. Ти повторюєш слідом і йдеш із готовим інструментом."
         className="solution-header"
       />
 
       {/* Column headers — desktop */}
       <div className="hidden sm:grid sm:grid-cols-[1fr_auto_1fr] items-center gap-4 mb-sp-sm">
-        <span className="text-sm font-semibold text-body border-b border-neutral-800 pb-sp-xs">Обычные курсы и каналы</span>
+        <span className="text-sm font-semibold text-body border-b border-neutral-800 pb-sp-xs">Звичайні курси та канали</span>
         <span className="w-4" />
-        <span className="text-sm font-semibold text-rose-400 border-b border-rose-500/20 pb-sp-xs">Низшая Лига</span>
+        <span className="text-sm font-semibold text-rose-400 border-b border-rose-500/20 pb-sp-xs">Нижча Ліга</span>
       </div>
 
       {/* Rows */}
@@ -85,7 +80,7 @@ export function SolutionSection() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                 {/* Old */}
                 <div className={`sol-old-${i} flex items-baseline gap-2 sm:items-center sm:flex-1`}>
-                  <span className="text-muted text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">Курсы</span>
+                  <span className="text-muted text-[11px] font-semibold uppercase tracking-wider sm:hidden min-w-11">Курси</span>
                   <p className="text-sm sm:text-lg leading-[1.65] text-body">
                     {row.old}
                   </p>

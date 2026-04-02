@@ -4,7 +4,7 @@ import { valueStack } from "@/constants/pricing"
 export function ValueStackTable() {
   return (
     <div className="offer-value-grid hidden sm:block card-base mb-sp-md">
-      <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-sm">Сколько это стоит по отдельности</p>
+      <p className="text-xs font-medium tracking-[0.09em] uppercase text-rose-400 mb-sp-sm">Скільки це коштує окремо</p>
 
       {valueStack.map((row, i) => (
         <div
@@ -22,12 +22,12 @@ export function ValueStackTable() {
       ))}
 
       <div className="flex items-center justify-between border-t border-neutral-700 pt-sp-xs mt-sp-xs">
-        <span className="text-sm font-bold text-white">Итого ценность</span>
-        <span className="text-sm font-bold text-rose-400">от $2 800</span>
+        <span className="text-sm font-bold text-white">Разом цінність</span>
+        <span className="text-sm font-bold text-rose-400">від $2 800</span>
       </div>
       <div className="flex items-center justify-between mt-1">
-        <span className="text-sm font-bold text-white">Ты платишь</span>
-        <span className="text-sm font-bold text-emerald-400">от $50/мес</span>
+        <span className="text-sm font-bold text-white">Ти платиш</span>
+        <span className="text-sm font-bold text-emerald-400">від $50/міс</span>
       </div>
     </div>
   )

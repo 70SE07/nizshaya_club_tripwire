@@ -9,8 +9,8 @@ export function ExpertSection() {
     <ScrollAnimationWrapper
       reveal={EXPERT_REVEAL}
       bg="bg-black"
-      label="Эксперт"
-      title="Почему это называется «Низшая Лига»"
+      label="Експерт"
+      title="Чому це називається «Нижча Ліга»"
       headerClassName="expert-header"
     >
       {/* Mobile */}
@@ -30,7 +30,7 @@ export function ExpertSection() {
             <div className="flex items-end justify-between gap-3">
               <div className="shrink-0">
                 <p className="text-white font-bold text-lg">Влад Ясько</p>
-                <p className="text-rose-400 text-sm">Основатель клуба</p>
+                <p className="text-rose-400 text-sm">Засновник клубу</p>
               </div>
               <div className="flex-1 min-w-0">
                 <AudioPlayer variant="compact" src="/vlad_club_demo.mp3" />
@@ -68,7 +68,7 @@ export function ExpertSection() {
         <div className="bg-neutral-900/80 border-t border-neutral-800 p-sp-sm flex items-center gap-sp-md">
           <div className="shrink-0">
             <p className="text-white font-bold text-lg">Влад Ясько</p>
-            <p className="text-rose-400 text-sm">Основатель клуба</p>
+            <p className="text-rose-400 text-sm">Засновник клубу</p>
           </div>
           <div className="h-8 w-px bg-neutral-700" />
           <p className="text-sm text-body flex-1">
