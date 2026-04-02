@@ -1,19 +1,31 @@
+'use client'
+
 import { HOW_IT_WORKS_REVEAL } from "@/constants/animations"
-import { howItWorksSteps } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
+const ui = {
+  ru: { label: "Как это работает", title: "Как это устроено" },
+  uk: { label: "Як це працює", title: "Як це влаштовано" },
+}
+
 export function HowItWorksSection() {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const t = ui[lang]
+
   return (
     <ScrollAnimationWrapper
       reveal={HOW_IT_WORKS_REVEAL}
       bg="bg-black"
-      label="Как это работает"
-      title="Как это устроено"
+      label={t.label}
+      title={t.title}
       headerClassName="hiw-header"
     >
       {/* Steps */}
       <div className="hiw-steps grid-section mb-sp-md">
-        {howItWorksSteps.map((step, i) => (
+        {content.howItWorksSteps.map((step, i) => (
           <div
             key={i}
             className="hiw-step card-base"

@@ -1,23 +1,35 @@
+'use client'
+
 import { Monitor, Zap, Mic, Users, MessageSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { PROGRAM_REVEAL } from "@/constants/animations"
-import { programItems } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 const icons = [Monitor, Zap, Mic, Users, MessageSquare]
 
+const ui = {
+  ru: { label: "Программа", title: "Что конкретно внутри клуба", subtitle: "Не курс с модулями. Живой клуб — стримы, стек, практики рядом." },
+  uk: { label: "Програма", title: "Що конкретно всередині клубу", subtitle: "Не курс із модулями. Живий клуб — стріми, стек, практики поруч." },
+}
+
 export function ProgramSection() {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const t = ui[lang]
+
   return (
     <ScrollAnimationWrapper
       reveal={PROGRAM_REVEAL}
-      label="Программа"
-      title="Что конкретно внутри клуба"
-      subtitle="Не курс с модулями. Живой клуб — стримы, стек, практики рядом."
+      label={t.label}
+      title={t.title}
+      subtitle={t.subtitle}
       headerClassName="program-header"
     >
       {/* ── Mobile: cards ── */}
       <div className="program-mobile sm:hidden space-y-3">
-        {programItems.map((item, i) => {
+        {content.programItems.map((item, i) => {
           const Icon = icons[i]
           const isPremium = item.premium
           return (
@@ -46,7 +58,7 @@ export function ProgramSection() {
 
       {/* ── Desktop: bento grid (Variant C) ── */}
       <div className="program-desktop hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-3">
-        {programItems.map((item, i) => {
+        {content.programItems.map((item, i) => {
           const Icon = icons[i]
           const isPremium = item.premium
           return (
