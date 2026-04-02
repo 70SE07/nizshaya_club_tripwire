@@ -1,16 +1,23 @@
+'use client'
+
 import { OFFER_REVEAL } from "@/constants/animations"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 import { TariffCards } from "@/components/landing/offer/tariff-cards"
 import { ValueStackTable } from "@/components/landing/offer/value-stack-table"
 import { BonusList } from "@/components/landing/offer/bonus-list"
 
 export function OfferSection() {
+  const { lang } = useLanguage()
+  const ui = getUI(lang)
+
   return (
     <ScrollAnimationWrapper
       reveal={OFFER_REVEAL}
       id="offer"
-      label="Офер"
-      title="Що ти отримуєш. Все й одразу."
+      label={ui.offer.label}
+      title={ui.offer.title}
       headerClassName="offer-header"
     >
       <TariffCards />
@@ -20,7 +27,7 @@ export function OfferSection() {
       {/* Anchor */}
       <div className="text-center">
         <p className="text-sm text-muted">
-          Співвідношення цінності до ціни: <span className="text-rose-400 font-bold">35:1</span>. Від $50/міс ти отримуєш те, що коштує $2 800 при окремій купівлі.
+          {ui.offer.anchor}
         </p>
       </div>
     </ScrollAnimationWrapper>

@@ -3,7 +3,9 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { FAQ_REVEAL } from "@/constants/animations"
-import { faqs } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 import { CtaButton } from "@/components/landing/cta-button"
 
@@ -39,17 +41,21 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export function FaqSection() {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const ui = getUI(lang)
+
   return (
     <ScrollAnimationWrapper
       reveal={FAQ_REVEAL}
       label="FAQ"
-      title="Часто запитують. Відповідаємо чесно."
+      title={ui.faq.title}
       headerClassName="faq-header"
     >
       {/* Questions */}
       <div className="faq-list grid-section mb-sp-md">
         <div className="col-full card-base">
-          {faqs.map((faq, i) => (
+          {content.faqs.map((faq, i) => (
             <FaqItem key={i} q={faq.q} a={faq.a} />
           ))}
         </div>
@@ -59,7 +65,7 @@ export function FaqSection() {
       <div className="faq-cta grid-section">
         <div className="col-full text-center">
           <CtaButton variant="ghost">
-            Вступити до клубу →
+            {ui.faq.cta}
           </CtaButton>
         </div>
       </div>

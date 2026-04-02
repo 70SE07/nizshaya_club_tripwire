@@ -11,10 +11,15 @@ const VladScene = dynamic(
 import { Spotlight } from "@/components/ui/spotlight"
 import { CtaButton } from "@/components/landing/cta-button"
 import { RotatingBadge } from "@/components/landing/hero/rotating-badge"
-import { heroBadgeTexts } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null)
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const ui = getUI(lang)
 
   useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
@@ -45,31 +50,31 @@ export function HeroSection() {
           <div className="sm:col-span-2 flex flex-col justify-center py-sp-lg">
             {/* Badge */}
             <RotatingBadge
-              texts={heroBadgeTexts}
+              texts={content.heroBadgeTexts}
               className="hero-badge inline-flex items-center gap-2 badge-accent rounded-full px-4 py-1.5 w-fit mb-sp-lg"
             />
 
             {/* H1 */}
             <h1 className="hero-h1 text-4xl md:text-5xl lg:text-6xl leading-none font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 mb-sp-lg">
-              AI-інструменти для маркетингу та бізнесу —
+              {ui.hero.h1part1}
               <br />
               <span className="bg-linear-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
-                протестовані. Працюють. Приносять гроші.
+                {ui.hero.h1part2}
               </span>
             </h1>
 
             {/* Body */}
             <p className="hero-body text-lg leading-[1.65] text-body max-w-lg mb-sp-lg">
-              Кожні два тижні — стрим з екрана: перевірений стек, готові воркфлоу, робочі інструменти. Береш — впроваджуєш — заробляєш.
+              {ui.hero.body}
             </p>
 
             {/* CTA */}
             <div className="hero-cta">
               <CtaButton>
-                Вступити до клубу від $50 / міс
+                {ui.hero.cta}
               </CtaButton>
               <p className="text-sm text-muted mt-sp-sm">
-                при оплаті за 3 місяці · Не сподобається після першого стриму — повернемо гроші.
+                {ui.hero.priceNote}
               </p>
             </div>
           </div>

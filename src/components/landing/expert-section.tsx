@@ -1,16 +1,24 @@
+'use client'
+
 import Image from "next/image"
 import { AudioPlayer } from "@/components/ui/audio-player"
 import { EXPERT_REVEAL } from "@/constants/animations"
-import { expertQuote, expertBio } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
+import { getUI } from "@/i18n/ui"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 
 export function ExpertSection() {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+  const ui = getUI(lang)
+
   return (
     <ScrollAnimationWrapper
       reveal={EXPERT_REVEAL}
       bg="bg-black"
-      label="Експерт"
-      title="Чому це називається «Нижча Ліга»"
+      label={ui.expert.label}
+      title={ui.expert.title}
       headerClassName="expert-header"
     >
       {/* Mobile */}
@@ -19,7 +27,7 @@ export function ExpertSection() {
           <div className="aspect-square">
             <Image
               src="/vlad-photo.jpg"
-              alt="Влад Ясько"
+              alt={ui.expert.name}
               width={480}
               height={480}
               sizes="100vw"
@@ -29,8 +37,8 @@ export function ExpertSection() {
           <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-sp-sm rounded-b-2xl">
             <div className="flex items-end justify-between gap-3">
               <div className="shrink-0">
-                <p className="text-white font-bold text-lg">Влад Ясько</p>
-                <p className="text-rose-400 text-sm">Засновник клубу</p>
+                <p className="text-white font-bold text-lg">{ui.expert.name}</p>
+                <p className="text-rose-400 text-sm">{ui.expert.role}</p>
               </div>
               <div className="flex-1 min-w-0">
                 <AudioPlayer variant="compact" src="/vlad_club_demo.mp3" />
@@ -39,8 +47,8 @@ export function ExpertSection() {
           </div>
         </div>
         <div className="mt-sp-sm">
-          <p className="text-lg leading-[1.65] text-body-em mb-sp-sm">{expertQuote}</p>
-          <p className="text-sm text-body">{expertBio}</p>
+          <p className="text-lg leading-[1.65] text-body-em mb-sp-sm">{content.expertQuote}</p>
+          <p className="text-sm text-body">{content.expertBio}</p>
         </div>
       </div>
 
@@ -51,7 +59,7 @@ export function ExpertSection() {
           <div className="col-span-2 relative">
             <Image
               src="/vlad-photo.jpg"
-              alt="Влад Ясько"
+              alt={ui.expert.name}
               width={480}
               height={480}
               sizes="40vw"
@@ -60,19 +68,19 @@ export function ExpertSection() {
           </div>
           <div className="col-span-3 bg-linear-to-b from-rose-500/10 to-neutral-900/50 p-sp-md flex items-center">
             <p className="text-xl leading-[1.65] text-body-em">
-              {expertQuote}
+              {content.expertQuote}
             </p>
           </div>
         </div>
         {/* Bottom bar: name + bio + player */}
         <div className="bg-neutral-900/80 border-t border-neutral-800 p-sp-sm flex items-center gap-sp-md">
           <div className="shrink-0">
-            <p className="text-white font-bold text-lg">Влад Ясько</p>
-            <p className="text-rose-400 text-sm">Засновник клубу</p>
+            <p className="text-white font-bold text-lg">{ui.expert.name}</p>
+            <p className="text-rose-400 text-sm">{ui.expert.role}</p>
           </div>
           <div className="h-8 w-px bg-neutral-700" />
           <p className="text-sm text-body flex-1">
-            {expertBio}
+            {content.expertBio}
           </p>
           <div className="shrink-0 w-72">
             <AudioPlayer src="/vlad_club_demo.mp3" />
