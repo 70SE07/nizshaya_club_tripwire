@@ -7,8 +7,8 @@ export function GuaranteeSection() {
     <ScrollAnimationWrapper
       reveal={GUARANTEE_REVEAL}
       bg="bg-black"
-      label="Гарантия"
-      title="Никакого риска с твоей стороны."
+      label="Гарантія"
+      title="Жодного ризику з твого боку."
       headerClassName="guarantee-header"
     >
       {/* Content */}
@@ -16,16 +16,16 @@ export function GuaranteeSection() {
         <div className="col-full card-accent">
           <div className="flex items-center gap-3 mb-sp-sm">
             <ShieldCheck className="w-7 h-7 text-rose-400 shrink-0" />
-            <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Гарантия первого стрима</h3>
+            <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Гарантія першого стриму</h3>
           </div>
           <p className="text-sm text-body mb-sp-sm">
-            Приди на первый стрим. Открой инструмент. Повтори 3 шага, которые покажет Влад.
+            Прийди на перший стрим. Відкрий інструмент. Повтори 3 кроки, які покаже Влад.
           </p>
           <p className="text-sm text-body mb-sp-sm">
-            Если после этого у тебя не будет ни одного рабочего AI-инструмента, применимого к твоему бизнесу — напиши нам. Мы вернём деньги. Без вопросов. Без «давайте обсудим». Без «а почему не сработало». Просто возврат на карту.
+            Якщо після цього у тебе не буде жодного робочого AI-інструменту, застосовного до твого бізнесу — напиши нам. Ми повернемо гроші. Без запитань. Без «давайте обговоримо». Без «а чому не спрацювало». Просто повернення на картку.
           </p>
           <p className="text-sm text-body">
-            Мы уверены в результате. Если ты придёшь и сделаешь — ты получишь результат. Если не получишь — это наш косяк, а не твой. Мы несём ответственность деньгами.
+            Ми впевнені в результаті. Якщо ти прийдеш і зробиш — ти отримаєш результат. Якщо не отримаєш — це наш косяк, а не твій. Ми несемо відповідальність грошима.
           </p>
         </div>
       </div>

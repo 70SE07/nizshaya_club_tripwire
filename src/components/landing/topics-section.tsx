@@ -8,10 +8,20 @@ import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wr
 
 const icons = [Bot, Layers, Code, Video, Lock]
 
-const monthNames = [
-  "январь", "февраль", "март", "апрель", "май", "июнь",
-  "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь",
-]
+const monthNamesLocative: Record<number, string> = {
+  0: "січні",
+  1: "лютому",
+  2: "березні",
+  3: "квітні",
+  4: "травні",
+  5: "червні",
+  6: "липні",
+  7: "серпні",
+  8: "вересні",
+  9: "жовтні",
+  10: "листопаді",
+  11: "грудні",
+}
 
 export function TopicsSection() {
   const [schedule, setSchedule] = useState<{ topics: string[]; month: string } | null>(null)
@@ -21,7 +31,7 @@ export function TopicsSection() {
     const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
     const topics = topicsSchedule[key]
     if (topics) {
-      setSchedule({ topics, month: monthNames[now.getMonth()] })
+      setSchedule({ topics, month: monthNamesLocative[now.getMonth()] })
     }
   }, [])
 
@@ -29,9 +39,9 @@ export function TopicsSection() {
     <ScrollAnimationWrapper
       reveal={TOPICS_REVEAL}
       bg="bg-black"
-      label="Темы стримов"
-      title="Разбираем то, что уже приносит деньги"
-      subtitle="2 раза в месяц — стрим. Новый инструмент, новый кейс, новая связка. Показываем с экрана, повторяешь — забираешь."
+      label="Теми стримів"
+      title="Розбираємо те, що вже приносить гроші"
+      subtitle="2 рази на місяць — стрим. Новий інструмент, новий кейс, нова зв'язка. Показуємо з екрана, повторюєш — забираєш."
       headerClassName="topics-header"
     >
       {/* Cards 2×2 + full */}
@@ -61,7 +71,7 @@ export function TopicsSection() {
           <div className="topics-schedule card-base p-sp-md!">
             <div className="flex items-center gap-2 mb-sp-sm">
               <Calendar className="w-5 h-5 text-rose-400" />
-              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стримы в {schedule.month}е</h3>
+              <h3 className="text-lg md:text-xl lg:text-2xl leading-snug font-semibold text-white">Стрими у {schedule.month}</h3>
             </div>
             <div className="flex flex-col gap-sp-xs">
               {schedule.topics.map((topic, i) => (

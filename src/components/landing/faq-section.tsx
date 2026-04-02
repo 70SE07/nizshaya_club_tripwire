@@ -43,7 +43,7 @@ export function FaqSection() {
     <ScrollAnimationWrapper
       reveal={FAQ_REVEAL}
       label="FAQ"
-      title="Часто задают. Отвечаем честно."
+      title="Часто запитують. Відповідаємо чесно."
       headerClassName="faq-header"
     >
       {/* Questions */}
@@ -59,7 +59,7 @@ export function FaqSection() {
       <div className="faq-cta grid-section">
         <div className="col-full text-center">
           <CtaButton variant="ghost">
-            Вступить в клуб →
+            Вступити до клубу →
           </CtaButton>
         </div>
       </div>

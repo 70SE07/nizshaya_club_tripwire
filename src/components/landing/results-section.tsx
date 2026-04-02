@@ -10,7 +10,7 @@ export function ResultsSection() {
     <ScrollAnimationWrapper
       reveal={RESULTS_REVEAL}
       label="Результат"
-      title="Что изменится. Конкретно."
+      title="Що зміниться. Конкретно."
       headerClassName="results-header"
     >
       {/* Metrics -- 4 tiles */}
@@ -31,7 +31,7 @@ export function ResultsSection() {
       <div className="results-outcomes grid-section mb-sp-md">
         <div className="col-full">
           <p className="text-lg leading-[1.65] text-body mb-sp-sm">
-            После первого месяца ты уходишь с:
+            Після першого місяця ти йдеш із:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-sp-xs">
             {resultsOutcomes.map((item, i) => (

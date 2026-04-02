@@ -9,8 +9,8 @@ export function OfferSection() {
     <ScrollAnimationWrapper
       reveal={OFFER_REVEAL}
       id="offer"
-      label="Оффер"
-      title="Что ты получаешь. Всё и сразу."
+      label="Офер"
+      title="Що ти отримуєш. Все й одразу."
       headerClassName="offer-header"
     >
       <TariffCards />
@@ -20,7 +20,7 @@ export function OfferSection() {
       {/* Anchor */}
       <div className="text-center">
         <p className="text-sm text-muted">
-          Соотношение ценности к цене: <span className="text-rose-400 font-bold">35:1</span>. От $50/мес ты получаешь то, что стоит $2 800 при отдельной покупке.
+          Співвідношення цінності до ціни: <span className="text-rose-400 font-bold">35:1</span>. Від $50/міс ти отримуєш те, що коштує $2 800 при окремій купівлі.
         </p>
       </div>
     </ScrollAnimationWrapper>

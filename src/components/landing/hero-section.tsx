@@ -51,25 +51,25 @@ export function HeroSection() {
 
             {/* H1 */}
             <h1 className="hero-h1 text-4xl md:text-5xl lg:text-6xl leading-none font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 mb-sp-lg">
-              AI-инструменты для маркетинга и бизнеса —
+              AI-інструменти для маркетингу та бізнесу —
               <br />
               <span className="bg-linear-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
-                протестированы. Работают. Приносят деньги.
+                протестовані. Працюють. Приносять гроші.
               </span>
             </h1>
 
             {/* Body */}
             <p className="hero-body text-lg leading-[1.65] text-body max-w-lg mb-sp-lg">
-              Каждые две недели — стрим с экрана: проверенный стек, готовые воркфлоу, рабочие инструменты. Берёшь — внедряешь — зарабатываешь.
+              Кожні два тижні — стрим з екрана: перевірений стек, готові воркфлоу, робочі інструменти. Береш — впроваджуєш — заробляєш.
             </p>
 
             {/* CTA */}
             <div className="hero-cta">
               <CtaButton>
-                Вступить в клуб от $50 / мес
+                Вступити до клубу від $50 / міс
               </CtaButton>
               <p className="text-sm text-muted mt-sp-sm">
-                при оплате за 3 месяца · Не понравится после первого стрима — вернём деньги.
+                при оплаті за 3 місяці · Не сподобається після першого стриму — повернемо гроші.
               </p>
             </div>
           </div>
