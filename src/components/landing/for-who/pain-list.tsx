@@ -1,5 +1,8 @@
+'use client'
+
 import { Check } from "lucide-react"
-import { pains } from "@/constants/content"
+import { getContent } from "@/constants/content"
+import { useLanguage } from "@/i18n/context"
 
 interface PainListProps {
   checked: Set<number>
@@ -7,10 +10,13 @@ interface PainListProps {
 }
 
 export function PainList({ checked, toggle }: PainListProps) {
+  const { lang } = useLanguage()
+  const content = getContent(lang)
+
   return (
     <div className="pain-list grid-section mb-sp-md">
       <div className="col-full">
-        {pains.map((pain, i) => {
+        {content.pains.map((pain, i) => {
           const isChecked = checked.has(i)
           return (
             <div

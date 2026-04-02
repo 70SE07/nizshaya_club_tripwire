@@ -3,11 +3,19 @@
 import { useRef, useState, useLayoutEffect } from "react"
 import { gsap } from "@/lib/gsap"
 import { FOR_WHO_REVEAL } from "@/constants/animations"
+import { useLanguage } from "@/i18n/context"
 import { ScrollAnimationWrapper } from "@/components/landing/scroll-animation-wrapper"
 import { PainList } from "@/components/landing/for-who/pain-list"
 import { ForWhoFooter } from "@/components/landing/for-who/for-who-footer"
 
+const ui = {
+  ru: { label: "Узнаёшь себя?", title1: "Ты уже знаешь про AI.", title2: "Просто не применяешь.", subtitle: "Отметь пункты, которые про тебя" },
+  uk: { label: "Впізнаєш себе?", title1: "Ти вже знаєш про AI.", title2: "Просто не застосовуєш.", subtitle: "Відміть пункти, які про тебе" },
+}
+
 export function ForWhoSection() {
+  const { lang } = useLanguage()
+  const t = ui[lang]
   const [checked, setChecked] = useState<Set<number>>(new Set())
   const footerRef = useRef<HTMLDivElement>(null)
   const footerWrapRef = useRef<HTMLDivElement>(null)
@@ -67,9 +75,9 @@ export function ForWhoSection() {
   return (
     <ScrollAnimationWrapper
       reveal={FOR_WHO_REVEAL}
-      label="Узнаёшь себя?"
-      title={<>Ты уже знаешь про AI.<br />Просто не применяешь.</>}
-      subtitle={<p className="text-sm text-muted">Отметь пункты, которые про тебя</p>}
+      label={t.label}
+      title={<>{t.title1}<br />{t.title2}</>}
+      subtitle={<p className="text-sm text-muted">{t.subtitle}</p>}
       headerClassName="for-who-header"
     >
       <PainList checked={checked} toggle={toggle} />
